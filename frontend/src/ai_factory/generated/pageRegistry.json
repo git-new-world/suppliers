@@ -1,0 +1,20 @@
+{
+  "framework": "react_vite",
+  "pages": [
+    {
+      "task_id": "config",
+      "label": "Config",
+      "route": "/config",
+      "path": "frontend/src/config/menu.tsx",
+      "acceptance_aliases": []
+    }
+  ],
+  "generated_at": "2026-08-16T05:18:23.883924Z",
+  "assembly_authorities": {
+    "primary": "engineering_baseline.json",
+    "secondary": "task_manifest.json",
+    "order": "dependency_graph.json",
+    "background": "development_route.json"
+  },
+  "entry_rewrite_policy": "missing_or_integrator_generated_only"
+}

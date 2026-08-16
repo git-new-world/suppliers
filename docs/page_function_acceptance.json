@@ -1,0 +1,3770 @@
+{
+  "metadata": {
+    "idea_id": "IDEA-20260808215020-MJXB6X",
+    "project_id": "suppliers",
+    "task_id": "IDEA-20260808215020-MJXB6X",
+    "generated_at": "2026-08-09T07:38:09.121+03:00",
+    "source_files_used": [
+      {
+        "file_type": "page_function_design",
+        "uri": "page_function_design.md",
+        "required": true
+      },
+      {
+        "file_type": "development_route",
+        "uri": "development_route.json",
+        "required": true
+      },
+      {
+        "file_type": "engineering_baseline",
+        "uri": "engineering_baseline.json",
+        "required": true
+      }
+    ]
+  },
+  "acceptance_generation_status": "ready_with_warnings",
+  "input_readiness": {
+    "page_function_design_present": true,
+    "development_route_present": true,
+    "engineering_baseline_present": true,
+    "blocking_issues": []
+  },
+  "acceptance_scope": {
+    "source_modules": [
+      {
+        "module_id": "MOD-001",
+        "module_name": "需求理解与规格生成",
+        "module_type": "domain_module"
+      },
+      {
+        "module_id": "MOD-002",
+        "module_name": "多平台寻源",
+        "module_type": "domain_module"
+      },
+      {
+        "module_id": "MOD-003",
+        "module_name": "供应商甄别画像",
+        "module_type": "domain_module"
+      },
+      {
+        "module_id": "MOD-004",
+        "module_name": "报价分析与比价",
+        "module_type": "domain_module"
+      },
+      {
+        "module_id": "MOD-005",
+        "module_name": "询价触达",
+        "module_type": "domain_module"
+      },
+      {
+        "module_id": "MOD-006",
+        "module_name": "评估与推荐",
+        "module_type": "domain_module"
+      },
+      {
+        "module_id": "MOD-007",
+        "module_name": "持续监控",
+        "module_type": "domain_module"
+      },
+      {
+        "module_id": "MOD-008",
+        "module_name": "平台管理",
+        "module_type": "domain_module"
+      }
+    ],
+    "source_pages": [
+      {
+        "page_id": "PAGE-001",
+        "page_name": "采购对话台",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-001"
+        ],
+        "related_features": [
+          "FEAT-001",
+          "FEAT-002"
+        ]
+      },
+      {
+        "page_id": "PAGE-002",
+        "page_name": "寻源规格书",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-001"
+        ],
+        "related_features": [
+          "FEAT-002",
+          "FEAT-003"
+        ]
+      },
+      {
+        "page_id": "PAGE-003",
+        "page_name": "寻源项目列表",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-001",
+          "MOD-006"
+        ],
+        "related_features": [
+          "FEAT-003"
+        ]
+      },
+      {
+        "page_id": "PAGE-004",
+        "page_name": "寻源项目详情",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-001",
+          "MOD-002",
+          "MOD-003",
+          "MOD-004",
+          "MOD-005",
+          "MOD-006",
+          "MOD-007",
+          "MOD-008"
+        ],
+        "related_features": [
+          "FEAT-003",
+          "FEAT-006",
+          "FEAT-018",
+          "FEAT-020"
+        ]
+      },
+      {
+        "page_id": "PAGE-005",
+        "page_name": "候选供应商列表",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-002",
+          "MOD-003"
+        ],
+        "related_features": [
+          "FEAT-004",
+          "FEAT-005",
+          "FEAT-006"
+        ]
+      },
+      {
+        "page_id": "PAGE-006",
+        "page_name": "供应商画像详情",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-003"
+        ],
+        "related_features": [
+          "FEAT-007",
+          "FEAT-008",
+          "FEAT-009",
+          "FEAT-010",
+          "FEAT-011"
+        ]
+      },
+      {
+        "page_id": "PAGE-007",
+        "page_name": "报价对比分析",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-004"
+        ],
+        "related_features": [
+          "FEAT-012",
+          "FEAT-013",
+          "FEAT-014"
+        ]
+      },
+      {
+        "page_id": "PAGE-008",
+        "page_name": "询价材料生成",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-005"
+        ],
+        "related_features": [
+          "FEAT-015",
+          "FEAT-016",
+          "FEAT-017"
+        ]
+      },
+      {
+        "page_id": "PAGE-009",
+        "page_name": "供应商评估报告",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-006"
+        ],
+        "related_features": [
+          "FEAT-018",
+          "FEAT-019",
+          "FEAT-020"
+        ]
+      },
+      {
+        "page_id": "PAGE-010",
+        "page_name": "监控中心",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-007"
+        ],
+        "related_features": [
+          "FEAT-020",
+          "FEAT-021",
+          "FEAT-022"
+        ]
+      },
+      {
+        "page_id": "PAGE-011",
+        "page_name": "监控预警详情",
+        "page_category": "user_page",
+        "related_modules": [
+          "MOD-007"
+        ],
+        "related_features": [
+          "FEAT-020",
+          "FEAT-021",
+          "FEAT-022"
+        ]
+      },
+      {
+        "page_id": "PAGE-012",
+        "page_name": "用户管理",
+        "page_category": "management_page",
+        "related_modules": [
+          "MOD-008"
+        ],
+        "related_features": [
+          "FEAT-023"
+        ]
+      },
+      {
+        "page_id": "PAGE-013",
+        "page_name": "品类知识库管理",
+        "page_category": "management_page",
+        "related_modules": [
+          "MOD-008"
+        ],
+        "related_features": [
+          "FEAT-024"
+        ]
+      },
+      {
+        "page_id": "PAGE-014",
+        "page_name": "数据源配置管理",
+        "page_category": "management_page",
+        "related_modules": [
+          "MOD-008",
+          "MOD-002"
+        ],
+        "related_features": [
+          "FEAT-025"
+        ]
+      },
+      {
+        "page_id": "PAGE-015",
+        "page_name": "监控规则配置",
+        "page_category": "management_page",
+        "related_modules": [
+          "MOD-008",
+          "MOD-007"
+        ],
+        "related_features": [
+          "FEAT-026"
+        ]
+      }
+    ],
+    "source_features": [
+      {
+        "feature_id": "FEAT-001",
+        "feature_name": "对话需求澄清",
+        "related_modules": [
+          "MOD-001"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-002",
+        "feature_name": "结构化规格书生成",
+        "related_modules": [
+          "MOD-001"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-003",
+        "feature_name": "规格书确认与项目创建",
+        "related_modules": [
+          "MOD-001"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-004",
+        "feature_name": "多平台并行检索",
+        "related_modules": [
+          "MOD-002"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-005",
+        "feature_name": "关键词自动扩展与收紧",
+        "related_modules": [
+          "MOD-002"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-006",
+        "feature_name": "候选供应商召回管理",
+        "related_modules": [
+          "MOD-002"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-007",
+        "feature_name": "工商数据交叉验证",
+        "related_modules": [
+          "MOD-003"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-008",
+        "feature_name": "地址与平台线索分析",
+        "related_modules": [
+          "MOD-003"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-009",
+        "feature_name": "资质认证识别",
+        "related_modules": [
+          "MOD-003"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-010",
+        "feature_name": "真工厂置信度评分",
+        "related_modules": [
+          "MOD-003"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-011",
+        "feature_name": "产能与规模推断",
+        "related_modules": [
+          "MOD-003"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-012",
+        "feature_name": "报价口径抽取",
+        "related_modules": [
+          "MOD-004"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-013",
+        "feature_name": "报价归一化比价",
+        "related_modules": [
+          "MOD-004"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-014",
+        "feature_name": "异常报价标注",
+        "related_modules": [
+          "MOD-004"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-015",
+        "feature_name": "RFQ 自动生成",
+        "related_modules": [
+          "MOD-005"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-016",
+        "feature_name": "询盘话术批量生成",
+        "related_modules": [
+          "MOD-005"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-017",
+        "feature_name": "联系方式汇总",
+        "related_modules": [
+          "MOD-005"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-018",
+        "feature_name": "评估报告生成",
+        "related_modules": [
+          "MOD-006"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-019",
+        "feature_name": "分层推荐策略",
+        "related_modules": [
+          "MOD-006"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-020",
+        "feature_name": "供应商风险监控",
+        "related_modules": [
+          "MOD-007"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-021",
+        "feature_name": "原材料价格监控",
+        "related_modules": [
+          "MOD-007"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-022",
+        "feature_name": "预警通知",
+        "related_modules": [
+          "MOD-007"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-023",
+        "feature_name": "用户权限管理",
+        "related_modules": [
+          "MOD-008"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-024",
+        "feature_name": "品类知识库维护",
+        "related_modules": [
+          "MOD-008"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-025",
+        "feature_name": "数据源配置维护",
+        "related_modules": [
+          "MOD-008"
+        ],
+        "priority": "P2"
+      },
+      {
+        "feature_id": "FEAT-026",
+        "feature_name": "监控规则配置",
+        "related_modules": [
+          "MOD-008"
+        ],
+        "priority": "P2"
+      }
+    ],
+    "source_roles": [
+      {
+        "role_id": "ROLE-001",
+        "role_name": "采购人员"
+      },
+      {
+        "role_id": "ROLE-002",
+        "role_name": "管理员"
+      }
+    ]
+  },
+  "global_acceptance_rules": [
+    {
+      "rule_id": "GAR-001",
+      "description": "所有页面验收必须使用真实浏览器或等效远程浏览器打开真实路由，禁止以静态代码审查、接口检查、截图占位或 AI 猜测代替浏览验收。",
+      "applies_to": "all_pages",
+      "severity": "blocker",
+      "check_method": "审查验收证据包是否包含浏览器打开真实路由的截图、交互轨迹、console 日志与 network 日志"
+    },
+    {
+      "rule_id": "GAR-002",
+      "description": "角色权限必须双向验证：采购人员可访问 PAGE-001 至 PAGE-011，访问 PAGE-012 至 PAGE-015 必须被拒绝；管理员可访问 PAGE-012 至 PAGE-015，访问 PAGE-001 至 PAGE-011 业务操作页必须被拒绝。",
+      "applies_to": "security_visibility",
+      "severity": "blocker",
+      "check_method": "真实浏览器以对应角色登录后直接输入目标路由，观察是否跳转、403 或展示无权限提示"
+    },
+    {
+      "rule_id": "GAR-003",
+      "description": "每个页面上的可见字段标签、按钮文案、状态枚举必须与 page_function_design.md 的 Regions、Main Actions、Page Fields 定义一致。",
+      "applies_to": "all_pages",
+      "severity": "major",
+      "check_method": "真实浏览器逐区域核对可见文案与字段标签"
+    },
+    {
+      "rule_id": "GAR-004",
+      "description": "页面间跳转必须携带正确的路由参数（如 project_id、spec_id、supplier_id、alert_id），目标页面能根据参数加载对应数据；无数据时展示空状态。",
+      "applies_to": "all_pages",
+      "severity": "blocker",
+      "check_method": "从源头页面点击跳转并查看 URL 参数与目标页面内容"
+    },
+    {
+      "rule_id": "GAR-005",
+      "description": "所有 AI 生成类内容（规格书草稿、RFQ、话术、评估报告、产能推断）必须能指出依据或展示置信度，不能凭空输出精确数字。",
+      "applies_to": "all_features",
+      "severity": "major",
+      "check_method": "查看 AI 输出区域是否包含证据链接、理由或置信度标注"
+    },
+    {
+      "rule_id": "GAR-006",
+      "description": "P0 功能必须全部通过验收；P1 功能允许在发布说明中标注为受限可用，但已实现部分仍须通过对应验收。",
+      "applies_to": "all_features",
+      "severity": "blocker",
+      "check_method": "核对 feature_acceptance 中 P0 功能无未通过项"
+    },
+    {
+      "rule_id": "GAR-007",
+      "description": "表单提交、AI 生成、导出文件等异步操作必须展示进行中状态（loading/进度），完成或失败后给出明确反馈；失败时必须展示错误信息且不丢失用户已输入内容。",
+      "applies_to": "workflow",
+      "severity": "major",
+      "check_method": "在真实浏览器执行关键动作并观察加载态与错误反馈"
+    },
+    {
+      "rule_id": "GAR-008",
+      "description": "核心状态流转必须遵循设计：spec_status 由 draft 变为 confirmed 后才能创建寻源项目；项目状态按 draft/sourcing/profiling/quoting/reporting/completed/archived 顺序流转；预警状态按 new/processing/resolved 流转。",
+      "applies_to": "workflow",
+      "severity": "blocker",
+      "check_method": "执行完整流程并检查状态字段变化与页面显示"
+    },
+    {
+      "rule_id": "GAR-009",
+      "description": "真实用户模拟场景必须采集截图、交互轨迹、console 日志、network 日志，并在失败时记录失败位置，作为 V5 Patch 修复输入。",
+      "applies_to": "human_simulation",
+      "severity": "blocker",
+      "check_method": "检查每个 human_simulation_acceptance 的 browser_execution 证据字段与证据包"
+    },
+    {
+      "rule_id": "GAR-010",
+      "description": "管理后台所有密钥类配置（API Key、数据库连接等）必须以引用方式展示，不能明文回显完整密钥。",
+      "applies_to": "security_visibility",
+      "severity": "major",
+      "check_method": "打开数据源配置页检查密钥字段是否掩码显示"
+    }
+  ],
+  "page_acceptance": [
+    {
+      "page_id": "PAGE-001",
+      "page_name": "采购对话台",
+      "route": "/chat",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-001"
+      ],
+      "related_features": [
+        "FEAT-001",
+        "FEAT-002"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-001-AC-001",
+          "description": "在真实浏览器打开 /chat 后，页面必须加载对话消息流区、规格书草稿预览区、AI 建议追问区三个区域，且消息输入框可用。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面并逐区域核对可见内容"
+        },
+        {
+          "criteria_id": "PAGE-001-AC-002",
+          "description": "用户输入产品描述并点击发送后，消息出现在对话流中，AI 返回追问问题或触发规格书草稿预览更新。",
+          "severity": "blocker",
+          "check_method": "输入示例描述并发送，等待 AI 响应，核对对话流与草稿预览"
+        },
+        {
+          "criteria_id": "PAGE-001-AC-003",
+          "description": "点击生成规格书草稿后，规格书草稿预览区呈现结构化内容，包含产品类目、关键参数、认证要求、需求数量、贸易条款等字段。",
+          "severity": "blocker",
+          "check_method": "点击按钮并核对预览区结构化字段"
+        },
+        {
+          "criteria_id": "PAGE-001-AC-004",
+          "description": "点击前往确认规格书按钮，跳转至 /specs/{id} 寻源规格书页面，URL 中携带有效 spec_id。",
+          "severity": "major",
+          "check_method": "点击按钮并检查跳转 URL 与目标页面"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "发送消息",
+          "expected_result": "AI 返回追问问题或更新规格书草稿预览",
+          "criteria_id": "PAGE-001-AC-002"
+        },
+        {
+          "action_name": "生成规格书草稿",
+          "expected_result": "在预览区呈现结构化规格书草稿",
+          "criteria_id": "PAGE-001-AC-003"
+        },
+        {
+          "action_name": "前往确认规格书",
+          "expected_result": "跳转至 PAGE-002 寻源规格书",
+          "criteria_id": "PAGE-001-AC-004"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-002",
+      "page_name": "寻源规格书",
+      "route": "/specs/:id",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-001"
+      ],
+      "related_features": [
+        "FEAT-002",
+        "FEAT-003"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-002-AC-001",
+          "description": "打开 /specs/:id 后展示规格书内容区（产品名称、类目、价格带、月需求量、认证、贸易条款）、完整度提示区（完整度百分比、缺失字段）与操作区。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面核对三个区域"
+        },
+        {
+          "criteria_id": "PAGE-002-AC-002",
+          "description": "点击编辑可修改字段并保存，保存后页面显示更新后的值；必填字段为空时禁止保存并给出提示。",
+          "severity": "major",
+          "check_method": "编辑字段并保存，验证更新结果与必填校验"
+        },
+        {
+          "criteria_id": "PAGE-002-AC-003",
+          "description": "点击 AI 重新生成后，当前规格书草稿被 AI 基于历史对话生成的新内容替换。",
+          "severity": "major",
+          "check_method": "点击按钮并对比替换前后内容"
+        },
+        {
+          "criteria_id": "PAGE-002-AC-004",
+          "description": "当 spec_status 为 draft 时，确认创建项目按钮不可用或点击后提示需先确认规格书；spec_status 为 confirmed 时点击确认创建项目并跳转至 /projects/{id}。",
+          "severity": "blocker",
+          "check_method": "分别在 draft 与 confirmed 状态下点击确认按钮，验证状态机约束"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "确认规格书并创建项目",
+          "expected_result": "规格书状态置为 confirmed，创建寻源项目并跳转至 PAGE-004",
+          "criteria_id": "PAGE-002-AC-004"
+        },
+        {
+          "action_name": "编辑规格书",
+          "expected_result": "保存并更新规格书内容",
+          "criteria_id": "PAGE-002-AC-002"
+        },
+        {
+          "action_name": "AI 重新生成",
+          "expected_result": "以新内容替换当前规格书草稿",
+          "criteria_id": "PAGE-002-AC-003"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-003",
+      "page_name": "寻源项目列表",
+      "route": "/projects",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-001",
+        "MOD-006"
+      ],
+      "related_features": [
+        "FEAT-003"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-003-AC-001",
+          "description": "打开 /projects 后展示项目列表，每行包含项目名称、产品类目、当前状态、创建时间、更新时间。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面核对列表列"
+        },
+        {
+          "criteria_id": "PAGE-003-AC-002",
+          "description": "状态筛选区提供进行中、待确认、已完成、已归档等筛选标签，点击后列表仅显示对应状态项目。",
+          "severity": "major",
+          "check_method": "逐个点击筛选标签核对结果"
+        },
+        {
+          "criteria_id": "PAGE-003-AC-003",
+          "description": "点击新建寻源项目跳转至 /chat。",
+          "severity": "major",
+          "check_method": "点击按钮检查跳转"
+        },
+        {
+          "criteria_id": "PAGE-003-AC-004",
+          "description": "点击某项目查看详情跳转至 /projects/{id}，并加载对应项目数据。",
+          "severity": "blocker",
+          "check_method": "点击项目行检查 URL 与详情内容"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "新建寻源项目",
+          "expected_result": "跳转至 PAGE-001 采购对话台",
+          "criteria_id": "PAGE-003-AC-003"
+        },
+        {
+          "action_name": "查看项目详情",
+          "expected_result": "跳转至 PAGE-004 寻源项目详情",
+          "criteria_id": "PAGE-003-AC-004"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-004",
+      "page_name": "寻源项目详情",
+      "route": "/projects/:id",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-001",
+        "MOD-002",
+        "MOD-003",
+        "MOD-004",
+        "MOD-005",
+        "MOD-006",
+        "MOD-007",
+        "MOD-008"
+      ],
+      "related_features": [
+        "FEAT-003",
+        "FEAT-006",
+        "FEAT-018",
+        "FEAT-020"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-004-AC-001",
+          "description": "打开 /projects/:id 后展示项目概览区（产品名称、规格摘要、当前状态、更新时间）、环节进度区（需求理解、多平台寻源、供应商甄别、报价比价、询价触达、评估报告各环节状态）、历史记录区（操作时间、操作人/AI、操作说明、状态变更记录）。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面核对三个区域"
+        },
+        {
+          "criteria_id": "PAGE-004-AC-002",
+          "description": "点击查看规格书跳转至 /specs/{spec_id}，URL 携带正确 spec_id。",
+          "severity": "major",
+          "check_method": "点击按钮检查跳转"
+        },
+        {
+          "criteria_id": "PAGE-004-AC-003",
+          "description": "点击查看候选供应商跳转至 /projects/{id}/candidates，并展示该项目候选列表。",
+          "severity": "blocker",
+          "check_method": "点击按钮检查跳转与列表加载"
+        },
+        {
+          "criteria_id": "PAGE-004-AC-004",
+          "description": "点击查看评估报告仅在报告已生成后可用，跳转至 /projects/{id}/report；报告未生成时按钮不可用或给出提示。",
+          "severity": "major",
+          "check_method": "在报告未生成与已生成两种状态下验证"
+        },
+        {
+          "criteria_id": "PAGE-004-AC-005",
+          "description": "环节进度区状态必须与项目实际状态一致，例如项目处于 profiling 时，需求理解与多平台寻源环节显示已完成，供应商甄别环节显示进行中。",
+          "severity": "major",
+          "check_method": "构造不同状态项目并核对环节状态"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "查看规格书",
+          "expected_result": "跳转至 PAGE-002 寻源规格书",
+          "criteria_id": "PAGE-004-AC-002"
+        },
+        {
+          "action_name": "查看候选供应商",
+          "expected_result": "跳转至 PAGE-005 候选供应商列表",
+          "criteria_id": "PAGE-004-AC-003"
+        },
+        {
+          "action_name": "查看评估报告",
+          "expected_result": "报告生成后跳转至 PAGE-009 供应商评估报告",
+          "criteria_id": "PAGE-004-AC-004"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-005",
+      "page_name": "候选供应商列表",
+      "route": "/projects/:id/candidates",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-002",
+        "MOD-003"
+      ],
+      "related_features": [
+        "FEAT-004",
+        "FEAT-005",
+        "FEAT-006"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-005-AC-001",
+          "description": "打开 /projects/:id/candidates 后展示候选供应商列表，包含供应商名称、来源平台、初步类型、召回关键词、来源链接。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面核对列表列"
+        },
+        {
+          "criteria_id": "PAGE-005-AC-002",
+          "description": "筛选排序区支持按平台、关键词、初步类型筛选，并支持排序；操作后列表刷新。",
+          "severity": "major",
+          "check_method": "选择不同筛选条件并核对结果"
+        },
+        {
+          "criteria_id": "PAGE-005-AC-003",
+          "description": "勾选一个或多个候选并点击提交深入分析名单后，系统启动深度画像任务，已选数量计数正确。",
+          "severity": "blocker",
+          "check_method": "勾选 3 家供应商并提交，观察任务启动反馈"
+        },
+        {
+          "criteria_id": "PAGE-005-AC-004",
+          "description": "点击重新寻源后，AI 扩展关键词并重新执行多平台检索，列表最终呈现更新后的候选集。",
+          "severity": "major",
+          "check_method": "点击重新寻源并等待检索完成"
+        },
+        {
+          "criteria_id": "PAGE-005-AC-005",
+          "description": "点击供应商名称或查看供应商画像跳转至 /suppliers/{id}，URL 携带正确 supplier_id。",
+          "severity": "blocker",
+          "check_method": "点击供应商行检查跳转"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "提交深入分析名单",
+          "expected_result": "对选中的供应商启动深度画像与全字段评估任务",
+          "criteria_id": "PAGE-005-AC-003"
+        },
+        {
+          "action_name": "重新寻源",
+          "expected_result": "AI 扩展关键词并重新执行多平台检索",
+          "criteria_id": "PAGE-005-AC-004"
+        },
+        {
+          "action_name": "查看供应商画像",
+          "expected_result": "跳转至 PAGE-006 供应商画像详情",
+          "criteria_id": "PAGE-005-AC-005"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-006",
+      "page_name": "供应商画像详情",
+      "route": "/suppliers/:id",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-003"
+      ],
+      "related_features": [
+        "FEAT-007",
+        "FEAT-008",
+        "FEAT-009",
+        "FEAT-010",
+        "FEAT-011"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-006-AC-001",
+          "description": "打开 /suppliers/:id 后展示评分概览区（真工厂置信度评分、供应商类型 factory/trader、规模分级）、工商与地址线索区、平台与资质证据区、产能推断区。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面核对四个区域"
+        },
+        {
+          "criteria_id": "PAGE-006-AC-002",
+          "description": "工商与地址线索区展示成立年限、注册资本、参保人数、经营范围、注册地址类型；产能推断区给出产能区间并标注推断依据，不能编造精确数字。",
+          "severity": "blocker",
+          "check_method": "核对字段展示与推断依据标注"
+        },
+        {
+          "criteria_id": "PAGE-006-AC-003",
+          "description": "平台与资质证据区展示平台标签、SKU 聚焦度、证书识别结果，且每条证据带证据链接。",
+          "severity": "major",
+          "check_method": "核对证据链接可点击且来源可见"
+        },
+        {
+          "criteria_id": "PAGE-006-AC-004",
+          "description": "点击加入比价名单后，该供应商被标记为比价对象，页面给出成功反馈。",
+          "severity": "major",
+          "check_method": "点击按钮并观察反馈"
+        },
+        {
+          "criteria_id": "PAGE-006-AC-005",
+          "description": "点击查看证据链接在新标签页打开来源 URL；点击反馈鉴别结果可提交人工纠正或确认。",
+          "severity": "minor",
+          "check_method": "点击证据链接与反馈按钮验证行为"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "加入比价名单",
+          "expected_result": "供应商被标记为比价对象并进入报价对比池",
+          "criteria_id": "PAGE-006-AC-004"
+        },
+        {
+          "action_name": "查看证据链接",
+          "expected_result": "在新标签页打开证据来源链接",
+          "criteria_id": "PAGE-006-AC-005"
+        },
+        {
+          "action_name": "反馈鉴别结果",
+          "expected_result": "提交反馈结果用于改进鉴别模型",
+          "criteria_id": "PAGE-006-AC-005"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-007",
+      "page_name": "报价对比分析",
+      "route": "/projects/:id/quotes",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-004"
+      ],
+      "related_features": [
+        "FEAT-012",
+        "FEAT-013",
+        "FEAT-014"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-007-AC-001",
+          "description": "打开 /projects/:id/quotes 后展示归一化口径选择区、价格分布图区、报价对比表区。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面核对三个区域"
+        },
+        {
+          "criteria_id": "PAGE-007-AC-002",
+          "description": "报价对比表展示供应商名称、原始报价口径、归一化单价、MOQ、阶梯价、异常标记。",
+          "severity": "blocker",
+          "check_method": "核对表格列与数据展示"
+        },
+        {
+          "criteria_id": "PAGE-007-AC-003",
+          "description": "切换归一化口径（数量档位、含税/不含税、FOB/EXW）后，价格分布图与对比表重新计算并刷新。",
+          "severity": "blocker",
+          "check_method": "调整口径参数并核对刷新后的数值"
+        },
+        {
+          "criteria_id": "PAGE-007-AC-004",
+          "description": "点击确认异常标注可选择原因（偷工减料/贸易商转单/引流价）并保存，保存后表格显示异常标记。",
+          "severity": "major",
+          "check_method": "选择异常报价并确认标注"
+        },
+        {
+          "criteria_id": "PAGE-007-AC-005",
+          "description": "点击导出报价对比下载 Excel 格式报价对比表，文件可打开且内容与页面一致。",
+          "severity": "major",
+          "check_method": "导出并打开文件核对"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "切换归一化口径",
+          "expected_result": "重新计算并刷新价格分布图与对比表",
+          "criteria_id": "PAGE-007-AC-003"
+        },
+        {
+          "action_name": "确认异常标注",
+          "expected_result": "保存异常标记与可能原因",
+          "criteria_id": "PAGE-007-AC-004"
+        },
+        {
+          "action_name": "导出报价对比",
+          "expected_result": "下载 Excel 格式报价对比表",
+          "criteria_id": "PAGE-007-AC-005"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-008",
+      "page_name": "询价材料生成",
+      "route": "/projects/:id/rfq",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-005"
+      ],
+      "related_features": [
+        "FEAT-015",
+        "FEAT-016",
+        "FEAT-017"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-008-AC-001",
+          "description": "打开 /projects/:id/rfq 后展示 RFQ 预览区、询盘话术区、联系方式汇总区。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面核对三个区域"
+        },
+        {
+          "criteria_id": "PAGE-008-AC-002",
+          "description": "点击生成 RFQ 后显示中英文双语询价单，内容基于规格书并包含报价要求、认证要求、贸易条款。",
+          "severity": "blocker",
+          "check_method": "点击生成 RFQ 并核对中英文内容"
+        },
+        {
+          "criteria_id": "PAGE-008-AC-003",
+          "description": "点击生成批量话术显示面向 Top10 供应商的询盘话术列表，包含 1688 旺旺/邮件模板。",
+          "severity": "major",
+          "check_method": "点击生成并核对话术列表数量与模板形式"
+        },
+        {
+          "criteria_id": "PAGE-008-AC-004",
+          "description": "点击导出联系方式表可下载 Excel/CSV 文件，文件包含联系人、电话、微信/WhatsApp、邮箱、来源页面链接。",
+          "severity": "major",
+          "check_method": "导出并打开文件核对字段"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "生成 RFQ",
+          "expected_result": "显示中英文双语 RFQ 预览",
+          "criteria_id": "PAGE-008-AC-002"
+        },
+        {
+          "action_name": "生成批量话术",
+          "expected_result": "显示面向 Top10 供应商的询盘话术列表",
+          "criteria_id": "PAGE-008-AC-003"
+        },
+        {
+          "action_name": "导出联系方式表",
+          "expected_result": "导出 Excel/CSV 格式联系方式汇总表",
+          "criteria_id": "PAGE-008-AC-004"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-009",
+      "page_name": "供应商评估报告",
+      "route": "/projects/:id/report",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-006"
+      ],
+      "related_features": [
+        "FEAT-018",
+        "FEAT-019",
+        "FEAT-020"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-009-AC-001",
+          "description": "打开 /projects/:id/report 后展示分层推荐区（批量主力 ×2、备选 ×2、打样快反 ×1）、对比大表区、证据与置信度区。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面核对三个区域"
+        },
+        {
+          "criteria_id": "PAGE-009-AC-002",
+          "description": "对比大表包含供应商、类型、资质、价格带、产能推断、主要客户、风险信号、综合推荐度列；每条结论附证据链接与置信度。",
+          "severity": "blocker",
+          "check_method": "核对表格列与证据链接"
+        },
+        {
+          "criteria_id": "PAGE-009-AC-003",
+          "description": "点击导出评估报告生成 PDF/Word 文件并下载，文件内容与页面展示一致。",
+          "severity": "major",
+          "check_method": "导出并打开文件核对"
+        },
+        {
+          "criteria_id": "PAGE-009-AC-004",
+          "description": "点击发起监控后将所选推荐供应商加入监控对象，并在 /monitoring 可见。",
+          "severity": "major",
+          "check_method": "选择供应商并发起监控，跳转监控中心核验"
+        },
+        {
+          "criteria_id": "PAGE-009-AC-005",
+          "description": "点击生成询价材料跳转至 /projects/{id}/rfq。",
+          "severity": "major",
+          "check_method": "点击按钮检查跳转"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "导出评估报告",
+          "expected_result": "生成并下载 PDF/Word 版评估报告",
+          "criteria_id": "PAGE-009-AC-003"
+        },
+        {
+          "action_name": "发起监控",
+          "expected_result": "将所选供应商加入持续监控列表",
+          "criteria_id": "PAGE-009-AC-004"
+        },
+        {
+          "action_name": "生成询价材料",
+          "expected_result": "跳转至 PAGE-008 询价材料生成",
+          "criteria_id": "PAGE-009-AC-005"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-010",
+      "page_name": "监控中心",
+      "route": "/monitoring",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-007"
+      ],
+      "related_features": [
+        "FEAT-020",
+        "FEAT-021",
+        "FEAT-022"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-010-AC-001",
+          "description": "打开 /monitoring 后展示预警汇总区（司法风险、经营异常、股权变更、差评激增、涨价信号计数）、预警列表区、监控对象区。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面核对三个区域"
+        },
+        {
+          "criteria_id": "PAGE-010-AC-002",
+          "description": "预警列表展示预警时间、相关供应商、事件类型、严重程度、处理状态。",
+          "severity": "blocker",
+          "check_method": "核对列表列"
+        },
+        {
+          "criteria_id": "PAGE-010-AC-003",
+          "description": "点击某条预警记录跳转至 /monitoring/alerts/{id}，并加载对应预警证据。",
+          "severity": "blocker",
+          "check_method": "点击预警记录检查跳转与详情"
+        },
+        {
+          "criteria_id": "PAGE-010-AC-004",
+          "description": "点击添加监控对象打开供应商选择器，选择后可成功添加监控对象并在监控对象区显示。",
+          "severity": "major",
+          "check_method": "执行添加监控对象操作"
+        },
+        {
+          "criteria_id": "PAGE-010-AC-005",
+          "description": "点击设置通知偏好可配置通知渠道与频率，保存后偏好设置生效。",
+          "severity": "minor",
+          "check_method": "修改通知偏好并保存，再次打开验证持久化"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "查看预警详情",
+          "expected_result": "跳转至 PAGE-011 监控预警详情并加载证据",
+          "criteria_id": "PAGE-010-AC-003"
+        },
+        {
+          "action_name": "添加监控对象",
+          "expected_result": "打开供应商选择器并添加监控对象",
+          "criteria_id": "PAGE-010-AC-004"
+        },
+        {
+          "action_name": "设置通知偏好",
+          "expected_result": "保存当前用户的通知偏好设置",
+          "criteria_id": "PAGE-010-AC-005"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-011",
+      "page_name": "监控预警详情",
+      "route": "/monitoring/alerts/:id",
+      "page_category": "user_page",
+      "primary_roles": [
+        "ROLE-001"
+      ],
+      "related_modules": [
+        "MOD-007"
+      ],
+      "related_features": [
+        "FEAT-020",
+        "FEAT-021",
+        "FEAT-022"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-011-AC-001",
+          "description": "打开 /monitoring/alerts/:id 后展示预警概览区（事件类型、严重级别、发现时间、相关供应商、当前状态）、证据详情区、建议动作区。",
+          "severity": "blocker",
+          "check_method": "浏览器打开页面核对三个区域"
+        },
+        {
+          "criteria_id": "PAGE-011-AC-002",
+          "description": "证据详情区展示变更记录、来源链接、截图/文件、发布时间、原文引用。",
+          "severity": "major",
+          "check_method": "核对证据材料展示"
+        },
+        {
+          "criteria_id": "PAGE-011-AC-003",
+          "description": "点击标记已处理并填写处理说明后，预警状态更新为 resolved，并记录处理时间与说明。",
+          "severity": "blocker",
+          "check_method": "填写处理说明后点击按钮，核对状态与时间"
+        },
+        {
+          "criteria_id": "PAGE-011-AC-004",
+          "description": "点击查看供应商画像跳转至 /suppliers/{id}。",
+          "severity": "major",
+          "check_method": "点击按钮检查跳转"
+        },
+        {
+          "criteria_id": "PAGE-011-AC-005",
+          "description": "点击导出预警证据可下载包含链接与附件的证据包文件。",
+          "severity": "minor",
+          "check_method": "点击导出并检查文件下载"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "标记已处理",
+          "expected_result": "预警状态更新为 resolved 并记录处理时间与说明",
+          "criteria_id": "PAGE-011-AC-003"
+        },
+        {
+          "action_name": "查看供应商画像",
+          "expected_result": "跳转至 PAGE-006 供应商画像详情",
+          "criteria_id": "PAGE-011-AC-004"
+        },
+        {
+          "action_name": "导出预警证据",
+          "expected_result": "导出预警证据包（链接与附件）",
+          "criteria_id": "PAGE-011-AC-005"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-012",
+      "page_name": "用户管理",
+      "route": "/admin/users",
+      "page_category": "management_page",
+      "primary_roles": [
+        "ROLE-002"
+      ],
+      "related_modules": [
+        "MOD-008"
+      ],
+      "related_features": [
+        "FEAT-023"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-012-AC-001",
+          "description": "打开 /admin/users 后展示用户列表区（用户名、角色、状态、最近登录时间、创建时间）与用户编辑区。",
+          "severity": "blocker",
+          "check_method": "浏览器以管理员身份打开页面核对两个区域"
+        },
+        {
+          "criteria_id": "PAGE-012-AC-002",
+          "description": "点击新建用户填写表单并保存，新账号出现在用户列表且状态为 active。",
+          "severity": "major",
+          "check_method": "新建用户并核对列表"
+        },
+        {
+          "criteria_id": "PAGE-012-AC-003",
+          "description": "编辑角色权限后保存，用户角色与访问权限更新。",
+          "severity": "major",
+          "check_method": "修改角色并保存，用该账号验证权限变化"
+        },
+        {
+          "criteria_id": "PAGE-012-AC-004",
+          "description": "禁用/启用账号后，用户状态切换，禁用账号不能登录系统。",
+          "severity": "blocker",
+          "check_method": "禁用账号并尝试登录验证"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "新建用户",
+          "expected_result": "保存并显示新账号",
+          "criteria_id": "PAGE-012-AC-002"
+        },
+        {
+          "action_name": "编辑角色权限",
+          "expected_result": "更新用户角色与访问权限",
+          "criteria_id": "PAGE-012-AC-003"
+        },
+        {
+          "action_name": "禁用/启用账号",
+          "expected_result": "更新用户启用状态",
+          "criteria_id": "PAGE-012-AC-004"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-013",
+      "page_name": "品类知识库管理",
+      "route": "/admin/knowledge-base",
+      "page_category": "management_page",
+      "primary_roles": [
+        "ROLE-002"
+      ],
+      "related_modules": [
+        "MOD-008"
+      ],
+      "related_features": [
+        "FEAT-024"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-013-AC-001",
+          "description": "打开 /admin/knowledge-base 后展示品类树区（类目名称、子类目、上级类目、类目数量）与知识条目编辑区。",
+          "severity": "blocker",
+          "check_method": "浏览器以管理员身份打开页面核对两个区域"
+        },
+        {
+          "criteria_id": "PAGE-013-AC-002",
+          "description": "点击新增品类可创建类目及其参数模板，新品类出现在品类树。",
+          "severity": "major",
+          "check_method": "新增品类并核对品类树"
+        },
+        {
+          "criteria_id": "PAGE-013-AC-003",
+          "description": "编辑参数模板、比价归一化规则、同义词/英文关键词、价格影响因素说明后点击保存，知识库条目更新。",
+          "severity": "major",
+          "check_method": "编辑并保存，重新进入页面核对内容"
+        },
+        {
+          "criteria_id": "PAGE-013-AC-004",
+          "description": "导入/导出知识文件功能可用，导出的文件可被再次导入。",
+          "severity": "minor",
+          "check_method": "导出知识库文件并导入验证"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "新增品类",
+          "expected_result": "创建类目及其参数模板",
+          "criteria_id": "PAGE-013-AC-002"
+        },
+        {
+          "action_name": "保存知识条目",
+          "expected_result": "更新品类知识库条目",
+          "criteria_id": "PAGE-013-AC-003"
+        },
+        {
+          "action_name": "导入/导出知识",
+          "expected_result": "上传或下载知识库文件",
+          "criteria_id": "PAGE-013-AC-004"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-014",
+      "page_name": "数据源配置管理",
+      "route": "/admin/data-sources",
+      "page_category": "management_page",
+      "primary_roles": [
+        "ROLE-002"
+      ],
+      "related_modules": [
+        "MOD-008",
+        "MOD-002"
+      ],
+      "related_features": [
+        "FEAT-025"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-014-AC-001",
+          "description": "打开 /admin/data-sources 后展示数据源列表区（数据源名称、类型、运行状态、近日调用量、最近同步时间）与配置表单区（接入地址、密钥引用、抓取规则、同步频率）。",
+          "severity": "blocker",
+          "check_method": "浏览器以管理员身份打开页面核对两个区域"
+        },
+        {
+          "criteria_id": "PAGE-014-AC-002",
+          "description": "点击新增数据源填写配置并保存，新数据源出现在列表。",
+          "severity": "major",
+          "check_method": "新增数据源并核对列表"
+        },
+        {
+          "criteria_id": "PAGE-014-AC-003",
+          "description": "点击测试连接可验证配置有效性并返回连接成功或失败结果。",
+          "severity": "blocker",
+          "check_method": "使用有效与无效配置分别测试连接"
+        },
+        {
+          "criteria_id": "PAGE-014-AC-004",
+          "description": "启用/停用数据源后运行状态更新，停用后寻源任务不再调用该数据源。",
+          "severity": "major",
+          "check_method": "切换状态并验证寻源任务行为"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "新增数据源",
+          "expected_result": "保存数据源配置",
+          "criteria_id": "PAGE-014-AC-002"
+        },
+        {
+          "action_name": "测试连接",
+          "expected_result": "返回连接测试结果",
+          "criteria_id": "PAGE-014-AC-003"
+        },
+        {
+          "action_name": "启用/停用数据源",
+          "expected_result": "更新数据源运行状态",
+          "criteria_id": "PAGE-014-AC-004"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "page_id": "PAGE-015",
+      "page_name": "监控规则配置",
+      "route": "/admin/monitoring-rules",
+      "page_category": "management_page",
+      "primary_roles": [
+        "ROLE-002"
+      ],
+      "related_modules": [
+        "MOD-008",
+        "MOD-007"
+      ],
+      "related_features": [
+        "FEAT-026"
+      ],
+      "acceptance_criteria": [
+        {
+          "criteria_id": "PAGE-015-AC-001",
+          "description": "打开 /admin/monitoring-rules 后展示规则列表区（规则名称、事件类型、触发阈值、检查频率、启用状态）与通知渠道配置区（邮件、短信、站内信开关与收件参数）。",
+          "severity": "blocker",
+          "check_method": "浏览器以管理员身份打开页面核对两个区域"
+        },
+        {
+          "criteria_id": "PAGE-015-AC-002",
+          "description": "点击新增规则可创建监控规则，新规则出现在规则列表。",
+          "severity": "major",
+          "check_method": "新增规则并核对列表"
+        },
+        {
+          "criteria_id": "PAGE-015-AC-003",
+          "description": "编辑触发阈值并保存后阈值更新。",
+          "severity": "major",
+          "check_method": "编辑阈值并保存，重新进入核对"
+        },
+        {
+          "criteria_id": "PAGE-015-AC-004",
+          "description": "启用/停用规则后规则生效状态更新，停用后不再触发该监控任务。",
+          "severity": "blocker",
+          "check_method": "切换规则状态并验证监控任务调度"
+        }
+      ],
+      "main_action_acceptance": [
+        {
+          "action_name": "新增规则",
+          "expected_result": "保存新规则",
+          "criteria_id": "PAGE-015-AC-002"
+        },
+        {
+          "action_name": "编辑阈值",
+          "expected_result": "保存阈值更新",
+          "criteria_id": "PAGE-015-AC-003"
+        },
+        {
+          "action_name": "启用/停用规则",
+          "expected_result": "更新规则启用状态",
+          "criteria_id": "PAGE-015-AC-004"
+        }
+      ],
+      "acceptance_priority": "P1"
+    }
+  ],
+  "feature_acceptance": [
+    {
+      "feature_id": "FEAT-001",
+      "feature_name": "对话需求澄清",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-001"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-001-AC-01",
+          "criteria": "在 /chat 发送模糊产品描述后，AI 至少追问目标价格带、月需求量、认证要求、贴牌/公模中的一项关键信息。"
+        },
+        {
+          "id": "FEAT-001-AC-02",
+          "criteria": "对话消息流区展示用户消息与 AI 追问，AI 建议追问区展示可点击的快捷回复选项。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-002",
+      "feature_name": "结构化规格书生成",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-001",
+        "PAGE-002"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-002-AC-01",
+          "criteria": "AI 基于对话内容输出结构化规格书草稿，包含产品类目、关键参数、认证要求、需求数量、贸易条款。"
+        },
+        {
+          "id": "FEAT-002-AC-02",
+          "criteria": "规格书草稿可在 PAGE-002 预览、编辑或由 AI 重新生成。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-003",
+      "feature_name": "规格书确认与项目创建",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-002",
+        "PAGE-003",
+        "PAGE-004"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-003-AC-01",
+          "criteria": "只有 spec_status 为 confirmed 的规格书才能创建寻源项目；draft 状态时禁止创建。"
+        },
+        {
+          "id": "FEAT-003-AC-02",
+          "criteria": "确认后创建寻源项目并跳转至项目详情页 PAGE-004。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-004",
+      "feature_name": "多平台并行检索",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-005"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-004-AC-01",
+          "criteria": "寻源任务按规格书在 1688、阿里国际站、百度爱采购、展会名录、海关数据等平台产生候选召回。"
+        },
+        {
+          "id": "FEAT-004-AC-02",
+          "criteria": "候选供应商列表展示来源平台字段，不同平台来源可区分。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-005",
+      "feature_name": "关键词自动扩展与收紧",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-005"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-005-AC-01",
+          "criteria": "点击重新寻源后，系统按同义词/英文/上下游关键词扩展或收紧关键词，并重新执行检索。"
+        },
+        {
+          "id": "FEAT-005-AC-02",
+          "criteria": "重新寻源后匹配关键词字段反映新的关键词。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-006",
+      "feature_name": "候选供应商召回管理",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-004",
+        "PAGE-005"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-006-AC-01",
+          "criteria": "候选供应商列表在项目详情页可访问。"
+        },
+        {
+          "id": "FEAT-006-AC-02",
+          "criteria": "勾选供应商并提交深入分析名单后，仅对选中供应商启动深度画像任务。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-007",
+      "feature_name": "工商数据交叉验证",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-006"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-007-AC-01",
+          "criteria": "供应商画像展示成立年限、注册资本、参保人数、经营范围等信息并与多源数据一致。"
+        },
+        {
+          "id": "FEAT-007-AC-02",
+          "criteria": "页面标注数据来源，无法核实的数据标注为信息不足。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-008",
+      "feature_name": "地址与平台线索分析",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-006"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-008-AC-01",
+          "criteria": "展示注册地址类型（工业园/厂房 vs 写字楼/居民楼）、平台标签、SKU 聚焦度。"
+        },
+        {
+          "id": "FEAT-008-AC-02",
+          "criteria": "地址与平台线索分析结论带证据，不能无依据输出。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-009",
+      "feature_name": "资质认证识别",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-006"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-009-AC-01",
+          "criteria": "资质证书图片经 OCR 识别后展示证书名称与公司名核对结果。"
+        },
+        {
+          "id": "FEAT-009-AC-02",
+          "criteria": "无法识别或未提供的证书不编造识别结果。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-010",
+      "feature_name": "真工厂置信度评分",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-006"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-010-AC-01",
+          "criteria": "供应商画像展示 0-100 的真工厂置信度评分与供应商类型 factory/trader。"
+        },
+        {
+          "id": "FEAT-010-AC-02",
+          "criteria": "评分与供应商类型附判定理由。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-011",
+      "feature_name": "产能与规模推断",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-006"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-011-AC-01",
+          "criteria": "产能推断区展示产能区间与规模等级（small/medium/large），并给出推断依据。"
+        },
+        {
+          "id": "FEAT-011-AC-02",
+          "criteria": "页面不编造精确产能数字，只输出区间与依据。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-012",
+      "feature_name": "报价口径抽取",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-007"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-012-AC-01",
+          "criteria": "报价对比表展示各家原始报价口径（价格带、MOQ、阶梯价、含税/不含税、FOB/EXW）。"
+        },
+        {
+          "id": "FEAT-012-AC-02",
+          "criteria": "原始报价口径字段与供应商实际报价信息来源一致。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-013",
+      "feature_name": "报价归一化比价",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-006",
+        "PAGE-007"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-013-AC-01",
+          "criteria": "报价对比分析页展示归一化后可比单价与价格分布图。"
+        },
+        {
+          "id": "FEAT-013-AC-02",
+          "criteria": "切换口径参数后归一化单价与分布图更新。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-014",
+      "feature_name": "异常报价标注",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-007"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-014-AC-01",
+          "criteria": "明显低于成本价的报价可被标记为异常，并选择可能原因（偷工减料/贸易商转单/引流价）。"
+        },
+        {
+          "id": "FEAT-014-AC-02",
+          "criteria": "异常标记保存后表格可见。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-015",
+      "feature_name": "RFQ 自动生成",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-008"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-015-AC-01",
+          "criteria": "点击生成 RFQ 后展示中英文双语询价单，内容基于规格书并包含报价要求、认证要求、贸易条款。"
+        },
+        {
+          "id": "FEAT-015-AC-02",
+          "criteria": "RFQ 可复制或导出。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-016",
+      "feature_name": "询盘话术批量生成",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-008"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-016-AC-01",
+          "criteria": "点击生成批量话术展示面向 Top10 供应商的询盘话术列表。"
+        },
+        {
+          "id": "FEAT-016-AC-02",
+          "criteria": "话术包含 1688 旺旺/邮件模板形式，可针对不同供应商区分。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-017",
+      "feature_name": "联系方式汇总",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-008"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-017-AC-01",
+          "criteria": "联系方式汇总区展示联系人、电话、微信/WhatsApp、邮箱、来源页面链接。"
+        },
+        {
+          "id": "FEAT-017-AC-02",
+          "criteria": "导出联系方式表文件包含以上字段。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-018",
+      "feature_name": "评估报告生成",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-004",
+        "PAGE-009"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-018-AC-01",
+          "criteria": "评估报告页展示对比大表与推荐结论，每条结论附证据链接与置信度。"
+        },
+        {
+          "id": "FEAT-018-AC-02",
+          "criteria": "报告状态字段（draft/final）与页面展示一致。"
+        },
+        {
+          "id": "FEAT-018-AC-03",
+          "criteria": "点击导出评估报告可下载 PDF/Word 文件。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-019",
+      "feature_name": "分层推荐策略",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-009"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-019-AC-01",
+          "criteria": "分层推荐区展示批量主力 ×2、备选 ×2、打样快反 ×1 的组合推荐。"
+        },
+        {
+          "id": "FEAT-019-AC-02",
+          "criteria": "推荐策略说明与对比大表数据一致。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-020",
+      "feature_name": "供应商风险监控",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-004",
+        "PAGE-009",
+        "PAGE-010",
+        "PAGE-011"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-020-AC-01",
+          "criteria": "监控中心展示司法风险、经营异常、股权变更、差评激增、涨价信号预警。"
+        },
+        {
+          "id": "FEAT-020-AC-02",
+          "criteria": "发起监控后推荐供应商出现在监控对象列表。"
+        },
+        {
+          "id": "FEAT-020-AC-03",
+          "criteria": "预警详情页展示证据与建议动作。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-021",
+      "feature_name": "原材料价格监控",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-010",
+        "PAGE-011"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-021-AC-01",
+          "criteria": "监控中心预警汇总包含原材料价格波动预警计数。"
+        },
+        {
+          "id": "FEAT-021-AC-02",
+          "criteria": "原材料价格预警详情展示价格变化信息与议价窗口建议。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-022",
+      "feature_name": "预警通知",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-010",
+        "PAGE-011"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-022-AC-01",
+          "criteria": "预警列表展示通知事件，支持站内信查看。"
+        },
+        {
+          "id": "FEAT-022-AC-02",
+          "criteria": "设置通知偏好可配置渠道与频率，保存后生效。"
+        },
+        {
+          "id": "FEAT-022-AC-03",
+          "criteria": "标记已处理后预警状态更新为 resolved。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-023",
+      "feature_name": "用户权限管理",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-012"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-023-AC-01",
+          "criteria": "用户管理页可新建用户并设置角色。"
+        },
+        {
+          "id": "FEAT-023-AC-02",
+          "criteria": "禁用账号后该账号不能登录系统；角色变更后访问权限生效。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-024",
+      "feature_name": "品类知识库维护",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-013"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-024-AC-01",
+          "criteria": "品类知识库页展示品类树与知识条目编辑区。"
+        },
+        {
+          "id": "FEAT-024-AC-02",
+          "criteria": "保存知识条目后更新生效，导入/导出知识文件可用。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-025",
+      "feature_name": "数据源配置维护",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-014"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-025-AC-01",
+          "criteria": "数据源配置页可新增数据源并设置接入参数。"
+        },
+        {
+          "id": "FEAT-025-AC-02",
+          "criteria": "测试连接返回真实连接结果。"
+        },
+        {
+          "id": "FEAT-025-AC-03",
+          "criteria": "停用数据源后寻源任务不再调用该数据源。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    },
+    {
+      "feature_id": "FEAT-026",
+      "feature_name": "监控规则配置",
+      "priority": "P2",
+      "related_pages": [
+        "PAGE-015"
+      ],
+      "acceptance_criteria": [
+        {
+          "id": "FEAT-026-AC-01",
+          "criteria": "监控规则配置页可新增规则并编辑阈值。"
+        },
+        {
+          "id": "FEAT-026-AC-02",
+          "criteria": "停用规则后该规则不再触发监控任务。"
+        }
+      ],
+      "acceptance_priority": "P1"
+    }
+  ],
+  "workflow_acceptance": [
+    {
+      "workflow_id": "WF-001",
+      "workflow_name": "需求澄清到项目创建流程",
+      "related_page_ids": [
+        "PAGE-001",
+        "PAGE-002",
+        "PAGE-004"
+      ],
+      "related_feature_ids": [
+        "FEAT-001",
+        "FEAT-002",
+        "FEAT-003"
+      ],
+      "expected_flow": "用户打开 /chat → 输入产品描述 → AI 多轮追问 → 生成规格书草稿 → 前往 /specs/:id → 编辑/确认规格书 → 规格书状态置为 confirmed → 创建寻源项目 → 跳转 /projects/:id 并展示项目概览。",
+      "acceptance_criteria": [
+        "规格书只有在 confirmed 状态才能创建项目。",
+        "创建项目后跳转至 PAGE-004，项目详情页展示新建项目的概览信息。"
+      ]
+    },
+    {
+      "workflow_id": "WF-002",
+      "workflow_name": "寻源召回与候选筛选流程",
+      "related_page_ids": [
+        "PAGE-004",
+        "PAGE-005",
+        "PAGE-006"
+      ],
+      "related_feature_ids": [
+        "FEAT-004",
+        "FEAT-005",
+        "FEAT-006"
+      ],
+      "expected_flow": "项目详情页点击查看候选供应商 → 进入 /projects/:id/candidates → 查看多平台召回列表 → 筛选/排序 → 勾选深入分析名单 → 提交深挖 → 深度画像任务启动 → 查看单个供应商画像 /suppliers/:id。",
+      "acceptance_criteria": [
+        "候选列表与项目关联，平台来源可区分。",
+        "提交深挖名单后仅选中供应商被深度画像。"
+      ]
+    },
+    {
+      "workflow_id": "WF-003",
+      "workflow_name": "报价分析与比价流程",
+      "related_page_ids": [
+        "PAGE-006",
+        "PAGE-007"
+      ],
+      "related_feature_ids": [
+        "FEAT-012",
+        "FEAT-013",
+        "FEAT-014"
+      ],
+      "expected_flow": "供应商画像页点击加入比价名单 → 进入 /projects/:id/quotes → 查看归一化报价与价格分布 → 切换口径 → 确认异常标注 → 导出报价对比表。",
+      "acceptance_criteria": [
+        "加入比价名单的供应商出现在报价对比表。",
+        "切换口径后归一化单价与价格分布刷新。"
+      ]
+    },
+    {
+      "workflow_id": "WF-004",
+      "workflow_name": "询价触达材料生成流程",
+      "related_page_ids": [
+        "PAGE-008",
+        "PAGE-009"
+      ],
+      "related_feature_ids": [
+        "FEAT-015",
+        "FEAT-016",
+        "FEAT-017"
+      ],
+      "expected_flow": "评估报告页点击生成询价材料 → 进入 /projects/:id/rfq → 点击生成 RFQ → 查看中英文双语询价单 → 点击生成批量话术 → 查看 Top10 话术 → 导出联系方式表。",
+      "acceptance_criteria": [
+        "RFQ 基于规格书生成中英文双语内容。",
+        "联系方式导出文件包含联系人、电话、微信/WhatsApp、邮箱。"
+      ]
+    },
+    {
+      "workflow_id": "WF-005",
+      "workflow_name": "评估报告与监控发起流程",
+      "related_page_ids": [
+        "PAGE-009",
+        "PAGE-010"
+      ],
+      "related_feature_ids": [
+        "FEAT-018",
+        "FEAT-019",
+        "FEAT-020"
+      ],
+      "expected_flow": "进入 /projects/:id/report → 查看分层推荐与对比大表 → 点击导出评估报告 → 选择推荐供应商 → 点击发起监控 → 进入 /monitoring 查看监控对象。",
+      "acceptance_criteria": [
+        "报告导出文件与页面内容一致。",
+        "发起监控后所选供应商出现在监控中心监控对象列表。"
+      ]
+    },
+    {
+      "workflow_id": "WF-006",
+      "workflow_name": "预警处理闭环流程",
+      "related_page_ids": [
+        "PAGE-010",
+        "PAGE-011"
+      ],
+      "related_feature_ids": [
+        "FEAT-020",
+        "FEAT-021",
+        "FEAT-022"
+      ],
+      "expected_flow": "进入 /monitoring → 查看预警汇总与列表 → 点击某条预警 → 进入 /monitoring/alerts/:id → 查看证据与建议动作 → 填写处理说明 → 点击标记已处理 → 预警状态更新为 resolved。",
+      "acceptance_criteria": [
+        "预警详情证据区展示来源与原文引用。",
+        "标记已处理后状态字段为 resolved 并记录处理时间。"
+      ]
+    },
+    {
+      "workflow_id": "WF-007",
+      "workflow_name": "管理端数据源与监控规则配置流程",
+      "related_page_ids": [
+        "PAGE-014",
+        "PAGE-015"
+      ],
+      "related_feature_ids": [
+        "FEAT-025",
+        "FEAT-026"
+      ],
+      "expected_flow": "管理员进入 /admin/data-sources → 新增数据源 → 保存配置 → 点击测试连接 → 返回连接结果 → 进入 /admin/monitoring-rules → 新增监控规则 → 编辑阈值 → 启用/停用规则。",
+      "acceptance_criteria": [
+        "数据源测试连接返回真实结果而非模拟值。",
+        "监控规则启用/停用状态变化并影响实际监控调度。"
+      ]
+    }
+  ],
+  "human_simulation_acceptance": [
+    {
+      "scenario_id": "SIM-001",
+      "scenario_name": "采购人员发起对话并生成规格书草稿",
+      "related_page_ids": [
+        "PAGE-001"
+      ],
+      "related_feature_ids": [
+        "FEAT-001",
+        "FEAT-002"
+      ],
+      "role_id": "ROLE-001",
+      "expected_flow": "用户打开采购对话台，输入模糊产品描述，AI 返回追问，点击生成规格书草稿，预览区出现结构化内容。",
+      "acceptance_criteria": [
+        "发送消息后对话流出现用户输入与 AI 追问。",
+        "规格书草稿预览区出现产品类目、关键参数、需求数量字段。"
+      ],
+      "browser_execution": {
+        "entry_url_or_route": "/chat",
+        "required": true,
+        "must_record_steps": true,
+        "must_capture_screenshot": true,
+        "must_capture_console_log": true,
+        "must_capture_network_log": true,
+        "failure_location_required": true,
+        "steps": [
+          {
+            "step": 1,
+            "action": "open",
+            "description": "打开真实浏览器并访问 /chat 页面",
+            "target": "/chat"
+          },
+          {
+            "step": 2,
+            "action": "wait",
+            "description": "等待页面加载完成，确认对话消息流区、规格书草稿预览区、AI 建议追问区可见",
+            "target": "页面三个区域"
+          },
+          {
+            "step": 3,
+            "action": "type",
+            "description": "在消息输入框输入“我需要采购一批不锈钢保温杯，2000 个左右”",
+            "target": "消息输入框"
+          },
+          {
+            "step": 4,
+            "action": "click",
+            "description": "点击发送按钮",
+            "target": "发送按钮"
+          },
+          {
+            "step": 5,
+            "action": "wait",
+            "description": "等待 AI 回复，查看是否返回追问或更新草稿预览",
+            "target": "对话消息流区"
+          },
+          {
+            "step": 6,
+            "action": "click",
+            "description": "点击“生成规格书草稿”按钮",
+            "target": "生成规格书草稿按钮"
+          },
+          {
+            "step": 7,
+            "action": "verify",
+            "description": "验证规格书草稿预览区出现结构化字段",
+            "target": "规格书草稿预览区"
+          }
+        ]
+      },
+      "acceptance_priority": "P1"
+    },
+    {
+      "scenario_id": "SIM-002",
+      "scenario_name": "确认规格书并创建寻源项目",
+      "related_page_ids": [
+        "PAGE-002",
+        "PAGE-004"
+      ],
+      "related_feature_ids": [
+        "FEAT-002",
+        "FEAT-003"
+      ],
+      "role_id": "ROLE-001",
+      "expected_flow": "用户打开寻源规格书，查看内容与完整度提示，点击确认规格书，系统校验状态后创建项目并跳转项目详情。",
+      "acceptance_criteria": [
+        "规格书状态由 draft 变为 confirmed 后才能创建项目。",
+        "创建项目后跳转至 /projects/:id 且项目详情页正常展示。"
+      ],
+      "browser_execution": {
+        "entry_url_or_route": "/specs/:id",
+        "required": true,
+        "must_record_steps": true,
+        "must_capture_screenshot": true,
+        "must_capture_console_log": true,
+        "must_capture_network_log": true,
+        "failure_location_required": true,
+        "steps": [
+          {
+            "step": 1,
+            "action": "open",
+            "description": "打开浏览器访问 /specs/{spec_id}",
+            "target": "/specs/:id"
+          },
+          {
+            "step": 2,
+            "action": "verify",
+            "description": "核对规格书内容区展示产品名称、类目、价格带、月需求量、认证、贸易条款",
+            "target": "规格书内容区"
+          },
+          {
+            "step": 3,
+            "action": "verify",
+            "description": "核对完整度提示区显示完整度百分比与缺失字段",
+            "target": "完整度与缺失提示区"
+          },
+          {
+            "step": 4,
+            "action": "click",
+            "description": "以 draft 状态尝试点击确认按钮，验证是否被阻止或提示需先确认规格书",
+            "target": "确认规格书按钮"
+          },
+          {
+            "step": 5,
+            "action": "click",
+            "description": "切换到 confirmed 状态后点击确认规格书并创建项目",
+            "target": "确认规格书按钮"
+          },
+          {
+            "step": 6,
+            "action": "verify",
+            "description": "验证跳转至 /projects/{id} 且项目详情页显示新项目信息",
+            "target": "/projects/:id"
+          }
+        ]
+      },
+      "acceptance_priority": "P1"
+    },
+    {
+      "scenario_id": "SIM-003",
+      "scenario_name": "候选供应商筛选并提交深入分析名单",
+      "related_page_ids": [
+        "PAGE-005",
+        "PAGE-006"
+      ],
+      "related_feature_ids": [
+        "FEAT-004",
+        "FEAT-005",
+        "FEAT-006"
+      ],
+      "role_id": "ROLE-001",
+      "expected_flow": "用户进入候选供应商列表，按平台筛选，勾选 3 家供应商，提交深入分析名单，系统启动深度画像任务。",
+      "acceptance_criteria": [
+        "候选列表展示来源平台与召回关键词。",
+        "提交后已选数量反馈正确且任务启动。"
+      ],
+      "browser_execution": {
+        "entry_url_or_route": "/projects/:id/candidates",
+        "required": true,
+        "must_record_steps": true,
+        "must_capture_screenshot": true,
+        "must_capture_console_log": true,
+        "must_capture_network_log": true,
+        "failure_location_required": true,
+        "steps": [
+          {
+            "step": 1,
+            "action": "open",
+            "description": "打开浏览器访问 /projects/{project_id}/candidates",
+            "target": "/projects/:id/candidates"
+          },
+          {
+            "step": 2,
+            "action": "verify",
+            "description": "核对候选供应商列表区展示供应商名称、来源平台、初步类型、召回关键词、来源链接",
+            "target": "候选供应商列表区"
+          },
+          {
+            "step": 3,
+            "action": "select",
+            "description": "在筛选排序区选择来源平台 1688 并核对列表刷新",
+            "target": "平台筛选下拉"
+          },
+          {
+            "step": 4,
+            "action": "check",
+            "description": "勾选 3 家供应商复选框",
+            "target": "供应商复选框"
+          },
+          {
+            "step": 5,
+            "action": "verify",
+            "description": "核对已选数量计数为 3",
+            "target": "已选数量计数"
+          },
+          {
+            "step": 6,
+            "action": "click",
+            "description": "点击提交深入分析名单按钮",
+            "target": "提交深入分析名单按钮"
+          },
+          {
+            "step": 7,
+            "action": "verify",
+            "description": "验证系统显示深度画像任务启动反馈",
+            "target": "页面反馈提示"
+          }
+        ]
+      },
+      "acceptance_priority": "P1"
+    },
+    {
+      "scenario_id": "SIM-004",
+      "scenario_name": "查看供应商画像并加入比价名单",
+      "related_page_ids": [
+        "PAGE-006",
+        "PAGE-007"
+      ],
+      "related_feature_ids": [
+        "FEAT-007",
+        "FEAT-008",
+        "FEAT-009",
+        "FEAT-010",
+        "FEAT-011",
+        "FEAT-013"
+      ],
+      "role_id": "ROLE-001",
+      "expected_flow": "用户从候选列表进入供应商画像，查看评分与证据，点击加入比价名单，供应商进入报价对比池。",
+      "acceptance_criteria": [
+        "画像页展示置信度评分、供应商类型与证据链接。",
+        "加入比价名单后该供应商进入报价对比池。"
+      ],
+      "browser_execution": {
+        "entry_url_or_route": "/suppliers/:id",
+        "required": true,
+        "must_record_steps": true,
+        "must_capture_screenshot": true,
+        "must_capture_console_log": true,
+        "must_capture_network_log": true,
+        "failure_location_required": true,
+        "steps": [
+          {
+            "step": 1,
+            "action": "open",
+            "description": "打开浏览器访问 /suppliers/{supplier_id}",
+            "target": "/suppliers/:id"
+          },
+          {
+            "step": 2,
+            "action": "verify",
+            "description": "核对评分概览区展示真工厂置信度评分、供应商类型、规模分级",
+            "target": "评分概览区"
+          },
+          {
+            "step": 3,
+            "action": "verify",
+            "description": "核对工商与地址线索区、平台与资质证据区、产能推断区内容",
+            "target": "画像各区域"
+          },
+          {
+            "step": 4,
+            "action": "click",
+            "description": "点击一个证据链接，验证新标签页打开来源 URL",
+            "target": "证据链接"
+          },
+          {
+            "step": 5,
+            "action": "click",
+            "description": "点击“加入比价名单”按钮",
+            "target": "加入比价名单按钮"
+          },
+          {
+            "step": 6,
+            "action": "verify",
+            "description": "验证页面给出加入成功反馈，并在报价对比页可见该供应商",
+            "target": "页面反馈提示"
+          }
+        ]
+      },
+      "acceptance_priority": "P1"
+    },
+    {
+      "scenario_id": "SIM-005",
+      "scenario_name": "切换归一化口径并导出报价对比表",
+      "related_page_ids": [
+        "PAGE-007"
+      ],
+      "related_feature_ids": [
+        "FEAT-012",
+        "FEAT-013",
+        "FEAT-014"
+      ],
+      "role_id": "ROLE-001",
+      "expected_flow": "用户进入报价对比分析页，查看价格分布与对比表，切换数量档位口径，确认异常标注，导出 Excel。",
+      "acceptance_criteria": [
+        "切换口径后价格分布图与归一化单价刷新。",
+        "异常标注保存成功且表格显示异常标记。"
+      ],
+      "browser_execution": {
+        "entry_url_or_route": "/projects/:id/quotes",
+        "required": true,
+        "must_record_steps": true,
+        "must_capture_screenshot": true,
+        "must_capture_console_log": true,
+        "must_capture_network_log": true,
+        "failure_location_required": true,
+        "steps": [
+          {
+            "step": 1,
+            "action": "open",
+            "description": "打开浏览器访问 /projects/{project_id}/quotes",
+            "target": "/projects/:id/quotes"
+          },
+          {
+            "step": 2,
+            "action": "verify",
+            "description": "核对归一化口径选择区、价格分布图区、报价对比表区可见",
+            "target": "页面三个区域"
+          },
+          {
+            "step": 3,
+            "action": "select",
+            "description": "在归一化口径选择区切换数量档位或含税/不含税参数",
+            "target": "口径参数控件"
+          },
+          {
+            "step": 4,
+            "action": "verify",
+            "description": "验证价格分布图与对比表数值随新口径刷新",
+            "target": "价格分布图与对比表"
+          },
+          {
+            "step": 5,
+            "action": "click",
+            "description": "在报价对比表中选择一条异常报价并点击确认异常标注，选择原因“偷工减料”",
+            "target": "异常标注按钮"
+          },
+          {
+            "step": 6,
+            "action": "click",
+            "description": "点击导出报价对比按钮",
+            "target": "导出报价对比按钮"
+          },
+          {
+            "step": 7,
+            "action": "verify",
+            "description": "验证 Excel 文件下载且内容与页面一致",
+            "target": "下载文件"
+          }
+        ]
+      },
+      "acceptance_priority": "P1"
+    },
+    {
+      "scenario_id": "SIM-006",
+      "scenario_name": "生成 RFQ 并导出联系方式汇总表",
+      "related_page_ids": [
+        "PAGE-008"
+      ],
+      "related_feature_ids": [
+        "FEAT-015",
+        "FEAT-016",
+        "FEAT-017"
+      ],
+      "role_id": "ROLE-001",
+      "expected_flow": "用户进入询价材料生成页，点击生成 RFQ，查看双语内容，点击生成批量话术，查看 Top10 话术，导出联系方式表。",
+      "acceptance_criteria": [
+        "RFQ 展示中英文双语内容且基于规格书。",
+        "批量话术列表覆盖 Top10 供应商。",
+        "联系方式导出文件字段完整。"
+      ],
+      "browser_execution": {
+        "entry_url_or_route": "/projects/:id/rfq",
+        "required": true,
+        "must_record_steps": true,
+        "must_capture_screenshot": true,
+        "must_capture_console_log": true,
+        "must_capture_network_log": true,
+        "failure_location_required": true,
+        "steps": [
+          {
+            "step": 1,
+            "action": "open",
+            "description": "打开浏览器访问 /projects/{project_id}/rfq",
+            "target": "/projects/:id/rfq"
+          },
+          {
+            "step": 2,
+            "action": "click",
+            "description": "点击“生成 RFQ”按钮",
+            "target": "生成 RFQ 按钮"
+          },
+          {
+            "step": 3,
+            "action": "verify",
+            "description": "验证 RFQ 预览区展示中英文双语询价单",
+            "target": "RFQ 预览区"
+          },
+          {
+            "step": 4,
+            "action": "click",
+            "description": "点击“生成批量话术”按钮",
+            "target": "生成批量话术按钮"
+          },
+          {
+            "step": 5,
+            "action": "verify",
+            "description": "验证询盘话术区展示面向 Top10 供应商的话术列表",
+            "target": "询盘话术区"
+          },
+          {
+            "step": 6,
+            "action": "click",
+            "description": "点击“导出联系方式表”按钮",
+            "target": "导出联系方式表按钮"
+          },
+          {
+            "step": 7,
+            "action": "verify",
+            "description": "验证 Excel/CSV 文件下载且包含联系人、电话、微信/WhatsApp、邮箱",
+            "target": "下载文件"
+          }
+        ]
+      },
+      "acceptance_priority": "P1"
+    },
+    {
+      "scenario_id": "SIM-007",
+      "scenario_name": "导出评估报告并发起监控",
+      "related_page_ids": [
+        "PAGE-009",
+        "PAGE-010"
+      ],
+      "related_feature_ids": [
+        "FEAT-018",
+        "FEAT-019",
+        "FEAT-020"
+      ],
+      "role_id": "ROLE-001",
+      "expected_flow": "用户进入评估报告页，查看分层推荐与对比大表，点击导出报告，选择推荐供应商，点击发起监控，跳转监控中心核对监控对象。",
+      "acceptance_criteria": [
+        "评估报告导出文件可打开且内容一致。",
+        "发起监控后监控中心出现对应监控对象。"
+      ],
+      "browser_execution": {
+        "entry_url_or_route": "/projects/:id/report",
+        "required": true,
+        "must_record_steps": true,
+        "must_capture_screenshot": true,
+        "must_capture_console_log": true,
+        "must_capture_network_log": true,
+        "failure_location_required": true,
+        "steps": [
+          {
+            "step": 1,
+            "action": "open",
+            "description": "打开浏览器访问 /projects/{project_id}/report",
+            "target": "/projects/:id/report"
+          },
+          {
+            "step": 2,
+            "action": "verify",
+            "description": "核对分层推荐区展示主力 ×2、备选 ×2、打样快反 ×1",
+            "target": "分层推荐区"
+          },
+          {
+            "step": 3,
+            "action": "verify",
+            "description": "核对对比大表区展示供应商、类型、资质、价格带、产能、风险信号、综合推荐度",
+            "target": "对比大表区"
+          },
+          {
+            "step": 4,
+            "action": "click",
+            "description": "点击“导出评估报告”按钮",
+            "target": "导出评估报告按钮"
+          },
+          {
+            "step": 5,
+            "action": "verify",
+            "description": "验证 PDF/Word 文件下载",
+            "target": "下载文件"
+          },
+          {
+            "step": 6,
+            "action": "select",
+            "description": "在报告中选择两家推荐供应商用于发起监控",
+            "target": "推荐供应商选择框"
+          },
+          {
+            "step": 7,
+            "action": "click",
+            "description": "点击“发起监控”按钮",
+            "target": "发起监控按钮"
+          },
+          {
+            "step": 8,
+            "action": "verify",
+            "description": "跳转 /monitoring 并核对所选供应商出现在监控对象区",
+            "target": "/monitoring 监控对象区"
+          }
+        ]
+      },
+      "acceptance_priority": "P1"
+    },
+    {
+      "scenario_id": "SIM-008",
+      "scenario_name": "处理监控预警并标记已处理",
+      "related_page_ids": [
+        "PAGE-010",
+        "PAGE-011"
+      ],
+      "related_feature_ids": [
+        "FEAT-020",
+        "FEAT-021",
+        "FEAT-022"
+      ],
+      "role_id": "ROLE-001",
+      "expected_flow": "用户从监控中心点击预警记录，进入预警详情，查看证据与建议动作，填写处理说明，标记已处理，状态变为 resolved。",
+      "acceptance_criteria": [
+        "预警详情展示证据来源与 AI 建议动作。",
+        "标记已处理后状态为 resolved 且记录处理时间。"
+      ],
+      "browser_execution": {
+        "entry_url_or_route": "/monitoring/alerts/:id",
+        "required": true,
+        "must_record_steps": true,
+        "must_capture_screenshot": true,
+        "must_capture_console_log": true,
+        "must_capture_network_log": true,
+        "failure_location_required": true,
+        "steps": [
+          {
+            "step": 1,
+            "action": "open",
+            "description": "打开浏览器访问 /monitoring/alerts/{alert_id}",
+            "target": "/monitoring/alerts/:id"
+          },
+          {
+            "step": 2,
+            "action": "verify",
+            "description": "核对预警概览区展示事件类型、严重级别、发现时间、相关供应商、当前状态",
+            "target": "预警概览区"
+          },
+          {
+            "step": 3,
+            "action": "verify",
+            "description": "核对证据详情区展示变更记录、来源链接、原文引用",
+            "target": "证据详情区"
+          },
+          {
+            "step": 4,
+            "action": "type",
+            "description": "在建议动作区的处理说明输入框填写“已联系供应商核实”",
+            "target": "处理说明输入框"
+          },
+          {
+            "step": 5,
+            "action": "click",
+            "description": "点击“标记已处理”按钮",
+            "target": "标记已处理按钮"
+          },
+          {
+            "step": 6,
+            "action": "verify",
+            "description": "验证预警状态更新为 resolved 并显示处理时间与说明",
+            "target": "预警概览状态"
+          }
+        ]
+      },
+      "acceptance_priority": "P1"
+    },
+    {
+      "scenario_id": "SIM-009",
+      "scenario_name": "管理员测试数据源连接",
+      "related_page_ids": [
+        "PAGE-014"
+      ],
+      "related_feature_ids": [
+        "FEAT-025"
+      ],
+      "role_id": "ROLE-002",
+      "expected_flow": "管理员进入数据源配置管理页，新增数据源并保存，点击测试连接，获得真实连接结果。",
+      "acceptance_criteria": [
+        "数据源保存成功并出现在列表。",
+        "测试连接返回可用/不可用的真实结果。"
+      ],
+      "browser_execution": {
+        "entry_url_or_route": "/admin/data-sources",
+        "required": true,
+        "must_record_steps": true,
+        "must_capture_screenshot": true,
+        "must_capture_console_log": true,
+        "must_capture_network_log": true,
+        "failure_location_required": true,
+        "steps": [
+          {
+            "step": 1,
+            "action": "open",
+            "description": "以管理员身份打开浏览器访问 /admin/data-sources",
+            "target": "/admin/data-sources"
+          },
+          {
+            "step": 2,
+            "action": "verify",
+            "description": "核对数据源列表区与配置表单区可见",
+            "target": "数据源配置页两个区域"
+          },
+          {
+            "step": 3,
+            "action": "click",
+            "description": "点击“新增数据源”按钮",
+            "target": "新增数据源按钮"
+          },
+          {
+            "step": 4,
+            "action": "type",
+            "description": "填写数据源名称、接入地址、密钥引用、抓取规则、同步频率",
+            "target": "配置表单"
+          },
+          {
+            "step": 5,
+            "action": "click",
+            "description": "点击保存按钮",
+            "target": "保存按钮"
+          },
+          {
+            "step": 6,
+            "action": "verify",
+            "description": "验证新数据源出现在数据源列表",
+            "target": "数据源列表区"
+          },
+          {
+            "step": 7,
+            "action": "click",
+            "description": "点击“测试连接”按钮",
+            "target": "测试连接按钮"
+          },
+          {
+            "step": 8,
+            "action": "verify",
+            "description": "验证返回连接成功或失败的明确结果",
+            "target": "测试结果提示"
+          }
+        ]
+      },
+      "acceptance_priority": "P1"
+    }
+  ],
+  "field_acceptance": [
+    {
+      "field_id": "FIELD-P001-001",
+      "page_id": "PAGE-001",
+      "field_name": "message_content",
+      "label": "消息内容",
+      "field_type": "text",
+      "required": true,
+      "validation_rule": "非空，不超过 5000 字符",
+      "acceptance_criteria": "输入为空时发送不可用；输入超过 5000 字符时给出长度提示。"
+    },
+    {
+      "field_id": "FIELD-P001-002",
+      "page_id": "PAGE-001",
+      "field_name": "ai_suggested_questions",
+      "label": "AI建议追问问题",
+      "field_type": "array",
+      "required": false,
+      "validation_rule": "问题列表",
+      "acceptance_criteria": "AI 建议追问区展示可点击的快捷问题列表，点击后作为消息发送。"
+    },
+    {
+      "field_id": "FIELD-P001-003",
+      "page_id": "PAGE-001",
+      "field_name": "spec_draft_ref",
+      "label": "规格书草稿引用",
+      "field_type": "string",
+      "required": false,
+      "validation_rule": "关联规格书草稿ID",
+      "acceptance_criteria": "草稿预览区显示规格书草稿 ID 或可跳转引用。"
+    },
+    {
+      "field_id": "FIELD-P002-001",
+      "page_id": "PAGE-002",
+      "field_name": "product_name",
+      "label": "产品名称",
+      "field_type": "string",
+      "required": true,
+      "validation_rule": "非空，不超过 200 字符",
+      "acceptance_criteria": "产品名称为空时不能保存；超长时给出提示。"
+    },
+    {
+      "field_id": "FIELD-P002-002",
+      "page_id": "PAGE-002",
+      "field_name": "product_category",
+      "label": "产品类目",
+      "field_type": "enum",
+      "required": true,
+      "validation_rule": "来自品类知识库",
+      "acceptance_criteria": "类目下拉选项来自品类知识库且必选。"
+    },
+    {
+      "field_id": "FIELD-P002-003",
+      "page_id": "PAGE-002",
+      "field_name": "target_price_range",
+      "label": "目标价格带",
+      "field_type": "string",
+      "required": false,
+      "validation_rule": "如 \"50-100 CNY\"",
+      "acceptance_criteria": "价格带输入格式校验，非法格式给出提示。"
+    },
+    {
+      "field_id": "FIELD-P002-004",
+      "page_id": "PAGE-002",
+      "field_name": "monthly_quantity",
+      "label": "月需求量",
+      "field_type": "integer",
+      "required": false,
+      "validation_rule": "大于 0",
+      "acceptance_criteria": "月需求量必须大于 0，否则提示。"
+    },
+    {
+      "field_id": "FIELD-P002-005",
+      "page_id": "PAGE-002",
+      "field_name": "certification_requirements",
+      "label": "认证要求",
+      "field_type": "array",
+      "required": false,
+      "validation_rule": "CE / ROHS / ISO9001 / BSCI / FDA 等",
+      "acceptance_criteria": "可多选认证项并正确展示。"
+    },
+    {
+      "field_id": "FIELD-P002-006",
+      "page_id": "PAGE-002",
+      "field_name": "trade_terms",
+      "label": "贸易条款",
+      "field_type": "enum",
+      "required": false,
+      "validation_rule": "EXW / FOB / CIF / DDP",
+      "acceptance_criteria": "贸易条款下拉展示 EXW/FOB/CIF/DDP 且能选择。"
+    },
+    {
+      "field_id": "FIELD-P002-007",
+      "page_id": "PAGE-002",
+      "field_name": "spec_status",
+      "label": "规格书状态",
+      "field_type": "enum",
+      "required": true,
+      "validation_rule": "draft / confirmed",
+      "acceptance_criteria": "页面展示规格书状态，draft 与 confirmed 显示正确。"
+    },
+    {
+      "field_id": "FIELD-P003-001",
+      "page_id": "PAGE-003",
+      "field_name": "project_name",
+      "label": "项目名称",
+      "field_type": "string",
+      "required": true,
+      "validation_rule": "非空，不超过 200 字符",
+      "acceptance_criteria": "项目列表展示项目名称且非空。"
+    },
+    {
+      "field_id": "FIELD-P003-002",
+      "page_id": "PAGE-003",
+      "field_name": "project_status",
+      "label": "项目状态",
+      "field_type": "enum",
+      "required": true,
+      "validation_rule": "draft / sourcing / profiling / quoting / reporting / completed / archived",
+      "acceptance_criteria": "项目状态按枚举展示且与项目实际进度一致。"
+    },
+    {
+      "field_id": "FIELD-P003-003",
+      "page_id": "PAGE-003",
+      "field_name": "created_at",
+      "label": "创建时间",
+      "field_type": "datetime",
+      "required": true,
+      "validation_rule": "系统记录",
+      "acceptance_criteria": "创建时间由系统记录并展示。"
+    },
+    {
+      "field_id": "FIELD-P003-004",
+      "page_id": "PAGE-003",
+      "field_name": "updated_at",
+      "label": "更新时间",
+      "field_type": "datetime",
+      "required": false,
+      "validation_rule": "系统记录",
+      "acceptance_criteria": "项目有变更后更新时间更新。"
+    },
+    {
+      "field_id": "FIELD-P004-001",
+      "page_id": "PAGE-004",
+      "field_name": "project_status",
+      "label": "项目状态",
+      "field_type": "enum",
+      "required": true,
+      "validation_rule": "draft / sourcing / profiling / quoting / reporting / completed / archived",
+      "acceptance_criteria": "项目概览区展示的项目状态与列表页一致。"
+    },
+    {
+      "field_id": "FIELD-P004-002",
+      "page_id": "PAGE-004",
+      "field_name": "supplier_candidate_count",
+      "label": "候选供应商数量",
+      "field_type": "integer",
+      "required": false,
+      "validation_rule": "大于等于 0",
+      "acceptance_criteria": "候选数量非负且与候选列表实际数量一致。"
+    },
+    {
+      "field_id": "FIELD-P004-003",
+      "page_id": "PAGE-004",
+      "field_name": "report_status",
+      "label": "报告状态",
+      "field_type": "enum",
+      "required": false,
+      "validation_rule": "not_started / generating / generated / exported",
+      "acceptance_criteria": "报告状态随生成流程正确变化。"
+    },
+    {
+      "field_id": "FIELD-P004-004",
+      "page_id": "PAGE-004",
+      "field_name": "progress_steps",
+      "label": "环节进度",
+      "field_type": "array",
+      "required": false,
+      "validation_rule": "各环节状态列表",
+      "acceptance_criteria": "环节进度区展示各环节状态且与项目实际进度同步。"
+    },
+    {
+      "field_id": "FIELD-P004-005",
+      "page_id": "PAGE-004",
+      "field_name": "history_records",
+      "label": "历史记录",
+      "field_type": "array",
+      "required": false,
+      "validation_rule": "操作记录列表",
+      "acceptance_criteria": "历史记录区展示操作时间、操作人/AI、操作说明、状态变更。"
+    },
+    {
+      "field_id": "FIELD-P005-001",
+      "page_id": "PAGE-005",
+      "field_name": "supplier_name",
+      "label": "供应商名称",
+      "field_type": "string",
+      "required": true,
+      "validation_rule": "非空",
+      "acceptance_criteria": "候选列表每行供应商名称非空。"
+    },
+    {
+      "field_id": "FIELD-P005-002",
+      "page_id": "PAGE-005",
+      "field_name": "source_platform",
+      "label": "来源平台",
+      "field_type": "string",
+      "required": true,
+      "validation_rule": "1688 / 阿里国际站 / 百度爱采购 / 展会名录 / 海关数据等",
+      "acceptance_criteria": "来源平台字段展示对应平台名称。"
+    },
+    {
+      "field_id": "FIELD-P005-003",
+      "page_id": "PAGE-005",
+      "field_name": "initial_type",
+      "label": "初步类型",
+      "field_type": "enum",
+      "required": false,
+      "validation_rule": "unknown / factory / trader",
+      "acceptance_criteria": "初步类型枚举展示正确。"
+    },
+    {
+      "field_id": "FIELD-P005-004",
+      "page_id": "PAGE-005",
+      "field_name": "confidence_score",
+      "label": "初步置信度",
+      "field_type": "number",
+      "required": false,
+      "validation_rule": "0-100",
+      "acceptance_criteria": "置信度评分在 0-100 之间。"
+    },
+    {
+      "field_id": "FIELD-P005-005",
+      "page_id": "PAGE-005",
+      "field_name": "selected_for_deep_dive",
+      "label": "是否选择深入分析",
+      "field_type": "boolean",
+      "required": false,
+      "validation_rule": "true / false",
+      "acceptance_criteria": "复选框勾选状态正确反映是否选择深入分析。"
+    },
+    {
+      "field_id": "FIELD-P006-001",
+      "page_id": "PAGE-006",
+      "field_name": "factory_confidence_score",
+      "label": "真工厂置信度评分",
+      "field_type": "number",
+      "required": true,
+      "validation_rule": "0-100",
+      "acceptance_criteria": "评分概览区展示 0-100 的置信度评分。"
+    },
+    {
+      "field_id": "FIELD-P006-002",
+      "page_id": "PAGE-006",
+      "field_name": "supplier_type",
+      "label": "供应商类型",
+      "field_type": "enum",
+      "required": true,
+      "validation_rule": "factory / trader",
+      "acceptance_criteria": "供应商类型展示为 factory 或 trader，与判定理由一致。"
+    },
+    {
+      "field_id": "FIELD-P006-003",
+      "page_id": "PAGE-006",
+      "field_name": "established_year",
+      "label": "成立年限",
+      "field_type": "integer",
+      "required": false,
+      "validation_rule": "大于 1900",
+      "acceptance_criteria": "成立年限大于 1900，不展示不可能年份。"
+    },
+    {
+      "field_id": "FIELD-P006-004",
+      "page_id": "PAGE-006",
+      "field_name": "insured_personnel_count",
+      "label": "参保人数",
+      "field_type": "integer",
+      "required": false,
+      "validation_rule": "大于等于 0",
+      "acceptance_criteria": "参保人数非负。"
+    },
+    {
+      "field_id": "FIELD-P006-005",
+      "page_id": "PAGE-006",
+      "field_name": "capacity_level",
+      "label": "产能规模分级",
+      "field_type": "enum",
+      "required": false,
+      "validation_rule": "small / medium / large",
+      "acceptance_criteria": "产能规模分级展示正确且附推断依据。"
+    },
+    {
+      "field_id": "FIELD-P006-006",
+      "page_id": "PAGE-006",
+      "field_name": "evidence_links",
+      "label": "证据链接",
+      "field_type": "array",
+      "required": false,
+      "validation_rule": "URL 列表",
+      "acceptance_criteria": "证据链接可点击且新标签页打开有效 URL。"
+    },
+    {
+      "field_id": "FIELD-P007-001",
+      "page_id": "PAGE-007",
+      "field_name": "supplier_name",
+      "label": "供应商名称",
+      "field_type": "string",
+      "required": true,
+      "validation_rule": "非空",
+      "acceptance_criteria": "报价对比表供应商名称非空。"
+    },
+    {
+      "field_id": "FIELD-P007-002",
+      "page_id": "PAGE-007",
+      "field_name": "original_quote_terms",
+      "label": "原始报价口径",
+      "field_type": "string",
+      "required": false,
+      "validation_rule": "如 \"1000台 不含税 EXW\"",
+      "acceptance_criteria": "原始报价口径文本完整展示。"
+    },
+    {
+      "field_id": "FIELD-P007-003",
+      "page_id": "PAGE-007",
+      "field_name": "normalized_unit_price",
+      "label": "归一化单价",
+      "field_type": "number",
+      "required": true,
+      "validation_rule": "大于 0",
+      "acceptance_criteria": "归一化单价大于 0 且随口径切换刷新。"
+    },
+    {
+      "field_id": "FIELD-P007-004",
+      "page_id": "PAGE-007",
+      "field_name": "moq",
+      "label": "最小起订量",
+      "field_type": "integer",
+      "required": false,
+      "validation_rule": "大于 0",
+      "acceptance_criteria": "MOQ 大于 0 时正确显示。"
+    },
+    {
+      "field_id": "FIELD-P007-005",
+      "page_id": "PAGE-007",
+      "field_name": "is_abnormal",
+      "label": "是否异常报价",
+      "field_type": "boolean",
+      "required": false,
+      "validation_rule": "true / false",
+      "acceptance_criteria": "异常标记保存后表格显示异常状态。"
+    },
+    {
+      "field_id": "FIELD-P007-006",
+      "page_id": "PAGE-007",
+      "field_name": "abnormal_reason",
+      "label": "异常原因",
+      "field_type": "string",
+      "required": false,
+      "validation_rule": "偷工减料 / 贸易商转单 / 引流价",
+      "acceptance_criteria": "异常原因下拉选项正确且保存后展示。"
+    },
+    {
+      "field_id": "FIELD-P008-001",
+      "page_id": "PAGE-008",
+      "field_name": "rfq_content",
+      "label": "RFQ 内容",
+      "field_type": "text",
+      "required": true,
+      "validation_rule": "中英文双语询价单正文",
+      "acceptance_criteria": "RFQ 预览展示中英文双语正文且内容完整。"
+    },
+    {
+      "field_id": "FIELD-P008-002",
+      "page_id": "PAGE-008",
+      "field_name": "outreach_template",
+      "label": "询盘话术模板",
+      "field_type": "array",
+      "required": false,
+      "validation_rule": "面向 Top10 供应商的话术列表",
+      "acceptance_criteria": "话术列表覆盖 Top10 且可区分模板类型（旺旺/邮件）。"
+    },
+    {
+      "field_id": "FIELD-P008-003",
+      "page_id": "PAGE-008",
+      "field_name": "contact_summary",
+      "label": "联系方式汇总",
+      "field_type": "array",
+      "required": false,
+      "validation_rule": "联系人、电话、微信/WhatsApp、邮箱列表",
+      "acceptance_criteria": "联系方式汇总展示完整字段且导出文件一致。"
+    },
+    {
+      "field_id": "FIELD-P009-001",
+      "page_id": "PAGE-009",
+      "field_name": "recommendation_strategy",
+      "label": "分层推荐策略",
+      "field_type": "text",
+      "required": true,
+      "validation_rule": "主力 ×2 + 备选 ×2 + 打样快反 ×1",
+      "acceptance_criteria": "分层推荐区展示 5 家供应商的组合且角色分配正确。"
+    },
+    {
+      "field_id": "FIELD-P009-002",
+      "page_id": "PAGE-009",
+      "field_name": "confidence_level",
+      "label": "置信度",
+      "field_type": "number",
+      "required": false,
+      "validation_rule": "0-100",
+      "acceptance_criteria": "置信度在 0-100 之间且展示于证据与置信度区。"
+    },
+    {
+      "field_id": "FIELD-P009-003",
+      "page_id": "PAGE-009",
+      "field_name": "report_status",
+      "label": "报告状态",
+      "field_type": "enum",
+      "required": true,
+      "validation_rule": "draft / final",
+      "acceptance_criteria": "报告状态展示 draft/final 且与操作一致。"
+    },
+    {
+      "field_id": "FIELD-P010-001",
+      "page_id": "PAGE-010",
+      "field_name": "alert_type",
+      "label": "预警类型",
+      "field_type": "enum",
+      "required": true,
+      "validation_rule": "litigation / business_exception / equity_change / negative_review / price_increase / raw_material_price",
+      "acceptance_criteria": "预警列表展示各预警类型且与汇总计数一致。"
+    },
+    {
+      "field_id": "FIELD-P010-002",
+      "page_id": "PAGE-010",
+      "field_name": "severity_level",
+      "label": "严重程度",
+      "field_type": "enum",
+      "required": true,
+      "validation_rule": "low / medium / high / critical",
+      "acceptance_criteria": "严重程度枚举展示正确。"
+    },
+    {
+      "field_id": "FIELD-P010-003",
+      "page_id": "PAGE-010",
+      "field_name": "alert_status",
+      "label": "预警状态",
+      "field_type": "enum",
+      "required": true,
+      "validation_rule": "new / processing / resolved",
+      "acceptance_criteria": "预警状态展示正确且可被标记处理更新。"
+    },
+    {
+      "field_id": "FIELD-P010-004",
+      "page_id": "PAGE-010",
+      "field_name": "monitored_supplier_count",
+      "label": "监控供应商数量",
+      "field_type": "integer",
+      "required": false,
+      "validation_rule": "大于等于 0",
+      "acceptance_criteria": "监控对象区数量非负且与列表一致。"
+    },
+    {
+      "field_id": "FIELD-P011-001",
+      "page_id": "PAGE-011",
+      "field_name": "evidence_detail",
+      "label": "证据详情",
+      "field_type": "text",
+      "required": true,
+      "validation_rule": "非空",
+      "acceptance_criteria": "证据详情区展示变更记录、原文引用等内容且非空。"
+    },
+    {
+      "field_id": "FIELD-P011-002",
+      "page_id": "PAGE-011",
+      "field_name": "source_url",
+      "label": "来源链接",
+      "field_type": "string",
+      "required": false,
+      "validation_rule": "合法 URL",
+      "acceptance_criteria": "来源链接必需为合法 URL 且可打开。"
+    },
+    {
+      "field_id": "FIELD-P011-003",
+      "page_id": "PAGE-011",
+      "field_name": "suggested_action",
+      "label": "AI 建议动作",
+      "field_type": "text",
+      "required": false,
+      "validation_rule": "议价窗口提示或风险规避建议",
+      "acceptance_criteria": "建议动作区展示议价或风险规避建议。"
+    },
+    {
+      "field_id": "FIELD-P011-004",
+      "page_id": "PAGE-011",
+      "field_name": "handled_at",
+      "label": "处理时间",
+      "field_type": "datetime",
+      "required": false,
+      "validation_rule": "系统记录",
+      "acceptance_criteria": "标记已处理后展示处理时间。"
+    },
+    {
+      "field_id": "FIELD-P011-005",
+      "page_id": "PAGE-011",
+      "field_name": "handler_note",
+      "label": "处理说明",
+      "field_type": "text",
+      "required": false,
+      "validation_rule": "用户填写",
+      "acceptance_criteria": "处理说明输入后保存且展示。"
+    },
+    {
+      "field_id": "FIELD-P012-001",
+      "page_id": "PAGE-012",
+      "field_name": "username",
+      "label": "用户名",
+      "field_type": "string",
+      "required": true,
+      "validation_rule": "非空，唯一",
+      "acceptance_criteria": "用户名唯一性校验，重复时提示。"
+    },
+    {
+      "field_id": "FIELD-P012-002",
+      "page_id": "PAGE-012",
+      "field_name": "role_id",
+      "label": "角色ID",
+      "field_type": "string",
+      "required": true,
+      "validation_rule": "ROLE-001 / ROLE-002",
+      "acceptance_criteria": "角色下拉展示 ROLE-001 与 ROLE-002。"
+    },
+    {
+      "field_id": "FIELD-P012-003",
+      "page_id": "PAGE-012",
+      "field_name": "user_status",
+      "label": "用户状态",
+      "field_type": "enum",
+      "required": true,
+      "validation_rule": "active / disabled",
+      "acceptance_criteria": "禁用账号后状态显示 disabled。"
+    },
+    {
+      "field_id": "FIELD-P013-001",
+      "page_id": "PAGE-013",
+      "field_name": "category_name",
+      "label": "品类名称",
+      "field_type": "string",
+      "required": true,
+      "validation_rule": "非空",
+      "acceptance_criteria": "品类树中品类名称非空。"
+    },
+    {
+      "field_id": "FIELD-P013-002",
+      "page_id": "PAGE-013",
+      "field_name": "parameter_template",
+      "label": "参数模板",
+      "field_type": "array",
+      "required": false,
+      "validation_rule": "参数项列表",
+      "acceptance_criteria": "知识条目编辑区可维护参数模板并保存。"
+    },
+    {
+      "field_id": "FIELD-P013-003",
+      "page_id": "PAGE-013",
+      "field_name": "price_normalization_rules",
+      "label": "比价归一化规则",
+      "field_type": "array",
+      "required": false,
+      "validation_rule": "口径转换规则列表",
+      "acceptance_criteria": "比价归一化规则可保存并在报价归一化中生效。"
+    },
+    {
+      "field_id": "FIELD-P013-004",
+      "page_id": "PAGE-013",
+      "field_name": "keyword_synonyms",
+      "label": "关键词映射",
+      "field_type": "array",
+      "required": false,
+      "validation_rule": "同义词/英文/上下游关键词列表",
+      "acceptance_criteria": "关键词映射可维护并支持寻源关键词扩展。"
+    },
+    {
+      "field_id": "FIELD-P014-001",
+      "page_id": "PAGE-014",
+      "field_name": "data_source_name",
+      "label": "数据源名称",
+      "field_type": "string",
+      "required": true,
+      "validation_rule": "非空",
+      "acceptance_criteria": "数据源列表展示名称且非空。"
+    },
+    {
+      "field_id": "FIELD-P014-002",
+      "page_id": "PAGE-014",
+      "field_name": "run_status",
+      "label": "运行状态",
+      "field_type": "enum",
+      "required": false,
+      "validation_rule": "启用/停用",
+      "acceptance_criteria": "运行状态随启用/停用操作更新。"
+    },
+    {
+      "field_id": "FIELD-P014-003",
+      "page_id": "PAGE-014",
+      "field_name": "recent_call_count",
+      "label": "近日调用量",
+      "field_type": "integer",
+      "required": false,
+      "validation_rule": "大于等于 0",
+      "acceptance_criteria": "调用量数据正确显示。"
+    },
+    {
+      "field_id": "FIELD-P014-004",
+      "page_id": "PAGE-014",
+      "field_name": "last_sync_time",
+      "label": "最近同步时间",
+      "field_type": "datetime",
+      "required": false,
+      "validation_rule": "系统记录",
+      "acceptance_criteria": "同步时间随数据源同步更新。"
+    },
+    {
+      "field_id": "FIELD-P015-001",
+      "page_id": "PAGE-015",
+      "field_name": "rule_name",
+      "label": "规则名称",
+      "field_type": "string",
+      "required": true,
+      "validation_rule": "非空",
+      "acceptance_criteria": "规则列表规则名称非空。"
+    },
+    {
+      "field_id": "FIELD-P015-002",
+      "page_id": "PAGE-015",
+      "field_name": "trigger_threshold",
+      "label": "触发阈值",
+      "field_type": "string",
+      "required": false,
+      "validation_rule": "可编辑",
+      "acceptance_criteria": "阈值编辑保存后更新并生效。"
+    },
+    {
+      "field_id": "FIELD-P015-003",
+      "page_id": "PAGE-015",
+      "field_name": "check_frequency",
+      "label": "检查频率",
+      "field_type": "string",
+      "required": false,
+      "validation_rule": "可配置",
+      "acceptance_criteria": "检查频率可配置并展示。"
+    },
+    {
+      "field_id": "FIELD-P015-004",
+      "page_id": "PAGE-015",
+      "field_name": "enabled_status",
+      "label": "启用状态",
+      "field_type": "boolean",
+      "required": false,
+      "validation_rule": "true / false",
+      "acceptance_criteria": "启用/停用开关状态正确反映规则生效情况。"
+    }
+  ],
+  "role_permission_acceptance": [
+    {
+      "role_id": "ROLE-001",
+      "role_name": "采购人员",
+      "allowed_pages": [
+        "PAGE-001",
+        "PAGE-002",
+        "PAGE-003",
+        "PAGE-004",
+        "PAGE-005",
+        "PAGE-006",
+        "PAGE-007",
+        "PAGE-008",
+        "PAGE-009",
+        "PAGE-010",
+        "PAGE-011"
+      ],
+      "blocked_pages": [
+        "PAGE-012",
+        "PAGE-013",
+        "PAGE-014",
+        "PAGE-015"
+      ],
+      "allowed_actions": [
+        "发送对话消息与回答 AI 追问",
+        "生成与确认规格书并创建项目",
+        "查看项目列表与项目详情",
+        "筛选候选供应商并提交深入分析名单",
+        "查看供应商画像与加入比价名单",
+        "切换报价口径与导出报价对比",
+        "生成 RFQ、批量话术并导出联系方式表",
+        "导出评估报告并发起监控",
+        "查看与处理监控预警"
+      ],
+      "blocked_actions": [
+        "访问 /admin/users 页面",
+        "访问 /admin/knowledge-base 页面",
+        "访问 /admin/data-sources 页面",
+        "访问 /admin/monitoring-rules 页面",
+        "创建或编辑系统用户",
+        "维护品类知识库",
+        "配置数据源",
+        "配置监控规则"
+      ],
+      "acceptance_criteria": [
+        "以 ROLE-001 登录后可访问 PAGE-001 至 PAGE-011 全部页面。",
+        "以 ROLE-001 直接输入 /admin/users、/admin/knowledge-base、/admin/data-sources、/admin/monitoring-rules 时必须被拒绝（403、重定向或无权限提示）。"
+      ],
+      "denied_pages": [
+        "admin/*",
+        "system_config/*",
+        "user_management/*"
+      ]
+    },
+    {
+      "role_id": "ROLE-002",
+      "role_name": "管理员",
+      "allowed_pages": [
+        "PAGE-012",
+        "PAGE-013",
+        "PAGE-014",
+        "PAGE-015"
+      ],
+      "blocked_pages": [
+        "PAGE-001",
+        "PAGE-002",
+        "PAGE-003",
+        "PAGE-004",
+        "PAGE-005",
+        "PAGE-006",
+        "PAGE-007",
+        "PAGE-008",
+        "PAGE-009",
+        "PAGE-010",
+        "PAGE-011"
+      ],
+      "allowed_actions": [
+        "新建、编辑、禁用/启用用户账号",
+        "维护品类知识库条目",
+        "配置与测试数据源",
+        "配置监控规则与通知渠道"
+      ],
+      "blocked_actions": [
+        "发起寻源对话与生成规格书草稿",
+        "确认规格书并创建寻源项目",
+        "提交深入分析名单",
+        "生成 RFQ 与批量话术",
+        "处理业务预警"
+      ],
+      "acceptance_criteria": [
+        "以 ROLE-002 登录后可访问 PAGE-012 至 PAGE-015 全部页面。",
+        "以 ROLE-002 直接输入 /chat、/specs/:id、/projects/:id、/suppliers/:id、/monitoring 时必须被拒绝（403、重定向或无权限提示）。"
+      ],
+      "denied_pages": []
+    }
+  ],
+  "user_visible_quality_acceptance": [
+    {
+      "quality_id": "UQA-001",
+      "category": "usability",
+      "description": "所有页面关键操作按钮文案清晰且状态可感知（可用、不可用、加载中）。",
+      "acceptance_criteria": "按钮在无数据或未满足条件时置灰或提示，操作期间显示加载态。",
+      "check_method": "真实浏览器执行关键操作并观察按钮状态"
+    },
+    {
+      "quality_id": "UQA-002",
+      "category": "accessibility_smoke",
+      "description": "表单字段必须有 visible label 或 aria-label 关联，键盘可聚焦并完成主要操作。",
+      "acceptance_criteria": "Tab 键可到达输入框与按钮，label 与控件关联。",
+      "check_method": "使用键盘 Tab 遍历主要表单与按钮"
+    },
+    {
+      "quality_id": "UQA-003",
+      "category": "security_visibility",
+      "description": "管理后台密钥类字段（API Key 等）必须掩码显示，不能明文回显完整密钥。",
+      "acceptance_criteria": "数据源配置页密钥字段以掩码形式展示，编辑时输入新值。",
+      "check_method": "打开 /admin/data-sources 检查密钥字段"
+    },
+    {
+      "quality_id": "UQA-004",
+      "category": "error_handling",
+      "description": "AI 服务不可用或接口超时时，页面展示明确错误提示与重试入口，不丢失已输入内容。",
+      "acceptance_criteria": "模拟 AI 接口失败时页面提示错误并可重试，输入框内容保留。",
+      "check_method": "通过 network 拦截模拟失败并观察表现"
+    },
+    {
+      "quality_id": "UQA-005",
+      "category": "error_handling",
+      "description": "列表无数据时必须展示空状态提示，不能白屏或无限加载。",
+      "acceptance_criteria": "无候选、无预警、无项目时显示空状态文案。",
+      "check_method": "构造无数据场景并浏览页面"
+    },
+    {
+      "quality_id": "UQA-006",
+      "category": "data_consistency",
+      "description": "同一项目在列表页、详情页、候选页、报价页、报告页中的名称与状态必须一致。",
+      "acceptance_criteria": "跨页面项目状态与名称一致。",
+      "check_method": "依次浏览相关页面并核对"
+    },
+    {
+      "quality_id": "UQA-007",
+      "category": "data_consistency",
+      "description": "报价归一化结果可复现：相同口径参数下两次计算值一致。",
+      "acceptance_criteria": "同一口径切换两次，价格分布与归一化单价一致。",
+      "check_method": "重复切换口径并对比数值"
+    },
+    {
+      "quality_id": "UQA-008",
+      "category": "performance_smoke",
+      "description": "包含 100-300 条候选供应商的列表页在 3 秒内可交互，滚动无卡死。",
+      "acceptance_criteria": "列表加载后可在 3 秒内完成筛选操作。",
+      "check_method": "使用含 300 条数据的测试账号执行筛选"
+    },
+    {
+      "quality_id": "UQA-009",
+      "category": "performance_smoke",
+      "description": "AI 生成类操作（规格书草稿、RFQ、评估报告）必须展示等待提示，超时后给出失败反馈。",
+      "acceptance_criteria": "生成过程显示进行中，失败后提示可重试。",
+      "check_method": "观察 AI 生成类按钮的加载与反馈"
+    }
+  ],
+  "acceptance_evidence_requirements": [
+    {
+      "evidence_id": "EVID-001",
+      "evidence_type": "screenshot",
+      "description": "每个页面至少一张真实浏览器打开真实路由的截图，截图需包含地址栏与页面主体。",
+      "required": true
+    },
+    {
+      "evidence_id": "EVID-002",
+      "evidence_type": "interaction_trace",
+      "description": "每个 human_simulation_acceptance 场景必须提供交互轨迹记录（点击、输入、跳转步骤）。",
+      "required": true
+    },
+    {
+      "evidence_id": "EVID-003",
+      "evidence_type": "multi_step_trace",
+      "description": "跨页面工作流（WF-001 至 WF-007）必须提供覆盖完整流程的多步交互轨迹。",
+      "required": true
+    },
+    {
+      "evidence_id": "EVID-004",
+      "evidence_type": "network_log",
+      "description": "关键异步动作（AI 生成、提交深度画像、导出文件）必须有 network 日志，包含请求 URL 与状态码。",
+      "required": true
+    },
+    {
+      "evidence_id": "EVID-005",
+      "evidence_type": "console_log",
+      "description": "所有页面浏览过程必须有 console 日志记录，且不应出现未捕获的 JavaScript 异常。",
+      "required": true
+    },
+    {
+      "evidence_id": "EVID-006",
+      "evidence_type": "role_based_screenshot",
+      "description": "角色权限验证必须提供被拒绝访问的截图（403、重定向页或无权限提示）。",
+      "required": true
+    },
+    {
+      "evidence_id": "EVID-007",
+      "evidence_type": "functional_result",
+      "description": "导出类动作必须提供下载完成的文件或其可打开验证证据。",
+      "required": true
+    },
+    {
+      "evidence_id": "EVID-008",
+      "evidence_type": "configuration_reference",
+      "description": "验收证据包必须说明浏览器类型与版本、视口尺寸、测试数据夹具、登录角色。",
+      "required": true
+    },
+    {
+      "evidence_id": "EVID-009",
+      "evidence_type": "failure_location_marker",
+      "description": "每个失败项必须提供精确位置标记（截图坐标、selector 或可见文案）。",
+      "required": true
+    },
+    {
+      "evidence_id": "EVID-010",
+      "evidence_type": "v5_patch_repair_input",
+      "description": "验收报告失败部分必须按 v5_patch_repair_report_requirements 生成结构化 repair items 输入。",
+      "required": true
+    },
+    {
+      "evidence_id": "EVID-011",
+      "evidence_type": "evidence_package_reference",
+      "description": "验收证据包必须提供可访问的引用（目录、压缩包或链接），供 V5 Patch 修复追溯。",
+      "required": true
+    }
+  ],
+  "browser_acceptance_policy": {
+    "real_browser_required": true,
+    "human_like_navigation_required": true,
+    "must_visit_real_routes": true,
+    "must_capture_visual_evidence": true,
+    "must_capture_interaction_trace": true,
+    "must_capture_console_and_network_logs": true,
+    "must_not_accept_static_or_code_only_review": true
+  },
+  "failure_report_requirements": {
+    "must_report_each_failure": true,
+    "precise_location_required": true,
+    "required_failure_fields": [
+      "failure_id",
+      "acceptance_id",
+      "page_id",
+      "route_or_url",
+      "role",
+      "location",
+      "selector_or_visible_text",
+      "reproduction_steps",
+      "expected_result",
+      "actual_result",
+      "severity",
+      "evidence_refs",
+      "console_error_refs",
+      "network_error_refs",
+      "suggested_fix_scope"
+    ],
+    "location_precision_rule": "失败位置必须精确到页面 ID、路由/URL、页面区域、控件、字段、按钮、表格列、弹窗、错误提示或流程步骤；必须提供 selector 或可见文案、截图坐标或步骤编号辅助定位。禁止使用“页面有问题”“按钮不可用”“功能失败”这类模糊描述。",
+    "evidence_link_required": true
+  },
+  "v5_patch_repair_report_requirements": {
+    "patch_repair_input_ready_required": true,
+    "one_failure_one_repair_item": true,
+    "required_patch_repair_fields": [
+      "repair_item_id",
+      "source_failure_id",
+      "acceptance_id",
+      "page_id",
+      "route_or_url",
+      "precise_location",
+      "reproduction_steps",
+      "expected_result",
+      "actual_result",
+      "evidence_refs",
+      "suspected_area",
+      "allowed_fix_scope",
+      "forbidden_fix_scope",
+      "regression_check"
+    ],
+    "must_include_original_acceptance_reference": true,
+    "must_include_evidence_package_refs": true
+  },
+  "task_id": "IDEA-20260808215020-MJXB6X"
+}

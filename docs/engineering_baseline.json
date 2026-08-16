@@ -1,0 +1,584 @@
+{
+  "metadata": {
+    "idea_id": "IDEA-20260808215020-MJXB6X",
+    "project_id": "suppliers",
+    "task_id": "IDEA-20260808215020-MJXB6X",
+    "generated_at": "2026-08-09T01:09:13.722+03:00",
+    "source_files_used": [
+      {
+        "file_type": "page_function_design",
+        "uri": "page_function_design.md"
+      },
+      {
+        "file_type": "development_route",
+        "uri": "development_route.json"
+      }
+    ]
+  },
+  "baseline_generation_status": "ready_with_warnings",
+  "input_readiness": {
+    "page_function_design_present": true,
+    "development_route_present": true,
+    "repository_context_present": false,
+    "blocking_issues": []
+  },
+  "repository_baseline": {
+    "repository_url": "https://github.com/git-new-world/suppliers",
+    "repository_name": "suppliers",
+    "target_branch": "develop",
+    "baseline_commit_sha": "",
+    "working_branch_policy": "feature branches from develop, merge via pull request",
+    "primary_application_paths": [
+      "backend",
+      "frontend"
+    ],
+    "confidence": "medium"
+  },
+  "runtime_baseline": {
+    "primary_language": "python",
+    "frontend_runtime": {
+      "framework": "react",
+      "bundler": "vite",
+      "deploy_subpath": "/",
+      "router_lib": "react-router-dom",
+      "page_ext": ".tsx",
+      "export_default": true
+    },
+    "backend_runtime": {
+      "framework": "fastapi",
+      "entry_point": "backend/main.py"
+    },
+    "package_managers": [
+      "pip",
+      "npm"
+    ],
+    "required_dependencies": [
+      "fastapi",
+      "uvicorn[standard]",
+      "sqlalchemy",
+      "alembic",
+      "psycopg[binary]",
+      "langgraph",
+      "openai",
+      "playwright",
+      "httpx",
+      "celery[redis]",
+      "redis",
+      "paddleocr",
+      "pandas",
+      "jinja2",
+      "beautifulsoup4",
+      "reportlab",
+      "react",
+      "react-dom",
+      "react-router-dom",
+      "vite",
+      "typescript",
+      ""
+    ],
+    "database_stack": [
+      "postgresql",
+      "redis"
+    ],
+    "deployment_target": "docker_compose",
+    "environment_variables_required": [
+      "DATABASE_URL",
+      "REDIS_URL",
+      "SECRET_KEY",
+      "VITE_API_BASE_URL",
+      "VITE_APP_NAME"
+    ],
+    "secret_handling_policy": "management_console_encrypted_storage",
+    "confidence": "medium",
+    "service_requirements": [
+      {
+        "name": "redis",
+        "image": "redis",
+        "tag": "7-alpine",
+        "ports": [
+          6379
+        ],
+        "healthcheck": "redis-cli ping"
+      },
+      {
+        "name": "postgres",
+        "image": "postgres",
+        "tag": "16-alpine",
+        "ports": [
+          5432
+        ],
+        "env": [
+          "POSTGRES_DB",
+          "POSTGRES_USER",
+          "POSTGRES_PASSWORD"
+        ],
+        "healthcheck": "pg_isready"
+      }
+    ]
+  },
+  "dependency_baseline": {
+    "dependency_files": [
+      "frontend/package.json",
+      "backend/requirements.txt"
+    ],
+    "lock_files": [
+      "frontend/package-lock.json"
+    ],
+    "known_existing_dependencies": [],
+    "route_approved_dependencies_to_add": [
+      "langgraph@0.2.60",
+      "fastapi@0.115.6",
+      "playwright@1.49.1",
+      "httpx@0.28.1",
+      "celery@5.4.0",
+      "paddleocr@2.8.1",
+      "pandas@2.2.2",
+      "openai",
+      "sqlalchemy",
+      "jinja2",
+      "beautifulsoup4",
+      "reportlab",
+      "react",
+      "react-dom",
+      "redis"
+    ],
+    "version_lock_policy": "pin exact versions for approved modules",
+    "dependency_conflict_notes": [
+      "No repository scan was performed; dependency files are greenfield estimates. Route-approved exact versions are taken from development_route.json. Packages listed without a pinned version (openai, sqlalchemy, jinja2, beautifulsoup4, reportlab) must be confirmed and locked by Integrator during initialization."
+    ],
+    "confidence": "low"
+  },
+  "allowed_paths": [
+    {
+      "path": "backend/app/modules",
+      "reason": "Custom backend business modules per MOD-001 through MOD-008",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/app/services",
+      "reason": "Custom service-layer business logic",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/app/shared/adapters",
+      "reason": "Module integration adapters for route-approved open-source modules and professional APIs",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/app/tasks",
+      "reason": "Celery worker tasks and background jobs",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/app/db/models",
+      "reason": "Business model files created by Tasker",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/alembic/versions",
+      "reason": "Database migration version files created by Tasker",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/tests",
+      "reason": "Backend unit and integration tests",
+      "applies_to": "backend"
+    },
+    {
+      "path": "frontend/src/pages",
+      "reason": "Page components for user and management pages",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "frontend/src/components",
+      "reason": "Reusable React components",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "frontend/src/features",
+      "reason": "Frontend feature business logic and hooks",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "frontend/src/shared/adapters",
+      "reason": "Frontend module integration adapters",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "frontend/src/tests",
+      "reason": "Frontend unit and integration tests",
+      "applies_to": "frontend"
+    }
+  ],
+  "forbidden_paths": [
+    {
+      "path": "backend/main.py",
+      "reason": "Integrator-owned FastAPI entry point",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/app/api",
+      "reason": "Route registration owned by Integrator; Tasker must use integration hooks",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/app/core",
+      "reason": "Core configuration and application settings owned by Integrator",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/app/db/session.py",
+      "reason": "Integrator-owned database session factory",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/app/db/base.py",
+      "reason": "Integrator-owned declarative base and engine configuration",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/app/db/models/__init__.py",
+      "reason": "Integrator-owned models package registration file",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/requirements.txt",
+      "reason": "Integrator-owned dependency manifest",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/Dockerfile",
+      "reason": "Integrator-owned deployment image definition",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/alembic.ini",
+      "reason": "Integrator-owned Alembic configuration",
+      "applies_to": "backend"
+    },
+    {
+      "path": "backend/alembic/env.py",
+      "reason": "Integrator-owned Alembic environment bootstrap",
+      "applies_to": "backend"
+    },
+    {
+      "path": "frontend/package.json",
+      "reason": "Integrator-owned frontend dependency manifest",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "frontend/vite.config.ts",
+      "reason": "Integrator-owned Vite build configuration",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "frontend/index.html",
+      "reason": "Integrator-owned static HTML entry",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "frontend/src/main.tsx",
+      "reason": "Integrator-owned React bootstrap entry",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "frontend/src/App.tsx",
+      "reason": "Integrator-owned application shell",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "frontend/src/routes.tsx",
+      "reason": "Integrator-owned route registration; Tasker must use integration hooks",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "frontend/src/config/menu.tsx",
+      "reason": "Integrator-owned menu registration file",
+      "applies_to": "frontend"
+    },
+    {
+      "path": "docker-compose.yml",
+      "reason": "Integrator-owned deployment orchestration",
+      "applies_to": "backend"
+    },
+    {
+      "path": ".env.example",
+      "reason": "Integrator-owned environment variable template",
+      "applies_to": "backend"
+    }
+  ],
+  "validation_baseline": {
+    "known_validation_commands": [
+      {
+        "validation_id": "validation_1",
+        "validation_type": "unit_test",
+        "command": "pytest",
+        "applies_to": "backend",
+        "required": true,
+        "cwd": "backend"
+      },
+      {
+        "validation_id": "validation_2",
+        "validation_type": "lint",
+        "command": "flake8",
+        "applies_to": "backend",
+        "required": true,
+        "cwd": "backend"
+      },
+      {
+        "validation_id": "validation_3",
+        "validation_type": "deploy_check",
+        "command": "python3 -c \"from main import app\"",
+        "applies_to": "backend",
+        "required": true,
+        "cwd": "backend"
+      },
+      {
+        "validation_id": "validation_4",
+        "validation_type": "build",
+        "command": "npm run build",
+        "applies_to": "frontend",
+        "required": true,
+        "cwd": "frontend"
+      },
+      {
+        "validation_id": "validation_5",
+        "validation_type": "lint",
+        "command": "npm run lint",
+        "applies_to": "frontend",
+        "required": true,
+        "cwd": "frontend"
+      },
+      {
+        "validation_id": "validation_6",
+        "validation_type": "unit_test",
+        "command": "npm run test",
+        "applies_to": "frontend",
+        "required": true,
+        "cwd": "frontend"
+      }
+    ],
+    "required_validation_types": [
+      "unit_test",
+      "lint",
+      "build",
+      "deploy_check"
+    ],
+    "validation_gaps": [
+      "No repository scan was performed; validation commands are expected scaffold commands and must be confirmed by Integrator during initialization.",
+      "Exact pinned versions for some route-approved packages (openai, sqlalchemy, jinja2, beautifulsoup4, reportlab) are not confirmed in the route excerpt; Integrator must lock versions during initialization.",
+      "Docker Compose healthcheck and service definitions are pending Integrator initialization."
+    ]
+  },
+  "tasker_execution_boundary": {
+    "allowed_task_types": [
+      "module_integration",
+      "custom_development"
+    ],
+    "tasker_must_do": [
+      "Prefer route-approved open-source modules, SDKs, professional APIs, and reusable components.",
+      "Implement business logic only inside application_structure.tasker_writable_roots and allowed_paths.",
+      "Create business model files and migration version files under allowed paths.",
+      "Use named environment variables for any secret reference; never hardcode secret values.",
+      "Write tests and run the validation commands defined in validation_baseline.",
+      "Place module integration adapters under backend/app/shared/adapters and frontend/src/shared/adapters.",
+      "Prefer module_integration whenever an approved open-source module, SDK, API, or reusable component exists.",
+      "Use custom_development only when development_route explicitly marks the feature as not reusable, or no approved module/API/component exists."
+    ],
+    "tasker_must_not_do": [
+      "Do not modify integrator-owned files listed in application_structure.integrator_owned_files.",
+      "Do not change dependency manifests, lock files, or approved dependency versions.",
+      "Do not reimplement capabilities already provided by route-approved modules or APIs.",
+      "Do not add, replace, or upgrade dependencies outside the route-approved dependency list.",
+      "Do not hardcode API keys, tokens, passwords, or other secrets.",
+      "Do not modify backend/app/api or frontend/src/routes.tsx; use integration hooks instead."
+    ],
+    "context_rule": "route-approved open-source/module integration has priority over custom_development Route-approved open-source/module integration has priority over custom_development.",
+    "development_mode_priority": [
+      "module_integration",
+      "custom_development"
+    ],
+    "full_development_policy": "Custom development is permitted only when no approved module, SDK, professional API, or reusable component can satisfy the requirement; route-approved module integration must be selected first."
+  },
+  "application_structure": {
+    "application_type": "web_fullstack",
+    "structure_source": "development_route",
+    "structure_status": "inferred_standard_scaffold",
+    "runtime_family": "mixed",
+    "roots": {
+      "frontend_root": "frontend",
+      "backend_root": "backend",
+      "frontend_pages_root": "frontend/src/pages",
+      "frontend_components_root": "frontend/src/components",
+      "frontend_adapters_root": "frontend/src/shared/adapters",
+      "backend_modules_root": "backend/app/modules",
+      "backend_services_root": "backend/app/services",
+      "backend_adapters_root": "backend/app/shared/adapters",
+      "backend_tasks_root": "backend/app/tasks",
+      "backend_db_models_root": "backend/app/db/models",
+      "backend_migrations_root": "backend/alembic/versions",
+      "shared_root": "shared"
+    },
+    "frontend_root": "frontend",
+    "backend_root": "backend",
+    "frontend_pages_root": "frontend/src/pages",
+    "backend_modules_root": "backend/app/modules",
+    "tasker_writable_roots": [
+      "backend/app/modules",
+      "backend/app/services",
+      "backend/app/shared/adapters",
+      "backend/app/tasks",
+      "backend/alembic/versions",
+      "backend/tests",
+      "frontend/src/pages",
+      "frontend/src/components",
+      "frontend/src/features",
+      "frontend/src/shared/adapters",
+      "frontend/src/tests",
+      "shared",
+      "frontend/src/shared",
+      "frontend/shared",
+      "backend/src/modules"
+    ],
+    "tasker_readonly_files": [
+      "backend/package.json"
+    ],
+    "integrator_owned_files": [
+      "backend/main.py",
+      "backend/requirements.txt",
+      "backend/Dockerfile",
+      "backend/alembic.ini",
+      "backend/alembic/env.py",
+      "backend/alembic/script.py.mako",
+      "backend/apps/__init__.py",
+      "backend/apps/api/__init__.py",
+      "backend/apps/api/router.py",
+      "backend/apps/core/__init__.py",
+      "backend/apps/core/config.py",
+      "backend/apps/db/__init__.py",
+      "backend/apps/db/session.py",
+      "backend/apps/db/base.py",
+      "backend/apps/db/models/__init__.py",
+      "frontend/package.json",
+      "frontend/package-lock.json",
+      "frontend/tsconfig.json",
+      "frontend/tsconfig.node.json",
+      "frontend/vite.config.ts",
+      "frontend/index.html",
+      "frontend/src/main.tsx",
+      "frontend/src/App.tsx",
+      "frontend/src/routes.tsx",
+      "frontend/src/config/menu.tsx",
+      "frontend/.eslintrc.cjs",
+      ".env.example",
+      "README.md",
+      "docker/docker-compose.yml",
+      "docker/Dockerfile",
+      ".gitignore",
+      "infrastructure/ci.yml",
+      "infrastructure/deploy.yml",
+      "backend/api.py",
+      "frontend/vite.config.js"
+    ],
+    "path_derivation_rules": [
+      {
+        "baseline_profile": "module_integration",
+        "work_unit_type": "module_integration",
+        "target_root": "backend/apps/shared/adapters",
+        "path_template": "backend/app/shared/adapters/{adapter_name}/"
+      },
+      {
+        "baseline_profile": "module_integration",
+        "work_unit_type": "module_integration",
+        "target_root": "frontend/src/shared/adapters",
+        "path_template": "frontend/src/shared/adapters/{adapter_name}/"
+      },
+      {
+        "baseline_profile": "frontend_page",
+        "work_unit_type": "backend_api",
+        "target_root": "backend/apps/modules",
+        "path_template": "backend/app/modules/{module_name}/"
+      },
+      {
+        "baseline_profile": "frontend_page",
+        "work_unit_type": "frontend_page",
+        "target_root": "frontend/src/pages",
+        "path_template": "frontend/src/pages/{page_name}/"
+      },
+      {
+        "baseline_profile": "frontend_page",
+        "work_unit_type": "worker_service",
+        "target_root": "backend/apps/tasks",
+        "path_template": "backend/app/tasks/{task_name}.py"
+      },
+      {
+        "baseline_profile": "frontend_page",
+        "work_unit_type": "frontend_page",
+        "target_root": "backend/apps/db/models",
+        "path_template": "backend/app/db/models/{model_name}.py"
+      },
+      {
+        "baseline_profile": "frontend_page",
+        "work_unit_type": "frontend_page",
+        "target_root": "backend/tests",
+        "path_template": "backend/tests/test_{module_name}.py"
+      },
+      {
+        "baseline_profile": "backend_api",
+        "work_unit_type": "backend_api",
+        "target_root": "backend/src/modules",
+        "path_template": "backend/src/modules/{module_slug}/"
+      },
+      {
+        "baseline_profile": "full_stack_feature",
+        "work_unit_type": "full_stack_feature",
+        "target_root": "frontend/src/features",
+        "path_template": "frontend/src/features/{feature_slug}/"
+      }
+    ],
+    "router_files": [
+      "backend/apps/api/router.py",
+      "frontend/src/routes.tsx"
+    ],
+    "entry_files": [
+      "backend/main.py",
+      "frontend/src/main.tsx"
+    ],
+    "package_files": [
+      "frontend/package.json",
+      "backend/requirements.txt"
+    ],
+    "confidence": "medium",
+    "shared_root": "shared",
+    "framework": "react",
+    "frontend_components_root": "unknown",
+    "backend_routes_root": "unknown",
+    "database_migrations_root": "unknown",
+    "database_seed_root": "unknown",
+    "menu_registry_files": [
+      "frontend/src/config/menu.tsx"
+    ],
+    "config_files": [
+      "frontend/tsconfig.json",
+      "frontend/tsconfig.node.json",
+      "frontend/vite.config.ts",
+      "frontend/src/config/menu.tsx",
+      ".env.example",
+      "docker/docker-compose.yml",
+      "infrastructure/ci.yml",
+      "infrastructure/deploy.yml"
+    ]
+  },
+  "do_not_do": [
+    "Do not reimplement capabilities already provided by route-approved open-source modules or professional APIs.",
+    "Do not modify integrator-owned files listed in application_structure.integrator_owned_files.",
+    "Do not add, replace, or upgrade dependencies without route re-evaluation and Integrator approval.",
+    "Do not hardcode secrets, tokens, or API keys; use environment variable names and management-console-encrypted storage only.",
+    "Do not create page designs, acceptance criteria, task manifests, or API inventories from this baseline.",
+    "Do not design or finalize database schema in this file; implement models and migrations only inside allowed paths when required by task_manifest.",
+    "Do not switch backend or frontend framework away from fastapi/react without a new development route decision.",
+    "Do not write code outside application_structure.allowed_paths."
+  ],
+  "_integrator_authority": "engineering_baseline_first",
+  "_integrator_source": "/tmp/baseline_IDEA-2026080_b49dvlnc/engineering_baseline_0.json"
+}

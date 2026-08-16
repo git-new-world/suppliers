@@ -1,0 +1,4190 @@
+{
+  "metadata": {
+    "schema_version": "v6.task_manifest.1",
+    "idea_id": "IDEA-20260808215020-MJXB6X",
+    "project_id": "suppliers",
+    "manifest_id": "IDEA-20260808215020-MJXB6X-task-manifest",
+    "generated_at": "2026-08-14T23:23:26.185Z",
+    "source_files_used": [
+      {
+        "file_type": "page_function_design",
+        "uri": "page_function_design.md",
+        "required": true
+      },
+      {
+        "file_type": "development_route",
+        "uri": "development_route.json",
+        "required": true
+      },
+      {
+        "file_type": "engineering_baseline",
+        "uri": "engineering_baseline.json",
+        "required": true
+      },
+      {
+        "file_type": "page_function_acceptance",
+        "uri": "page_function_acceptance.json",
+        "required": true
+      }
+    ],
+    "batch_id": "IDEA-20260808215020-MJXB6X",
+    "platform_framework_note": "fastapi 为平台基础框架，已含于 engineering_baseline，不作为任务级 dependency_additions 重复声明",
+    "fixed_at": "2026-08-16T04:50:00Z",
+    "fix_note": "存量修复: 页面归属/契约/validation/refs/中文路径/task_index/字段补全/cve",
+    "fix2_note": "第2轮存量修复: deliverable/task_goal补全/refs补回/pytest路径限定/坏路径清理/路由占位清理/语义对齐"
+  },
+  "status": {
+    "manifest_generation_status": "ready_with_warnings",
+    "blocking_issues": [
+      "仓库扫描未执行，工程基线为 greenfield 估计；依赖精确版本需 Integrator 初始化时确认并锁定。",
+      "engineering_baseline.application_structure 中 tasker_writable_roots 的 backend/apps 与 allowed_paths 的 backend/app 路径不一致；本 manifest 按 allowed_paths 统一使用 backend/app 单数路径。"
+    ]
+  },
+  "execution_policy": {
+    "executor": "Tasker",
+    "parallel_dispatch_allowed": true,
+    "parallel_safety_rule": "同批任务不能修改相同页面、模块、路由、共享配置或同一基础设施装配面；模块集成任务（TASK-000/003/006/009）分别修改不同 adapter 目录，可并行；共享目录如 backend/app/db/models 只能创建 estimated_outputs 中列出的文件。",
+    "context_rule": "每个任务只读取工程基线、验收项、允许路径、只读入口和自身上下文所需的最小内容；任务不得读取或修改其他任务 allowed_paths 范围之外的文件。"
+  },
+  "tasks": [
+    {
+      "task_id": "TASK-000",
+      "task_index": 1,
+      "name": "MOD-001 需求理解与规格抽取服务集成",
+      "task_name": "MOD-001 需求理解与规格抽取服务集成",
+      "display_label": "需求理解-LangGraph集成",
+      "description": "集成 LangGraph、FastAPI 与 OpenAI API，构建多轮对话需求澄清与结构化寻源规格书抽取服务。负责 AI 主动追问、对话状态管理、规格书草稿结构化输出。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-001（采购对话台）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-001",
+      "module_id": "MOD-001",
+      "open_source_modules": [
+        {
+          "module_name": "langgraph",
+          "source_registry": "PyPI",
+          "version": "0.2.60",
+          "purpose": "管理多轮对话状态与 AI 追问流程",
+          "selection_status": "approved_for_baseline",
+          "cve_status": {
+            "result": "found_3_vulns",
+            "source": "resolveModuleMetadata",
+            "checked_at": "2026-08-09T01:09:05.797+03:00"
+          }
+        },
+        {
+          "module_name": "fastapi",
+          "source_registry": "PyPI",
+          "version": "0.115.6",
+          "purpose": "对话与规格抽取的 API 服务框架",
+          "selection_status": "approved_for_baseline"
+        }
+      ],
+      "priority": "P0",
+      "allowed_paths": [
+        "frontend/src/pages/page-001/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-000_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-000_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-000_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/shared/adapters/mod001/langgraph_adapter.py",
+        "backend/app/shared/adapters/mod001/openai_adapter.py",
+        "backend/app/services/mod001/chat_service.py",
+        "backend/app/services/mod001/spec_extractor.py",
+        "backend/tests/test_mod001_chat_service.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-001-AC-01",
+        "FEAT-002-AC-01"
+      ],
+      "dependencies": [],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/services/mod001/api.py"
+        },
+        {
+          "type": "env_requirement",
+          "target": ".env.example",
+          "operation": "append",
+          "source": "OPENAI_API_KEY"
+        }
+      ],
+      "dependency_additions": [
+        "langgraph",
+        "openai"
+      ],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-001（采购对话台）前端页面功能，路由；不包含后端业务逻辑。集成 LangGraph 与 OpenAI，提供多轮对话澄清与结构化规格书草稿生成的后端服务。",
+      "task_boundary": "不实现前端页面；不实现规格书 draft/confirmed 状态机与项目创建；不修改依赖 manifest；不直接修改 backend/app/api/router.py，通过 integration_hooks 声明。",
+      "tasker_instructions": "在 backend/app/shared/adapters/mod001 下实现 LangGraph 与 OpenAI 适配器；在 backend/app/services/mod001 下实现 chat_service 与 spec_extractor；通过 pytest 验证对话追问问答与规格书结构化抽取；AI 输出必须附带证据或置信度（GAR-005）。",
+      "acceptance_focus": "验收重点是对话服务返回 AI 追问或规格书草稿结构化内容、AI 输出不编造精确数字、后端 API 可通过 pytest/deploy_check 验证。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-001"
+      ]
+    },
+    {
+      "task_id": "TASK-000-PAGE-002",
+      "task_index": 2,
+      "name": "MOD-001 需求理解与规格抽取服务集成",
+      "task_name": "MOD-001 需求理解与规格抽取服务集成",
+      "display_label": "需求理解-LangGraph集成",
+      "description": "集成 LangGraph、FastAPI 与 OpenAI API，构建多轮对话需求澄清与结构化寻源规格书抽取服务。负责 AI 主动追问、对话状态管理、规格书草稿结构化输出。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-002（寻源规格书）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-002",
+      "module_id": "MOD-001",
+      "open_source_modules": [
+        {
+          "module_name": "langgraph",
+          "source_registry": "PyPI",
+          "version": "0.2.60",
+          "purpose": "管理多轮对话状态与 AI 追问流程",
+          "selection_status": "approved_for_baseline",
+          "cve_status": {
+            "result": "found_3_vulns",
+            "source": "resolveModuleMetadata",
+            "checked_at": "2026-08-09T01:09:05.797+03:00"
+          }
+        },
+        {
+          "module_name": "fastapi",
+          "source_registry": "PyPI",
+          "version": "0.115.6",
+          "purpose": "对话与规格抽取的 API 服务框架",
+          "selection_status": "approved_for_baseline"
+        }
+      ],
+      "priority": "P0",
+      "allowed_paths": [
+        "frontend/src/pages/page-002/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-000-PAGE-002_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-000-PAGE-002_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-000-PAGE-002_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/shared/adapters/mod001/langgraph_adapter.py",
+        "backend/app/shared/adapters/mod001/openai_adapter.py",
+        "backend/app/services/mod001/chat_service.py",
+        "backend/app/services/mod001/spec_extractor.py",
+        "backend/tests/test_mod001_chat_service.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-002-AC-01",
+        "FEAT-003-AC-01"
+      ],
+      "dependencies": [],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/services/mod001/api.py"
+        },
+        {
+          "type": "env_requirement",
+          "target": ".env.example",
+          "operation": "append",
+          "source": "OPENAI_API_KEY"
+        }
+      ],
+      "dependency_additions": [
+        "langgraph",
+        "openai"
+      ],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-002（寻源规格书）前端页面功能，路由；不包含后端业务逻辑。集成 LangGraph 与 OpenAI，提供多轮对话澄清与结构化规格书草稿生成的后端服务。",
+      "task_boundary": "不实现前端页面；不实现规格书 draft/confirmed 状态机与项目创建；不修改依赖 manifest；不直接修改 backend/app/api/router.py，通过 integration_hooks 声明。",
+      "tasker_instructions": "在 backend/app/shared/adapters/mod001 下实现 LangGraph 与 OpenAI 适配器；在 backend/app/services/mod001 下实现 chat_service 与 spec_extractor；通过 pytest 验证对话追问问答与规格书结构化抽取；AI 输出必须附带证据或置信度（GAR-005）。",
+      "acceptance_focus": "验收重点是对话服务返回 AI 追问或规格书草稿结构化内容、AI 输出不编造精确数字、后端 API 可通过 pytest/deploy_check 验证。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-002"
+      ]
+    },
+    {
+      "task_id": "TASK-001",
+      "task_index": 3,
+      "name": "PAGE-001 采购对话台页面",
+      "task_name": "PAGE-001 采购对话台页面",
+      "display_label": "对话台-消息流与草稿",
+      "description": "实现采购对话台前端页面，包含对话消息流区、规格书草稿预览区、AI 建议追问区；调用后端对话服务发送消息、生成规格书草稿，并支持跳转至规格书确认页。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "实现采购对话台前端组件与交互逻辑（消息发送、AI 追问展示、规格书草稿预览与跳转确认），不包含后端业务逻辑。",
+      "module_id": "MOD-001",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/chat/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-001_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-001_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-001_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "frontend/src/pages/chat/index.tsx",
+        "frontend/src/components/chat/MessageStream.tsx",
+        "frontend/src/components/chat/SpecDraftPreview.tsx",
+        "frontend/src/components/chat/AiSuggestionPanel.tsx",
+        "frontend/src/features/chat/useChat.ts",
+        "frontend/src/tests/chat.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-001-AC-02",
+        "FEAT-002-AC-02"
+      ],
+      "dependencies": [
+        "TASK-000"
+      ],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": false,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": false,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/chat/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/chat/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "type_check"
+      ],
+      "task_goal": "实现采购对话台前端组件与交互逻辑，支持消息发送、AI 追问展示、规格书草稿预览与跳转确认；不创建后端 API。",
+      "task_boundary": "不创建后端 API；不修改规格书确认逻辑；不直接修改 routes.tsx/menu.tsx，通过 integration_hooks 声明。",
+      "tasker_instructions": "在 frontend/src/pages/chat 下实现页面，复用 frontend/src/features/chat 封装对话服务调用；交互必须有 loading/错误反馈（GAR-007）；跳转 /specs/{id} 需携带有效 spec_id。",
+      "acceptance_focus": "验收重点是真实浏览器打开 /chat 渲染三个区域、发送消息后 AI 返回追问、生成规格书草稿预览、跳转 /specs/{id}。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-002",
+      "task_index": 4,
+      "name": "PAGE-002/003 寻源规格书确认与项目列表",
+      "task_name": "PAGE-002/003 寻源规格书确认与项目列表",
+      "display_label": "规格书-确认与项目",
+      "description": "实现寻源规格书页面（展示、编辑、AI 重新生成、确认创建项目）与寻源项目列表页面（列表、状态筛选、新建、查看详情），并实现规格书状态机与项目创建后端 API。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "实现规格书确认与项目列表前端功能（状态机 draft→confirmed 前端交互、规格书/项目列表页），不包含后端业务逻辑。",
+      "module_id": "MOD-001",
+      "open_source_modules": [],
+      "priority": "P0",
+      "allowed_paths": [
+        "frontend/src/components/specs/",
+        "frontend/src/components/projects/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-002_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-002_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-002_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod001/spec_api.py",
+        "backend/app/modules/mod001/project_api.py",
+        "backend/app/db/models/spec.py",
+        "backend/app/db/models/project.py",
+        "backend/alembic/versions/xxxx_create_spec_project.py",
+        "backend/tests/test_spec_status_machine.py",
+        "frontend/src/pages/specs/index.tsx",
+        "frontend/src/pages/projects/index.tsx",
+        "frontend/src/features/specs/useSpec.ts",
+        "frontend/src/features/projects/useProjects.ts",
+        "frontend/src/tests/specs.test.tsx",
+        "frontend/src/tests/projects.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-002-AC-02",
+        "FEAT-003-AC-02"
+      ],
+      "dependencies": [
+        "TASK-000",
+        "TASK-001"
+      ],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": true,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod001/spec_api.py"
+        },
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod001/project_api.py"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/specs/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/projects/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/projects/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "integration_test",
+        "type_check"
+      ],
+      "task_goal": "实现规格书确认状态机前端交互与规格书/项目列表页面；不创建后端 API。",
+      "task_boundary": "不实现对话台（TASK-001 范围）；不实现候选供应商、画像、报价等下游环节；在 backend/app/db/models 只能创建 spec.py 与 project.py，在 alembic/versions 只能创建本项目列出的迁移文件。",
+      "tasker_instructions": "规格书确认 API 必须校验 spec_status 为 confirmed 才允许创建项目（GAR-008）；前端项目列表支持状态筛选；页面路由与菜单注册通过 integration_hooks 声明；模型/迁移文件不得修改 __init__.py。",
+      "acceptance_focus": "验收重点是 spec_status 状态机约束、确认后创建项目并跳转 /projects/{id}、项目列表筛选与跳转、页面字段与设计一致。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-002-PAGE-003",
+      "task_index": 5,
+      "name": "PAGE-002/003 寻源规格书确认与项目列表",
+      "task_name": "PAGE-002/003 寻源规格书确认与项目列表",
+      "display_label": "规格书-确认与项目",
+      "description": "实现寻源规格书页面（展示、编辑、AI 重新生成、确认创建项目）与寻源项目列表页面（列表、状态筛选、新建、查看详情），并实现规格书状态机与项目创建后端 API。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-003（寻源项目列表）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-003",
+      "module_id": "MOD-001",
+      "open_source_modules": [],
+      "priority": "P0",
+      "allowed_paths": [
+        "frontend/src/components/specs/",
+        "frontend/src/components/projects/",
+        "frontend/src/pages/page-003/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-002-PAGE-003_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-002-PAGE-003_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-002-PAGE-003_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod001/spec_api.py",
+        "backend/app/modules/mod001/project_api.py",
+        "backend/app/db/models/spec.py",
+        "backend/app/db/models/project.py",
+        "backend/alembic/versions/xxxx_create_spec_project.py",
+        "backend/tests/test_spec_status_machine.py",
+        "frontend/src/pages/specs/index.tsx",
+        "frontend/src/pages/projects/index.tsx",
+        "frontend/src/features/specs/useSpec.ts",
+        "frontend/src/features/projects/useProjects.ts",
+        "frontend/src/tests/specs.test.tsx",
+        "frontend/src/tests/projects.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-003-AC-01",
+        "FEAT-003-AC-02"
+      ],
+      "dependencies": [
+        "TASK-000",
+        "TASK-001"
+      ],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": true,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod001/spec_api.py"
+        },
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod001/project_api.py"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/specs/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/projects/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/projects/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "integration_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-003（寻源项目列表）前端页面功能，路由；不包含后端业务逻辑。实现规格书确认状态机（draft→confirmed）、项目创建 API，以及规格书和项目列表两个用户页面。",
+      "task_boundary": "不实现对话台（TASK-001 范围）；不实现候选供应商、画像、报价等下游环节；在 backend/app/db/models 只能创建 spec.py 与 project.py，在 alembic/versions 只能创建本项目列出的迁移文件。",
+      "tasker_instructions": "规格书确认 API 必须校验 spec_status 为 confirmed 才允许创建项目（GAR-008）；前端项目列表支持状态筛选；页面路由与菜单注册通过 integration_hooks 声明；模型/迁移文件不得修改 __init__.py。",
+      "acceptance_focus": "验收重点是 spec_status 状态机约束、确认后创建项目并跳转 /projects/{id}、项目列表筛选与跳转、页面字段与设计一致。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-003"
+      ]
+    },
+    {
+      "task_id": "TASK-003",
+      "task_index": 6,
+      "name": "MOD-002 多平台检索服务集成",
+      "task_name": "MOD-002 多平台检索服务集成",
+      "display_label": "多平台寻源-Playwright",
+      "description": "集成 Playwright、httpx、Celery 与 Redis，构建 1688、阿里国际站、百度爱采购、展会名录、海关数据线索的多平台并行检索基础设施，支持自动翻页与 HTML 抓取。",
+      "development_mode": "module_integration",
+      "task_type": "module_integration",
+      "baseline_profile": "module_integration",
+      "task_scope": "仅搭建 MOD-002 多平台检索适配器、Celery 并行任务与基础服务层，不包含关键词策略业务逻辑和候选管理页面。",
+      "module_id": "MOD-002",
+      "open_source_modules": [
+        {
+          "module_name": "playwright",
+          "source_registry": "PyPI",
+          "version": "1.49.1",
+          "purpose": "驱动 1688、阿里国际站、百度爱采购等平台自动检索与翻页",
+          "selection_status": "approved_for_baseline"
+        },
+        {
+          "module_name": "httpx",
+          "source_registry": "PyPI",
+          "version": "0.28.1",
+          "purpose": "处理平台 API 请求与 HTML 抓取",
+          "selection_status": "approved_for_baseline"
+        },
+        {
+          "module_name": "celery",
+          "source_registry": "PyPI",
+          "version": "5.4.0",
+          "purpose": "并行检索任务队列",
+          "selection_status": "approved_for_baseline"
+        },
+        {
+          "module_name": "redis",
+          "source_registry": "PyPI",
+          "version": "7.4.1",
+          "purpose": "任务队列 Broker 与缓存",
+          "selection_status": "approved_for_baseline"
+        },
+        {
+          "module_name": "fastapi",
+          "source_registry": "PyPI",
+          "version": "0.115.6",
+          "purpose": "寻源模块 API 服务框架",
+          "selection_status": "approved_for_baseline"
+        }
+      ],
+      "priority": "P1",
+      "allowed_paths": [
+        "backend/app/shared/adapters/mod002/",
+        "backend/app/tasks/mod002/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-003_001",
+          "validation_type": "unit_test",
+          "command": "python3 -m pytest backend/app/shared/adapters/mod002/",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-003_002",
+          "validation_type": "lint",
+          "command": "flake8",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-003_003",
+          "validation_type": "deploy_check",
+          "command": "python3 -c \"from main import app\"",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-003_004",
+          "command": "python3 -m compileall .",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        },
+        {
+          "validation_id": "vc_TASK-003_005",
+          "command": "python3 manage.py check --deploy",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/shared/adapters/mod002/platform_adapter.py",
+        "backend/app/shared/adapters/mod002/playwright_client.py",
+        "backend/app/tasks/mod002/search_tasks.py",
+        "backend/tests/test_mod002_platform_search.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-004-AC-01",
+        "FEAT-005-AC-01",
+        "FEAT-006-AC-01"
+      ],
+      "dependencies": [],
+      "deliverable_type": "backend_connector",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/tasks/mod002/api.py"
+        }
+      ],
+      "dependency_additions": [
+        "playwright",
+        "httpx",
+        "celery[redis]",
+        "redis"
+      ],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "集成 Playwright/httpx/Celery/Redis，提供多平台并行检索可复用服务与 Celery 任务。",
+      "task_boundary": "不实现关键词扩展/收紧策略、候选池去重与召回阈值；不实现前端页面；不直接修改依赖 manifest 与 Docker Compose；服务入口通过 integration_hooks 注册。",
+      "tasker_instructions": "实现平台适配层，封装 1688、阿里国际站、百度爱采购等平台的自动检索和翻页；Celery 任务支持并行抓取；适配器接口保持与 TASK-004 的调用契约一致；测试时使用 mock 页面避免真实平台反爬依赖。",
+      "acceptance_focus": "验收重点是平台适配器可被 Celery 任务调用、返回候选供应商原始列表、pytest 覆盖翻页和异常重试路径。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-004",
+      "task_index": 7,
+      "name": "MOD-002 关键词扩展与候选召回管理",
+      "task_name": "MOD-002 关键词扩展与候选召回管理",
+      "display_label": "关键词-扩展与召回",
+      "description": "实现关键词自动扩展与收紧策略、候选供应商池去重与 100-300 家召回阈值管理，并提供触发重新寻源的后端 API。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "worker_service",
+      "task_scope": "覆盖 MOD-002 关键词策略、候选召回管理与触发 API；不包含多平台抓取适配器（TASK-003）和候选页面（TASK-005）。",
+      "module_id": "MOD-002",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "backend/app/modules/mod002/",
+        "backend/app/services/mod002/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-004_001",
+          "validation_type": "unit_test",
+          "command": "python3 -m pytest backend/app/modules/mod002/",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-004_002",
+          "validation_type": "lint",
+          "command": "flake8",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-004_003",
+          "validation_type": "deploy_check",
+          "command": "python3 -c \"from main import app\"",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-004_004",
+          "command": "python3 -m compileall .",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        },
+        {
+          "validation_id": "vc_TASK-004_005",
+          "command": "python3 manage.py check --deploy",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod002/keyword_strategy.py",
+        "backend/app/modules/mod002/candidate_manager.py",
+        "backend/app/services/mod002/resourcing_service.py",
+        "backend/app/db/models/candidate.py",
+        "backend/alembic/versions/xxxx_create_candidate.py",
+        "backend/tests/test_keyword_strategy.py",
+        "backend/tests/test_candidate_pool.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-004-AC-01",
+        "FEAT-004-AC-02",
+        "FEAT-005-AC-01",
+        "FEAT-005-AC-02",
+        "FEAT-006-AC-01",
+        "FEAT-006-AC-02",
+        "FEAT-003-AC-01",
+        "FEAT-003-AC-02",
+        "FEAT-018-AC-01",
+        "FEAT-018-AC-02",
+        "FEAT-018-AC-03",
+        "FEAT-020-AC-01",
+        "FEAT-020-AC-02",
+        "FEAT-020-AC-03"
+      ],
+      "dependencies": [
+        "TASK-003",
+        "TASK-018"
+      ],
+      "deliverable_type": "pipeline_stage",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod002/api.py"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "实现关键词自动扩展与收紧、候选池去重和 100-300 家召回阈值管理，并提供重新寻源触发 API。",
+      "task_boundary": "不实现平台抓取适配器（TASK-003 范围）；不实现候选列表前端页面（TASK-005 范围）；在 backend/app/db/models 只能创建 candidate.py。",
+      "tasker_instructions": "关键词策略消费 TASK-018 提供的品类知识库关键词映射 API 和 TASK-003 的检索服务；结果不足时扩展同义词/英文/上下游关键词，结果过杂时收紧；候选池去重后保留来源链接；通过重新寻源 API 触发 Celery 任务。",
+      "acceptance_focus": "验收重点是关键词扩展/收紧规则、100-300 召回阈值、候选去重、重新寻源 API 可触发并返回候选列表。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-005",
+      "task_index": 8,
+      "name": "PAGE-005 候选供应商列表页面",
+      "task_name": "PAGE-005 候选供应商列表页面",
+      "display_label": "候选列表-筛选勾选",
+      "description": "实现候选供应商列表页面，包含候选列表区、筛选排序区、深挖名单选择区；支持提交深入分析名单、重新寻源和查看供应商画像。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-005（候选供应商列表）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-005",
+      "module_id": "MOD-002",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/candidates/",
+        "frontend/src/pages/page-005/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-005_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-005_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-005_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "frontend/src/pages/candidates/index.tsx",
+        "frontend/src/components/candidates/CandidateTable.tsx",
+        "frontend/src/components/candidates/FilterSortBar.tsx",
+        "frontend/src/components/candidates/DeepDiveSelector.tsx",
+        "frontend/src/features/candidates/useCandidates.ts",
+        "frontend/src/tests/candidates.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-004-AC-02",
+        "FEAT-005-AC-02",
+        "FEAT-006-AC-02"
+      ],
+      "dependencies": [
+        "TASK-004"
+      ],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": false,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": false,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/candidates/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/candidates/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-005（候选供应商列表）前端页面功能，路由；不包含后端业务逻辑。实现候选供应商列表页面，支持筛选排序、勾选深入分析名单、重新寻源和查看画像。",
+      "task_boundary": "不创建后端 API；不实现供应商画像页面（TASK-008 范围）；不直接修改 routes.tsx/menu.tsx。",
+      "tasker_instructions": "页面从 URL 读取 project_id；提交深入分析名单时展示已选数量并调用 TASK-004 提供的启动深度画像 API；重新寻源需 loading 状态；跳转 /suppliers/{id} 携带供应商 ID。",
+      "acceptance_focus": "验收重点是候选列表字段完整、筛选排序生效、勾选计数正确、重新寻源与画像跳转可用。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-005"
+      ]
+    },
+    {
+      "task_id": "TASK-006",
+      "task_index": 9,
+      "name": "MOD-003 供应商画像证据服务集成",
+      "task_name": "MOD-003 供应商画像证据服务集成",
+      "display_label": "画像集成-OCR与工商",
+      "description": "集成 PaddleOCR、企查查与天眼查 API，构建资质证书 OCR 识别、工商数据交叉验证与公开证据采集服务。",
+      "development_mode": "module_integration",
+      "task_type": "module_integration",
+      "baseline_profile": "module_integration",
+      "task_scope": "仅搭建 MOD-003 证据采集与识别适配层，不包含置信度评分、产能推断和画像页面。",
+      "module_id": "MOD-003",
+      "open_source_modules": [
+        {
+          "module_name": "paddleocr",
+          "source_registry": "PyPI",
+          "version": "2.8.1",
+          "purpose": "资质证书图片 OCR 识别",
+          "selection_status": "approved_for_baseline"
+        },
+        {
+          "module_name": "httpx",
+          "source_registry": "PyPI",
+          "version": "0.28.1",
+          "purpose": "工商数据 API 调用与公开数据抓取",
+          "selection_status": "approved_for_baseline"
+        },
+        {
+          "module_name": "fastapi",
+          "source_registry": "PyPI",
+          "version": "0.115.6",
+          "purpose": "画像模块 API 服务框架",
+          "selection_status": "approved_for_baseline"
+        }
+      ],
+      "priority": "P1",
+      "allowed_paths": [
+        "backend/app/shared/adapters/mod003/",
+        "backend/app/modules/mod-003-/",
+        "backend/app/integrations/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-006_001",
+          "validation_type": "unit_test",
+          "command": "python3 -m pytest backend/app/modules/mod-003-/",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-006_002",
+          "validation_type": "lint",
+          "command": "flake8",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-006_003",
+          "validation_type": "deploy_check",
+          "command": "python3 -c \"from main import app\"",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-006_004",
+          "command": "python3 -m compileall .",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        },
+        {
+          "validation_id": "vc_TASK-006_005",
+          "command": "python3 manage.py check --deploy",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/shared/adapters/mod003/paddleocr_adapter.py",
+        "backend/app/shared/adapters/mod003/qcc_adapter.py",
+        "backend/app/shared/adapters/mod003/tianyancha_adapter.py",
+        "backend/tests/test_mod003_evidence_collection.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-007-AC-01",
+        "FEAT-008-AC-02",
+        "FEAT-010-AC-01",
+        "FEAT-011-AC-02"
+      ],
+      "dependencies": [],
+      "deliverable_type": "backend_connector",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/shared/adapters/mod003/api.py"
+        },
+        {
+          "type": "env_requirement",
+          "target": ".env.example",
+          "operation": "append",
+          "source": "QCC_API_KEY,TIANYANCHA_API_KEY"
+        }
+      ],
+      "dependency_additions": [
+        "paddleocr",
+        "httpx"
+      ],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "集成 PaddleOCR 与工商数据 API，为供应商画像提供资质识别和工商信息交叉验证能力。",
+      "task_boundary": "不实现置信度评分与产能推断规则；不实现画像页面；API Key 必须通过环境变量引用，不做明文硬编码。",
+      "tasker_instructions": "PaddleOCR 适配器接收证书图片并返回识别文本；企查查/天眼查适配器封装工商、股权、司法数据查询；服务接口需返回证据来源标识；测试使用样例图片与 mock API。",
+      "acceptance_focus": "验收重点是 OCR 识别结果可用于证书公司名核对、工商数据返回成立年限/注册资本/参保人数/经营范围、证据来源可追溯。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-007",
+      "task_index": 10,
+      "name": "MOD-003 真工厂置信度评分与产能推断",
+      "task_name": "MOD-003 真工厂置信度评分与产能推断",
+      "display_label": "评分-置信度与产能",
+      "description": "实现真工厂置信度评分、供应商类型判定（factory/trader）、地址与平台线索分析、产能区间与规模等级推断规则。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "backend_api",
+      "task_scope": "覆盖 MOD-003 定制评分与推断业务逻辑及画像数据 API；不包含证据采集适配器（TASK-006）和画像页面（TASK-008）。",
+      "module_id": "MOD-003",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "backend/app/modules/mod003/",
+        "backend/app/services/mod003/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-007_001",
+          "validation_type": "unit_test",
+          "command": "python3 -m pytest backend/app/modules/mod003/",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-007_002",
+          "validation_type": "lint",
+          "command": "flake8",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-007_003",
+          "validation_type": "deploy_check",
+          "command": "python3 -c \"from main import app\"",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-007_004",
+          "command": "python3 -m compileall .",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        },
+        {
+          "validation_id": "vc_TASK-007_005",
+          "command": "python3 manage.py check --deploy",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod003/scoring_rules.py",
+        "backend/app/modules/mod003/capacity_inference.py",
+        "backend/app/services/mod003/profile_service.py",
+        "backend/app/db/models/supplier_profile.py",
+        "backend/alembic/versions/xxxx_create_supplier_profile.py",
+        "backend/tests/test_scoring_rules.py",
+        "backend/tests/test_capacity_inference.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-007-AC-02",
+        "FEAT-009-AC-01",
+        "FEAT-010-AC-02",
+        "FEAT-013-AC-01"
+      ],
+      "dependencies": [
+        "TASK-006"
+      ],
+      "deliverable_type": "backend_connector",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod003/api.py"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "基于多源证据计算真工厂置信度评分、判定供应商类型并推断产能区间与规模等级。",
+      "task_boundary": "不实现 OCR/工商 API 适配器（TASK-006 范围）；不实现画像页面（TASK-008 范围）；产能推断必须标注依据，禁止编造精确数字；只能创建 supplier_profile.py 模型。",
+      "tasker_instructions": "评分规则综合工商数据、地址线索、平台标签、SKU 聚焦度与资质识别结果；每条结论附证据链接或置信度；产能推断输出区间而非精确数字（GAR-005）。",
+      "acceptance_focus": "验收重点是评分与类型判定可解释、产能区间带推断依据、画像 API 返回证据链接与置信度。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-008",
+      "task_index": 11,
+      "name": "PAGE-006 供应商画像详情页面",
+      "task_name": "PAGE-006 供应商画像详情页面",
+      "display_label": "画像-多源证据展示",
+      "description": "实现供应商画像详情页面，展示评分概览、工商与地址线索、平台与资质证据、产能推断四个区域，支持加入比价名单、查看证据链接和反馈鉴别结果。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-006（供应商画像详情）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-006",
+      "module_id": "MOD-003",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/suppliers/",
+        "frontend/src/pages/page-006/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-008_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-008_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-008_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "frontend/src/pages/suppliers/index.tsx",
+        "frontend/src/components/suppliers/ScoreOverview.tsx",
+        "frontend/src/components/suppliers/BusinessAddressPanel.tsx",
+        "frontend/src/components/suppliers/PlatformQualificationPanel.tsx",
+        "frontend/src/components/suppliers/CapacityPanel.tsx",
+        "frontend/src/features/suppliers/useSupplierProfile.ts",
+        "frontend/src/tests/suppliers.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-008-AC-01",
+        "FEAT-009-AC-02",
+        "FEAT-011-AC-01",
+        "FEAT-013-AC-02"
+      ],
+      "dependencies": [
+        "TASK-007"
+      ],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": false,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": false,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/suppliers/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-006（供应商画像详情）前端页面功能，路由；不包含后端业务逻辑。实现供应商画像详情页面，展示置信度评分、证据明细与产能推断，并支持加入比价名单。",
+      "task_boundary": "不创建后端 API；不实现报价对比页面（TASK-011 范围）；反馈鉴别结果动作需调用画像 API 并提交反馈。",
+      "tasker_instructions": "页面从 URL 读取 supplier_id；证据链接必须可点击并在新标签页打开；加入比价名单需成功反馈；产能推断区域标注依据，不得显示精确编造数字。",
+      "acceptance_focus": "验收重点是四区域完整展示、证据链接可打开、加入比价名单反馈、推断依据可见。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-006"
+      ]
+    },
+    {
+      "task_id": "TASK-009",
+      "task_index": 12,
+      "name": "MOD-004 报价口径抽取服务集成",
+      "task_name": "MOD-004 报价口径抽取服务集成",
+      "display_label": "报价集成-口径抽取",
+      "description": "集成 pandas 与 OpenAI API，构建报价口径抽取服务，从非结构化报价文本中抽取价格带、MOQ、阶梯价、含税/不含税、FOB/EXW 等口径。",
+      "development_mode": "module_integration",
+      "task_type": "module_integration",
+      "baseline_profile": "module_integration",
+      "task_scope": "仅搭建 MOD-004 报价清洗与口径抽取服务层，不包含归一化比价、异常标注和报价页面。",
+      "module_id": "MOD-004",
+      "open_source_modules": [
+        {
+          "module_name": "pandas",
+          "source_registry": "PyPI",
+          "version": "2.2.2",
+          "purpose": "报价数据清洗与统计计算",
+          "selection_status": "approved_for_baseline"
+        },
+        {
+          "module_name": "fastapi",
+          "source_registry": "PyPI",
+          "version": "0.115.6",
+          "purpose": "报价模块 API 服务框架",
+          "selection_status": "approved_for_baseline"
+        }
+      ],
+      "priority": "P1",
+      "allowed_paths": [
+        "backend/app/shared/adapters/mod004/",
+        "backend/app/modules/mod-004-/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-009_001",
+          "validation_type": "unit_test",
+          "command": "python3 -m pytest backend/app/modules/mod-004-/",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-009_002",
+          "validation_type": "lint",
+          "command": "flake8",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-009_003",
+          "validation_type": "deploy_check",
+          "command": "python3 -c \"from main import app\"",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-009_004",
+          "command": "python3 -m compileall .",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        },
+        {
+          "validation_id": "vc_TASK-009_005",
+          "command": "python3 manage.py check --deploy",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/shared/adapters/mod004/pandas_quote_adapter.py",
+        "backend/app/shared/adapters/mod004/openai_extractor.py",
+        "backend/tests/test_mod004_extraction.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-012-AC-01",
+        "FEAT-012-AC-02"
+      ],
+      "dependencies": [],
+      "deliverable_type": "backend_connector",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/shared/adapters/mod004/api.py"
+        }
+      ],
+      "dependency_additions": [
+        "pandas"
+      ],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "集成 pandas 与 OpenAI，提供报价口径自动抽取与结构化清洗服务。",
+      "task_boundary": "不实现归一化计算、价格分布与异常标注（TASK-010 范围）；不实现前端页面；抽取结果必须可追溯到原始报价文本。",
+      "tasker_instructions": "OpenAI 抽取器负责解析非结构化报价文本；pandas 负责将抽取结果整理为结构化表格；每条抽取结果保留原始文本引用，避免编造（GAR-005）。",
+      "acceptance_focus": "验收重点是报价口径抽取准确、结构化输出字段完整、测试覆盖常见报价格式。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-010",
+      "task_index": 13,
+      "name": "MOD-004 报价归一化与异常标注",
+      "task_name": "MOD-004 报价归一化与异常标注",
+      "display_label": "比价-归一化与异常",
+      "description": "实现报价归一化到统一口径、价格带分布计算、异常报价标注与可能原因判断，并提供报价对比分析 API。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "backend_api",
+      "task_scope": "覆盖 MOD-004 归一化、价格分布、异常标注业务逻辑及报价 API；不包含口径抽取集成服务（TASK-009）和报价页面（TASK-011）。",
+      "module_id": "MOD-004",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "backend/app/modules/mod004/",
+        "backend/app/services/mod004/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-010_001",
+          "validation_type": "unit_test",
+          "command": "python3 -m pytest backend/app/modules/mod004/",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-010_002",
+          "validation_type": "lint",
+          "command": "flake8",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-010_003",
+          "validation_type": "deploy_check",
+          "command": "python3 -c \"from main import app\"",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-010_004",
+          "command": "python3 -m compileall .",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        },
+        {
+          "validation_id": "vc_TASK-010_005",
+          "command": "python3 manage.py check --deploy",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod004/normalization_rules.py",
+        "backend/app/modules/mod004/anomaly_detector.py",
+        "backend/app/services/mod004/quote_comparison_service.py",
+        "backend/app/db/models/quote.py",
+        "backend/alembic/versions/xxxx_create_quote.py",
+        "backend/tests/test_normalization.py",
+        "backend/tests/test_anomaly_detector.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-012-AC-01",
+        "FEAT-013-AC-01",
+        "FEAT-014-AC-01"
+      ],
+      "dependencies": [
+        "TASK-009",
+        "TASK-018"
+      ],
+      "deliverable_type": "backend_connector",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod004/api.py"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "实现报价归一化计算、价格带分布与异常报价标注业务逻辑，提供报价对比分析 API。",
+      "task_boundary": "不实现报价口径抽取集成（TASK-009 范围）；不实现报价页面（TASK-011 范围）；只创建 quote.py 模型。",
+      "tasker_instructions": "使用 TASK-009 的口径抽取结果和 TASK-018 的品类知识库比价规则进行归一化；异常报价原因枚举为偷工减料/贸易商转单/引流价；导出 Excel 接口供页面下载。",
+      "acceptance_focus": "验收重点是归一化口径可切换、价格分布统计正确、异常标注保存与导出可用。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-011",
+      "task_index": 14,
+      "name": "PAGE-007 报价对比分析页面",
+      "task_name": "PAGE-007 报价对比分析页面",
+      "display_label": "报价-对比分析页",
+      "description": "实现报价对比分析页面，包含归一化口径选择区、价格分布图区、报价对比表区，支持切换口径、确认异常标注和导出报价对比。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-007（报价对比分析）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-007",
+      "module_id": "MOD-004",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/quotes/",
+        "frontend/src/pages/page-007/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-011_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-011_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-011_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "frontend/src/pages/quotes/index.tsx",
+        "frontend/src/components/quotes/NormalizationSelector.tsx",
+        "frontend/src/components/quotes/PriceDistributionChart.tsx",
+        "frontend/src/components/quotes/QuoteComparisonTable.tsx",
+        "frontend/src/features/quotes/useQuotes.ts",
+        "frontend/src/tests/quotes.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-012-AC-02",
+        "FEAT-013-AC-02",
+        "FEAT-014-AC-02"
+      ],
+      "dependencies": [
+        "TASK-010"
+      ],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": false,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": false,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/quotes/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/quotes/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-007（报价对比分析）前端页面功能，路由；不包含后端业务逻辑。实现报价对比分析页面，展示价格分布与对比表，支持口径切换、异常标注确认与导出。",
+      "task_boundary": "不创建后端 API；不实现报价口径抽取与归一化逻辑；导出通过调用 TASK-010 提供的导出接口触发下载。",
+      "tasker_instructions": "页面从 URL 读取 project_id；切换归一化口径后刷新价格分布图与对比表；异常标注操作需 loading/成功反馈（GAR-007）。",
+      "acceptance_focus": "验收重点是三个区域渲染、口径切换刷新、异常标注保存反馈、导出文件可下载。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-007"
+      ]
+    },
+    {
+      "task_id": "TASK-012",
+      "task_index": 15,
+      "name": "MOD-005 询价触达材料生成服务",
+      "task_name": "MOD-005 询价触达材料生成服务",
+      "display_label": "询价-生成服务",
+      "description": "实现中英文双语 RFQ 自动生成、Top10 供应商询盘话术批量生成与联系方式汇总表抽取服务，提供询价材料生成 API。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "backend_api",
+      "task_scope": "覆盖 MOD-005 RFQ、话术、联系方式汇总的生成服务与 API；不包含询价材料页面（TASK-013）。",
+      "module_id": "MOD-005",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "backend/app/modules/mod005/",
+        "backend/app/services/mod005/",
+        "backend/app/tasks/mod005/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-012_001",
+          "validation_type": "unit_test",
+          "command": "python3 -m pytest backend/app/modules/mod005/",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-012_002",
+          "validation_type": "lint",
+          "command": "flake8",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-012_003",
+          "validation_type": "deploy_check",
+          "command": "python3 -c \"from main import app\"",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-012_004",
+          "command": "python3 -m compileall .",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        },
+        {
+          "validation_id": "vc_TASK-012_005",
+          "command": "python3 manage.py check --deploy",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod005/rfq_generator.py",
+        "backend/app/modules/mod005/outreach_template_generator.py",
+        "backend/app/modules/mod005/contact_extractor.py",
+        "backend/app/services/mod005/rfq_service.py",
+        "backend/app/db/models/rfq.py",
+        "backend/alembic/versions/xxxx_create_rfq.py",
+        "backend/tests/test_rfq_generator.py",
+        "backend/tests/test_contact_extractor.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-015-AC-01",
+        "FEAT-016-AC-01",
+        "FEAT-017-AC-01"
+      ],
+      "dependencies": [
+        "TASK-002",
+        "TASK-005"
+      ],
+      "deliverable_type": "backend_connector",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod005/api.py"
+        }
+      ],
+      "dependency_additions": [
+        "jinja2"
+      ],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "基于 confirmed 规格书生成中英文双语 RFQ、Top10 询盘话术与联系方式汇总表。",
+      "task_boundary": "不实现询价材料页面（TASK-013 范围）；不直接发送询盘消息；RFQ 内容必须以规格书字段为依据，不编造。",
+      "tasker_instructions": "RFQ 生成使用 TASK-002 的 confirmed 规格书和 TASK-005 的候选供应商联系方式；Jinja2 模板生成中英文双语正文；联系方式抽取需去重并保留来源链接。",
+      "acceptance_focus": "验收重点是 RFQ 双语内容完整、话术面向 Top10 供应商、联系方式汇总可导出、内容可追溯。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-013",
+      "task_index": 16,
+      "name": "PAGE-008 询价材料生成页面",
+      "task_name": "PAGE-008 询价材料生成页面",
+      "display_label": "询价-材料页面",
+      "description": "实现询价材料生成页面，包含 RFQ 预览区、询盘话术区、联系方式汇总区，支持生成 RFQ、生成批量话术和导出联系方式表。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-008（询价材料生成）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-008",
+      "module_id": "MOD-005",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/rfq/",
+        "frontend/src/pages/page-008/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-013_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-013_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-013_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "frontend/src/pages/rfq/index.tsx",
+        "frontend/src/components/rfq/RfqPreview.tsx",
+        "frontend/src/components/rfq/OutreachTemplates.tsx",
+        "frontend/src/components/rfq/ContactSummaryTable.tsx",
+        "frontend/src/features/rfq/useRfq.ts",
+        "frontend/src/tests/rfq.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-015-AC-02",
+        "FEAT-016-AC-02",
+        "FEAT-017-AC-02"
+      ],
+      "dependencies": [
+        "TASK-012"
+      ],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": false,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": false,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/rfq/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/rfq/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-008（询价材料生成）前端页面功能，路由；不包含后端业务逻辑。实现询价材料生成页面，展示 RFQ、话术与联系方式，支持生成和导出操作。",
+      "task_boundary": "不创建后端 API；不实现 RFQ 生成逻辑；导出通过调用 TASK-012 的导出接口触发下载。",
+      "tasker_instructions": "页面从 URL 读取 project_id；生成 RFQ 与批量话术需 loading 状态（GAR-007）；导出联系方式表触发 Excel/CSV 下载。",
+      "acceptance_focus": "验收重点是三个区域渲染、生成与导出操作反馈正确、内容展示与设计一致。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-008"
+      ]
+    },
+    {
+      "task_id": "TASK-014",
+      "task_index": 17,
+      "name": "MOD-006 供应商评估报告生成服务",
+      "task_name": "MOD-006 供应商评估报告生成服务",
+      "display_label": "报告-生成服务",
+      "description": "实现供应商评估报告生成服务，汇总对比大表、证据链接与置信度，输出分层推荐策略（批量主力×2、备选×2、打样快反×1），支持 PDF/Word 导出。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "backend_api",
+      "task_scope": "覆盖 MOD-006 报告生成、分层推荐与导出服务；不包含评估报告页面（TASK-015）。",
+      "module_id": "MOD-006",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "backend/app/modules/mod006/",
+        "backend/app/services/mod006/",
+        "backend/app/tasks/mod006/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-014_001",
+          "validation_type": "unit_test",
+          "command": "python3 -m pytest backend/app/modules/mod006/",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-014_002",
+          "validation_type": "lint",
+          "command": "flake8",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-014_003",
+          "validation_type": "deploy_check",
+          "command": "python3 -c \"from main import app\"",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-014_004",
+          "command": "python3 -m compileall .",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        },
+        {
+          "validation_id": "vc_TASK-014_005",
+          "command": "python3 manage.py check --deploy",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod006/report_generator.py",
+        "backend/app/modules/mod006/recommendation_strategy.py",
+        "backend/app/services/mod006/report_service.py",
+        "backend/app/db/models/report.py",
+        "backend/alembic/versions/xxxx_create_report.py",
+        "backend/tests/test_report_generator.py",
+        "backend/tests/test_recommendation_strategy.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-018-AC-01",
+        "FEAT-018-AC-03",
+        "FEAT-019-AC-02",
+        "FEAT-020-AC-02"
+      ],
+      "dependencies": [
+        "TASK-008",
+        "TASK-011",
+        "TASK-012"
+      ],
+      "deliverable_type": "backend_connector",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod006/api.py"
+        }
+      ],
+      "dependency_additions": [
+        "reportlab"
+      ],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "生成供应商评估报告对比大表、分层推荐结论与 PDF/Word 导出文件。",
+      "task_boundary": "不实现评估报告页面（TASK-015 范围）；报告结论必须引用画像、报价、询价证据并附置信度；只创建 report.py 模型。",
+      "tasker_instructions": "报告服务消费 TASK-008 画像、TASK-011 归一化报价、TASK-012 询价材料；分层推荐为批量主力×2+备选×2+打样快反×1；导出使用 ReportLab。",
+      "acceptance_focus": "验收重点是报告对比大表完整、每条结论带证据链接与置信度、分层推荐策略输出正确、导出文件可生成。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-015",
+      "task_index": 18,
+      "name": "PAGE-009 供应商评估报告页面",
+      "task_name": "PAGE-009 供应商评估报告页面",
+      "display_label": "报告-展示与导出",
+      "description": "实现供应商评估报告页面，展示分层推荐区、对比大表区、证据与置信度区，支持导出评估报告、发起监控和生成询价材料。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-009（供应商评估报告）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-009",
+      "module_id": "MOD-006",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/report/",
+        "frontend/src/pages/page-009/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-015_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-015_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-015_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "frontend/src/pages/report/index.tsx",
+        "frontend/src/components/report/RecommendationPanel.tsx",
+        "frontend/src/components/report/ComparisonTable.tsx",
+        "frontend/src/components/report/EvidenceConfidencePanel.tsx",
+        "frontend/src/features/report/useReport.ts",
+        "frontend/src/tests/report.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-018-AC-02",
+        "FEAT-019-AC-01",
+        "FEAT-020-AC-01",
+        "FEAT-020-AC-03"
+      ],
+      "dependencies": [
+        "TASK-014"
+      ],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": false,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": false,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/report/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/report/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-009（供应商评估报告）前端页面功能，路由；不包含后端业务逻辑。实现评估报告页面，展示分层推荐、对比大表与证据置信度，支持导出报告、发起监控和生成询价材料跳转。",
+      "task_boundary": "不创建后端 API；发起监控调用 TASK-016 提供的监控 API 并跳转 /monitoring；生成询价材料跳转 /projects/{id}/rfq。",
+      "tasker_instructions": "页面从 URL 读取 project_id；报告导出触发 TASK-014 导出接口下载 PDF/Word；发起监控操作需 loading/成功反馈。",
+      "acceptance_focus": "验收重点是三区域展示、导出文件下载、发起监控跳转与监控对象添加反馈。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-009"
+      ]
+    },
+    {
+      "task_id": "TASK-016",
+      "task_index": 19,
+      "name": "MOD-007 持续监控与预警服务",
+      "task_name": "MOD-007 持续监控与预警服务",
+      "display_label": "监控-预警服务",
+      "description": "实现供应商司法风险、经营异常、股权变更、差评激增、涨价信号与原材料价格波动的持续监控服务，支持预警生成、通知与状态处理 API。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "backend_api",
+      "task_scope": "覆盖 MOD-007 监控检测、预警通知与预警处理 API；不包含监控中心页面（TASK-017）。",
+      "module_id": "MOD-007",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "backend/app/modules/mod007/",
+        "backend/app/services/mod007/",
+        "backend/app/tasks/mod007/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/src/routes.tsx",
+        "frontend/src/config/menu.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-016_001",
+          "validation_type": "unit_test",
+          "command": "python3 -m pytest backend/app/modules/mod007/",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-016_002",
+          "validation_type": "lint",
+          "command": "flake8",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-016_003",
+          "validation_type": "deploy_check",
+          "command": "python3 -c \"from main import app\"",
+          "cwd": "backend",
+          "required": true
+        },
+        {
+          "validation_id": "vc_TASK-016_004",
+          "command": "python3 -m compileall .",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        },
+        {
+          "validation_id": "vc_TASK-016_005",
+          "command": "python3 manage.py check --deploy",
+          "required": true,
+          "applies_to": "backend",
+          "cwd": "backend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod007/monitor_rules.py",
+        "backend/app/modules/mod007/alert_service.py",
+        "backend/app/services/mod007/monitoring_service.py",
+        "backend/app/tasks/mod007/monitor_tasks.py",
+        "backend/app/db/models/alert.py",
+        "backend/alembic/versions/xxxx_create_alert.py",
+        "backend/tests/test_monitor_rules.py",
+        "backend/tests/test_alert_service.py"
+      ],
+      "acceptance_refs": [
+        "FEAT-020-AC-01",
+        "FEAT-021-AC-01",
+        "FEAT-022-AC-02"
+      ],
+      "dependencies": [
+        "TASK-008",
+        "TASK-018"
+      ],
+      "deliverable_type": "backend_connector",
+      "output_contract": {
+        "page_accessible": false,
+        "backend_api_required": true,
+        "router_registry_changes": false,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod007/api.py"
+        }
+      ],
+      "dependency_additions": [
+        "celery[redis]",
+        "redis"
+      ],
+      "validation_required": [
+        "unit_test",
+        "lint",
+        "integration_test",
+        "build",
+        "type_check"
+      ],
+      "task_goal": "实现供应商与原材料风险监控、预警生成、通知发送与预警状态处理 API。",
+      "task_boundary": "不实现监控中心页面（TASK-017 范围）；预警触发依据数据源配置与监控规则；只创建 alert.py 模型。",
+      "tasker_instructions": "监控规则从 TASK-018 的监控规则配置 API 读取；监控对象来自 TASK-008 画像数据；Celery 定时任务执行检测；预警状态按 new→processing→resolved 流转（GAR-008）。",
+      "acceptance_focus": "验收重点是监控规则生效、预警生成与通知、预警状态流转 API 正确。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium"
+    },
+    {
+      "task_id": "TASK-017",
+      "task_index": 20,
+      "name": "PAGE-010/011 监控中心与预警详情页面",
+      "task_name": "PAGE-010/011 监控中心与预警详情页面",
+      "display_label": "监控-中心与详情",
+      "description": "实现监控中心页面（预警汇总、预警列表、监控对象）与监控预警详情页面（预警概览、证据详情、建议动作），支持查看预警详情、添加监控对象、设置通知偏好和标记已处理。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-010（监控中心）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-010",
+      "module_id": "MOD-007",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/monitoring/",
+        "frontend/src/pages/page-010/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-017_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-017_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-017_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "frontend/src/pages/monitoring/index.tsx",
+        "frontend/src/pages/monitoring/alerts/[id].tsx",
+        "frontend/src/components/monitoring/AlertSummary.tsx",
+        "frontend/src/components/monitoring/AlertList.tsx",
+        "frontend/src/components/monitoring/MonitoredSuppliers.tsx",
+        "frontend/src/components/monitoring/AlertDetail.tsx",
+        "frontend/src/features/monitoring/useMonitoring.ts",
+        "frontend/src/tests/monitoring.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-020-AC-02",
+        "FEAT-021-AC-02",
+        "FEAT-022-AC-03"
+      ],
+      "dependencies": [
+        "TASK-016"
+      ],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": false,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": false,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/monitoring/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/monitoring/alerts/[id].tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/monitoring/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-010（监控中心）前端页面功能，路由；不包含后端业务逻辑。实现监控中心与预警详情页面，支持预警汇总、列表、详情查看、添加监控对象与标记已处理。",
+      "task_boundary": "不创建后端 API；不实现监控检测与通知逻辑；标记已处理调用 TASK-016 的状态更新 API。",
+      "tasker_instructions": "监控中心从 URL 读取预警汇总与列表；预警详情页从 URL 读取 alert_id 并加载证据；标记已处理需填写处理说明并展示成功反馈。",
+      "acceptance_focus": "验收重点是监控中心汇总与列表展示、预警详情证据展示、标记已处理状态更新、跳转供应商画像。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-010"
+      ]
+    },
+    {
+      "task_id": "TASK-017-PAGE-011",
+      "task_index": 21,
+      "name": "PAGE-010/011 监控中心与预警详情页面",
+      "task_name": "PAGE-010/011 监控中心与预警详情页面",
+      "display_label": "监控-中心与详情",
+      "description": "实现监控中心页面（预警汇总、预警列表、监控对象）与监控预警详情页面（预警概览、证据详情、建议动作），支持查看预警详情、添加监控对象、设置通知偏好和标记已处理。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-011（监控预警详情）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-011",
+      "module_id": "MOD-007",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/monitoring/",
+        "frontend/src/pages/page-011/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-017-PAGE-011_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-017-PAGE-011_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-017-PAGE-011_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "frontend/src/pages/monitoring/index.tsx",
+        "frontend/src/pages/monitoring/alerts/[id].tsx",
+        "frontend/src/components/monitoring/AlertSummary.tsx",
+        "frontend/src/components/monitoring/AlertList.tsx",
+        "frontend/src/components/monitoring/MonitoredSuppliers.tsx",
+        "frontend/src/components/monitoring/AlertDetail.tsx",
+        "frontend/src/features/monitoring/useMonitoring.ts",
+        "frontend/src/tests/monitoring.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-020-AC-03",
+        "FEAT-022-AC-01"
+      ],
+      "dependencies": [
+        "TASK-016"
+      ],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": false,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": false,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/monitoring/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/monitoring/alerts/[id].tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/monitoring/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-011（监控预警详情）前端页面功能，路由；不包含后端业务逻辑。实现监控中心与预警详情页面，支持预警汇总、列表、详情查看、添加监控对象与标记已处理。",
+      "task_boundary": "不创建后端 API；不实现监控检测与通知逻辑；标记已处理调用 TASK-016 的状态更新 API。",
+      "tasker_instructions": "监控中心从 URL 读取预警汇总与列表；预警详情页从 URL 读取 alert_id 并加载证据；标记已处理需填写处理说明并展示成功反馈。",
+      "acceptance_focus": "验收重点是监控中心汇总与列表展示、预警详情证据展示、标记已处理状态更新、跳转供应商画像。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-011"
+      ]
+    },
+    {
+      "task_id": "TASK-018",
+      "task_index": 22,
+      "name": "MOD-008 平台管理后台",
+      "task_name": "MOD-008 平台管理后台",
+      "display_label": "平台管理-四页CRUD",
+      "description": "实现平台管理后台：用户管理、品类知识库管理、数据源配置管理和监控规则配置管理，包含管理页面与后端 CRUD API。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-012（用户管理）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-012",
+      "module_id": "MOD-008",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/admin/",
+        "frontend/src/pages/page-012/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-018_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-018_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-018_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod008/user_api.py",
+        "backend/app/modules/mod008/knowledge_base_api.py",
+        "backend/app/modules/mod008/data_source_api.py",
+        "backend/app/modules/mod008/monitoring_rule_api.py",
+        "backend/app/db/models/admin_models.py",
+        "backend/alembic/versions/xxxx_create_admin_models.py",
+        "backend/tests/test_admin_api.py",
+        "frontend/src/pages/admin/users/index.tsx",
+        "frontend/src/pages/admin/knowledge-base/index.tsx",
+        "frontend/src/pages/admin/data-sources/index.tsx",
+        "frontend/src/pages/admin/monitoring-rules/index.tsx",
+        "frontend/src/features/admin/useAdmin.ts",
+        "frontend/src/tests/admin.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-023-AC-01",
+        "FEAT-023-AC-02"
+      ],
+      "dependencies": [],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": true,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod008/admin_api.py"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/users/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/knowledge-base/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/data-sources/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/monitoring-rules/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/users/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "integration_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-012（用户管理）前端页面功能，路由；不包含后端业务逻辑。实现用户、品类知识库、数据源与监控规则四类管理页面及后端 CRUD API，支撑平台配置与领域知识沉淀。",
+      "task_boundary": "不实现业务模块页面（PAGE-001 至 PAGE-011）；密钥字段必须以掩码/引用方式展示，禁止明文回显完整密钥（GAR-010）；管理后台 API 只面向 ROLE-002。",
+      "tasker_instructions": "四个页面共用管理后台布局；后端 API 提供用户/品类/数据源/监控规则 CRUD；数据源配置的密钥字段掩码显示；品类知识库的比价规则与关键词映射数据结构需满足 TASK-004 和 TASK-010 的消费契约。",
+      "acceptance_focus": "验收重点是四类管理页面可完成增删改查、角色权限校验（ROLE-002 可访问、ROLE-001 拒绝）、密钥掩码、知识库与规则数据可被下游模块消费。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-012"
+      ]
+    },
+    {
+      "task_id": "TASK-018-PAGE-013",
+      "task_index": 23,
+      "name": "MOD-008 平台管理后台",
+      "task_name": "MOD-008 平台管理后台",
+      "display_label": "平台管理-四页CRUD",
+      "description": "实现平台管理后台：用户管理、品类知识库管理、数据源配置管理和监控规则配置管理，包含管理页面与后端 CRUD API。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-013（品类知识库管理）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-013",
+      "module_id": "MOD-008",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/admin/",
+        "frontend/src/pages/page-013/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-018-PAGE-013_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-018-PAGE-013_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-018-PAGE-013_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod008/user_api.py",
+        "backend/app/modules/mod008/knowledge_base_api.py",
+        "backend/app/modules/mod008/data_source_api.py",
+        "backend/app/modules/mod008/monitoring_rule_api.py",
+        "backend/app/db/models/admin_models.py",
+        "backend/alembic/versions/xxxx_create_admin_models.py",
+        "backend/tests/test_admin_api.py",
+        "frontend/src/pages/admin/users/index.tsx",
+        "frontend/src/pages/admin/knowledge-base/index.tsx",
+        "frontend/src/pages/admin/data-sources/index.tsx",
+        "frontend/src/pages/admin/monitoring-rules/index.tsx",
+        "frontend/src/features/admin/useAdmin.ts",
+        "frontend/src/tests/admin.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-024-AC-01",
+        "FEAT-024-AC-02"
+      ],
+      "dependencies": [],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": true,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod008/admin_api.py"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/users/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/knowledge-base/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/data-sources/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/monitoring-rules/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/users/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "integration_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-013（品类知识库管理）前端页面功能，路由；不包含后端业务逻辑。实现用户、品类知识库、数据源与监控规则四类管理页面及后端 CRUD API，支撑平台配置与领域知识沉淀。",
+      "task_boundary": "不实现业务模块页面（PAGE-001 至 PAGE-011）；密钥字段必须以掩码/引用方式展示，禁止明文回显完整密钥（GAR-010）；管理后台 API 只面向 ROLE-002。",
+      "tasker_instructions": "四个页面共用管理后台布局；后端 API 提供用户/品类/数据源/监控规则 CRUD；数据源配置的密钥字段掩码显示；品类知识库的比价规则与关键词映射数据结构需满足 TASK-004 和 TASK-010 的消费契约。",
+      "acceptance_focus": "验收重点是四类管理页面可完成增删改查、角色权限校验（ROLE-002 可访问、ROLE-001 拒绝）、密钥掩码、知识库与规则数据可被下游模块消费。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-013"
+      ]
+    },
+    {
+      "task_id": "TASK-018-PAGE-014",
+      "task_index": 24,
+      "name": "MOD-008 平台管理后台",
+      "task_name": "MOD-008 平台管理后台",
+      "display_label": "平台管理-四页CRUD",
+      "description": "实现平台管理后台：用户管理、品类知识库管理、数据源配置管理和监控规则配置管理，包含管理页面与后端 CRUD API。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-014（数据源配置管理）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-014",
+      "module_id": "MOD-008",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/admin/",
+        "frontend/src/pages/page-014/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-018-PAGE-014_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-018-PAGE-014_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-018-PAGE-014_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod008/user_api.py",
+        "backend/app/modules/mod008/knowledge_base_api.py",
+        "backend/app/modules/mod008/data_source_api.py",
+        "backend/app/modules/mod008/monitoring_rule_api.py",
+        "backend/app/db/models/admin_models.py",
+        "backend/alembic/versions/xxxx_create_admin_models.py",
+        "backend/tests/test_admin_api.py",
+        "frontend/src/pages/admin/users/index.tsx",
+        "frontend/src/pages/admin/knowledge-base/index.tsx",
+        "frontend/src/pages/admin/data-sources/index.tsx",
+        "frontend/src/pages/admin/monitoring-rules/index.tsx",
+        "frontend/src/features/admin/useAdmin.ts",
+        "frontend/src/tests/admin.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-025-AC-01",
+        "FEAT-025-AC-02",
+        "FEAT-025-AC-03"
+      ],
+      "dependencies": [],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": true,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod008/admin_api.py"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/users/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/knowledge-base/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/data-sources/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/monitoring-rules/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/users/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "integration_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-014（数据源配置管理）前端页面功能，路由；不包含后端业务逻辑。实现用户、品类知识库、数据源与监控规则四类管理页面及后端 CRUD API，支撑平台配置与领域知识沉淀。",
+      "task_boundary": "不实现业务模块页面（PAGE-001 至 PAGE-011）；密钥字段必须以掩码/引用方式展示，禁止明文回显完整密钥（GAR-010）；管理后台 API 只面向 ROLE-002。",
+      "tasker_instructions": "四个页面共用管理后台布局；后端 API 提供用户/品类/数据源/监控规则 CRUD；数据源配置的密钥字段掩码显示；品类知识库的比价规则与关键词映射数据结构需满足 TASK-004 和 TASK-010 的消费契约。",
+      "acceptance_focus": "验收重点是四类管理页面可完成增删改查、角色权限校验（ROLE-002 可访问、ROLE-001 拒绝）、密钥掩码、知识库与规则数据可被下游模块消费。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-014"
+      ]
+    },
+    {
+      "task_id": "TASK-018-PAGE-015",
+      "task_index": 25,
+      "name": "MOD-008 平台管理后台",
+      "task_name": "MOD-008 平台管理后台",
+      "display_label": "平台管理-四页CRUD",
+      "description": "实现平台管理后台：用户管理、品类知识库管理、数据源配置管理和监控规则配置管理，包含管理页面与后端 CRUD API。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-015（监控规则配置）前端页面功能，路由 不包含后端业务逻辑。",
+      "page_ref": "PAGE-015",
+      "module_id": "MOD-008",
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/components/admin/",
+        "frontend/src/pages/page-015/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/main.py",
+        "backend/requirements.txt",
+        "backend/Dockerfile",
+        "backend/alembic.ini",
+        "backend/alembic/env.py",
+        "backend/app/api/",
+        "backend/app/core/",
+        "backend/app/db/session.py",
+        "backend/app/db/base.py",
+        "backend/app/db/models/__init__.py",
+        "frontend/package.json",
+        "frontend/package-lock.json",
+        "frontend/tsconfig.json",
+        "frontend/vite.config.ts",
+        "frontend/index.html",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "docker-compose.yml",
+        ".env.example"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-018-PAGE-015_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-018-PAGE-015_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-018-PAGE-015_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "estimated_outputs": [
+        "backend/app/modules/mod008/user_api.py",
+        "backend/app/modules/mod008/knowledge_base_api.py",
+        "backend/app/modules/mod008/data_source_api.py",
+        "backend/app/modules/mod008/monitoring_rule_api.py",
+        "backend/app/db/models/admin_models.py",
+        "backend/alembic/versions/xxxx_create_admin_models.py",
+        "backend/tests/test_admin_api.py",
+        "frontend/src/pages/admin/users/index.tsx",
+        "frontend/src/pages/admin/knowledge-base/index.tsx",
+        "frontend/src/pages/admin/data-sources/index.tsx",
+        "frontend/src/pages/admin/monitoring-rules/index.tsx",
+        "frontend/src/features/admin/useAdmin.ts",
+        "frontend/src/tests/admin.test.tsx"
+      ],
+      "acceptance_refs": [
+        "FEAT-026-AC-01",
+        "FEAT-026-AC-02"
+      ],
+      "dependencies": [],
+      "deliverable_type": "runnable_slice",
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": true,
+        "router_registry_changes": true,
+        "build_config_changes": false,
+        "package_changes": false,
+        "backend_routes_changes": true,
+        "test_required": true
+      },
+      "integration_hooks": [
+        {
+          "type": "route_registration",
+          "target": "backend/app/api/router.py",
+          "operation": "register",
+          "source": "backend/app/modules/mod008/admin_api.py"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/users/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/knowledge-base/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/data-sources/index.tsx"
+        },
+        {
+          "type": "route_registration",
+          "target": "frontend/src/routes.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/monitoring-rules/index.tsx"
+        },
+        {
+          "type": "menu_registration",
+          "target": "frontend/src/config/menu.tsx",
+          "operation": "register",
+          "source": "frontend/src/pages/admin/users/index.tsx"
+        }
+      ],
+      "dependency_additions": [],
+      "validation_required": [
+        "build",
+        "lint",
+        "unit_test",
+        "integration_test",
+        "type_check"
+      ],
+      "task_goal": "实现页面 PAGE-015（监控规则配置）前端页面功能，路由；不包含后端业务逻辑。实现用户、品类知识库、数据源与监控规则四类管理页面及后端 CRUD API，支撑平台配置与领域知识沉淀。",
+      "task_boundary": "不实现业务模块页面（PAGE-001 至 PAGE-011）；密钥字段必须以掩码/引用方式展示，禁止明文回显完整密钥（GAR-010）；管理后台 API 只面向 ROLE-002。",
+      "tasker_instructions": "四个页面共用管理后台布局；后端 API 提供用户/品类/数据源/监控规则 CRUD；数据源配置的密钥字段掩码显示；品类知识库的比价规则与关键词映射数据结构需满足 TASK-004 和 TASK-010 的消费契约。",
+      "acceptance_focus": "验收重点是四类管理页面可完成增删改查、角色权限校验（ROLE-002 可访问、ROLE-001 拒绝）、密钥掩码、知识库与规则数据可被下游模块消费。",
+      "idea_id": "IDEA-20260808215020-MJXB6X",
+      "owner": "builder",
+      "estimated_complexity": "medium",
+      "source_page_ids": [
+        "PAGE-015"
+      ]
+    },
+    {
+      "task_id": "TASK-026-PAGE-004",
+      "task_index": 26,
+      "name": "页面 PAGE-004（寻源项目详情）",
+      "task_name": "页面 PAGE-004（寻源项目详情）",
+      "display_label": "寻源项目详情",
+      "description": "实现页面 PAGE-004（寻源项目详情）前端页面功能，路由 。",
+      "development_mode": "custom_development",
+      "task_type": "custom_development",
+      "baseline_profile": "frontend_page",
+      "task_scope": "仅实现页面 PAGE-004（寻源项目详情）前端页面功能，路由 寻源项目详情；不包含后端业务逻辑。",
+      "task_specific_boundary": "只实现前端页面；不创建后端 API，不修改路由注册文件。",
+      "task_boundary": "只实现前端页面；不创建后端 API，不修改路由注册文件。",
+      "context_scope": "page_function_design PAGE-004；page_function_acceptance 对应函数。",
+      "page_ref": "PAGE-004",
+      "source_page_ids": [
+        "PAGE-004"
+      ],
+      "acceptance_refs": [
+        "FEAT-003-AC-01",
+        "FEAT-003-AC-02",
+        "FEAT-006-AC-01",
+        "FEAT-006-AC-02",
+        "FEAT-018-AC-01",
+        "FEAT-018-AC-02",
+        "FEAT-018-AC-03",
+        "FEAT-020-AC-01",
+        "FEAT-020-AC-02",
+        "FEAT-020-AC-03"
+      ],
+      "open_source_modules": [],
+      "priority": "P1",
+      "allowed_paths": [
+        "frontend/src/pages/page-004/",
+        "frontend/src/components/"
+      ],
+      "forbidden_paths": [
+        "backend/config/",
+        "backend/manage.py",
+        "backend/requirements.txt",
+        "frontend/src/main.tsx",
+        "frontend/src/App.tsx",
+        "frontend/package.json",
+        "frontend/vite.config.ts",
+        "docker-compose.yml"
+      ],
+      "validation_commands": [
+        {
+          "validation_id": "vc_TASK-026-PAGE-004_001",
+          "command": "npm run build",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-026-PAGE-004_002",
+          "command": "npm run lint",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        },
+        {
+          "validation_id": "vc_TASK-026-PAGE-004_003",
+          "command": "npm run test",
+          "required": true,
+          "applies_to": "frontend",
+          "cwd": "frontend"
+        }
+      ],
+      "dependencies": [],
+      "output_contract": {
+        "page_accessible": true,
+        "backend_api_required": false,
+        "router_registry_changes": [],
+        "build_config_changes": [],
+        "package_changes": [],
+        "backend_routes_changes": [],
+        "test_required": true
+      },
+      "estimated_outputs": [
+        "页面组件文件",
+        "页面样式文件",
+        "页面测试文件"
+      ],
+      "integration_hooks": [],
+      "deliverable_type": "runnable_slice",
+      "task_goal": "实现页面 PAGE-004（寻源项目详情）前端页面功能，路由 寻源项目详情，不包含后端业务逻辑。"
+    }
+  ],
+  "dependency_graph": {
+    "nodes": [
+      {
+        "task_id": "TASK-000",
+        "display_label": "需求理解-LangGraph集成",
+        "priority": "P0"
+      },
+      {
+        "task_id": "TASK-000-PAGE-002",
+        "display_label": "需求理解-LangGraph集成",
+        "priority": "P0"
+      },
+      {
+        "task_id": "TASK-001",
+        "display_label": "对话台-消息流与草稿",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-002",
+        "display_label": "规格书-确认与项目",
+        "priority": "P0"
+      },
+      {
+        "task_id": "TASK-002-PAGE-003",
+        "display_label": "规格书-确认与项目",
+        "priority": "P0"
+      },
+      {
+        "task_id": "TASK-003",
+        "display_label": "多平台寻源-Playwright",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-004",
+        "display_label": "关键词-扩展与召回",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-005",
+        "display_label": "候选列表-筛选勾选",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-006",
+        "display_label": "画像集成-OCR与工商",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-007",
+        "display_label": "评分-置信度与产能",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-008",
+        "display_label": "画像-多源证据展示",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-009",
+        "display_label": "报价集成-口径抽取",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-010",
+        "display_label": "比价-归一化与异常",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-011",
+        "display_label": "报价-对比分析页",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-012",
+        "display_label": "询价-生成服务",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-013",
+        "display_label": "询价-材料页面",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-014",
+        "display_label": "报告-生成服务",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-015",
+        "display_label": "报告-展示与导出",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-016",
+        "display_label": "监控-预警服务",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-017",
+        "display_label": "监控-中心与详情",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-017-PAGE-011",
+        "display_label": "监控-中心与详情",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-018",
+        "display_label": "平台管理-四页CRUD",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-018-PAGE-013",
+        "display_label": "平台管理-四页CRUD",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-018-PAGE-014",
+        "display_label": "平台管理-四页CRUD",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-018-PAGE-015",
+        "display_label": "平台管理-四页CRUD",
+        "priority": "P1"
+      },
+      {
+        "task_id": "TASK-026-PAGE-004",
+        "display_label": "寻源项目详情",
+        "priority": "P1"
+      }
+    ],
+    "edges": [
+      {
+        "from_task_id": "TASK-000",
+        "to_task_id": "TASK-001",
+        "dependency_type": "requires_output",
+        "reason": "TASK-001 depends on TASK-000"
+      },
+      {
+        "from_task_id": "TASK-000",
+        "to_task_id": "TASK-002",
+        "dependency_type": "requires_output",
+        "reason": "TASK-002 depends on TASK-000"
+      },
+      {
+        "from_task_id": "TASK-001",
+        "to_task_id": "TASK-002",
+        "dependency_type": "requires_output",
+        "reason": "TASK-002 depends on TASK-001"
+      },
+      {
+        "from_task_id": "TASK-000",
+        "to_task_id": "TASK-002-PAGE-003",
+        "dependency_type": "requires_output",
+        "reason": "TASK-002-PAGE-003 depends on TASK-000"
+      },
+      {
+        "from_task_id": "TASK-001",
+        "to_task_id": "TASK-002-PAGE-003",
+        "dependency_type": "requires_output",
+        "reason": "TASK-002-PAGE-003 depends on TASK-001"
+      },
+      {
+        "from_task_id": "TASK-003",
+        "to_task_id": "TASK-004",
+        "dependency_type": "requires_output",
+        "reason": "TASK-004 depends on TASK-003"
+      },
+      {
+        "from_task_id": "TASK-018",
+        "to_task_id": "TASK-004",
+        "dependency_type": "requires_output",
+        "reason": "TASK-004 depends on TASK-018"
+      },
+      {
+        "from_task_id": "TASK-004",
+        "to_task_id": "TASK-005",
+        "dependency_type": "requires_output",
+        "reason": "TASK-005 depends on TASK-004"
+      },
+      {
+        "from_task_id": "TASK-006",
+        "to_task_id": "TASK-007",
+        "dependency_type": "requires_output",
+        "reason": "TASK-007 depends on TASK-006"
+      },
+      {
+        "from_task_id": "TASK-007",
+        "to_task_id": "TASK-008",
+        "dependency_type": "requires_output",
+        "reason": "TASK-008 depends on TASK-007"
+      },
+      {
+        "from_task_id": "TASK-009",
+        "to_task_id": "TASK-010",
+        "dependency_type": "requires_output",
+        "reason": "TASK-010 depends on TASK-009"
+      },
+      {
+        "from_task_id": "TASK-018",
+        "to_task_id": "TASK-010",
+        "dependency_type": "requires_output",
+        "reason": "TASK-010 depends on TASK-018"
+      },
+      {
+        "from_task_id": "TASK-010",
+        "to_task_id": "TASK-011",
+        "dependency_type": "requires_output",
+        "reason": "TASK-011 depends on TASK-010"
+      },
+      {
+        "from_task_id": "TASK-002",
+        "to_task_id": "TASK-012",
+        "dependency_type": "requires_output",
+        "reason": "TASK-012 depends on TASK-002"
+      },
+      {
+        "from_task_id": "TASK-005",
+        "to_task_id": "TASK-012",
+        "dependency_type": "requires_output",
+        "reason": "TASK-012 depends on TASK-005"
+      },
+      {
+        "from_task_id": "TASK-012",
+        "to_task_id": "TASK-013",
+        "dependency_type": "requires_output",
+        "reason": "TASK-013 depends on TASK-012"
+      },
+      {
+        "from_task_id": "TASK-008",
+        "to_task_id": "TASK-014",
+        "dependency_type": "requires_output",
+        "reason": "TASK-014 depends on TASK-008"
+      },
+      {
+        "from_task_id": "TASK-011",
+        "to_task_id": "TASK-014",
+        "dependency_type": "requires_output",
+        "reason": "TASK-014 depends on TASK-011"
+      },
+      {
+        "from_task_id": "TASK-012",
+        "to_task_id": "TASK-014",
+        "dependency_type": "requires_output",
+        "reason": "TASK-014 depends on TASK-012"
+      },
+      {
+        "from_task_id": "TASK-014",
+        "to_task_id": "TASK-015",
+        "dependency_type": "requires_output",
+        "reason": "TASK-015 depends on TASK-014"
+      },
+      {
+        "from_task_id": "TASK-008",
+        "to_task_id": "TASK-016",
+        "dependency_type": "requires_output",
+        "reason": "TASK-016 depends on TASK-008"
+      },
+      {
+        "from_task_id": "TASK-018",
+        "to_task_id": "TASK-016",
+        "dependency_type": "requires_output",
+        "reason": "TASK-016 depends on TASK-018"
+      },
+      {
+        "from_task_id": "TASK-016",
+        "to_task_id": "TASK-017",
+        "dependency_type": "requires_output",
+        "reason": "TASK-017 depends on TASK-016"
+      },
+      {
+        "from_task_id": "TASK-016",
+        "to_task_id": "TASK-017-PAGE-011",
+        "dependency_type": "requires_output",
+        "reason": "TASK-017-PAGE-011 depends on TASK-016"
+      },
+      {
+        "from_task_id": "TASK-000-PAGE-002",
+        "to_task_id": "TASK-000-PAGE-002",
+        "dependency_type": "standalone",
+        "reason": "该任务无外部依赖，可独立执行"
+      },
+      {
+        "from_task_id": "TASK-018-PAGE-013",
+        "to_task_id": "TASK-018-PAGE-013",
+        "dependency_type": "standalone",
+        "reason": "该任务无外部依赖，可独立执行"
+      },
+      {
+        "from_task_id": "TASK-018-PAGE-014",
+        "to_task_id": "TASK-018-PAGE-014",
+        "dependency_type": "standalone",
+        "reason": "该任务无外部依赖，可独立执行"
+      },
+      {
+        "from_task_id": "TASK-018-PAGE-015",
+        "to_task_id": "TASK-018-PAGE-015",
+        "dependency_type": "standalone",
+        "reason": "该任务无外部依赖，可独立执行"
+      },
+      {
+        "from_task_id": "TASK-026-PAGE-004",
+        "to_task_id": "TASK-026-PAGE-004",
+        "dependency_type": "standalone",
+        "reason": "该任务无外部依赖，可独立执行"
+      }
+    ],
+    "has_cycle": false,
+    "max_dependency_depth": 5,
+    "graph_notes": "Auto-generated from task dependencies. 26 nodes, 24 edges.; TASK-000-PAGE-002 为独立任务，无外部依赖; TASK-018-PAGE-013 为独立任务，无外部依赖; TASK-018-PAGE-014 为独立任务，无外部依赖; TASK-018-PAGE-015 为独立任务，无外部依赖; TASK-026-PAGE-004 为独立任务，无外部依赖"
+  },
+  "execution_batches": [
+    {
+      "batch_id": "batch_0",
+      "batch_order": 1,
+      "task_ids": [
+        "TASK-000",
+        "TASK-003",
+        "TASK-006",
+        "TASK-009",
+        "TASK-018"
+      ],
+      "can_run_in_parallel": true,
+      "batch_goal": "并行建设四个模块集成适配器与平台管理基础，为业务任务提供服务与配置基线。",
+      "entry_condition": "工程基线允许路径与依赖清单已由 Integrator 初始化确认。",
+      "exit_condition": "后端 pytest/flake8/deploy_check 与前端 npm run build/lint/test 通过，integration_hooks 装配声明就绪。"
+    },
+    {
+      "batch_id": "batch_1",
+      "batch_order": 1,
+      "task_ids": [
+        "TASK-001",
+        "TASK-004",
+        "TASK-007",
+        "TASK-010"
+      ],
+      "can_run_in_parallel": true,
+      "batch_goal": "基于集成服务实现第一批业务后端逻辑与对话页面前端。",
+      "entry_condition": "batch_0 完成且集成服务接口可用。",
+      "exit_condition": "各任务单元测试、lint、构建通过，业务 API 接口可用。"
+    },
+    {
+      "batch_id": "batch_2",
+      "batch_order": 2,
+      "task_ids": [
+        "TASK-002",
+        "TASK-005",
+        "TASK-008",
+        "TASK-011"
+      ],
+      "can_run_in_parallel": true,
+      "batch_goal": "实现规格书确认、候选列表、画像详情、报价对比四个用户页面。",
+      "entry_condition": "batch_1 完成且对应业务 API 可用。",
+      "exit_condition": "页面可通过浏览器 URL 访问、API 联调通过、验收项自测通过。"
+    },
+    {
+      "batch_id": "batch_3",
+      "batch_order": 3,
+      "task_ids": [
+        "TASK-012",
+        "TASK-016"
+      ],
+      "can_run_in_parallel": true,
+      "batch_goal": "实现询价触达服务与持续监控服务。",
+      "entry_condition": "batch_2 完成（规格书、候选、画像数据可用）。",
+      "exit_condition": "RFQ 生成与预警检测服务测试通过。"
+    },
+    {
+      "batch_id": "batch_4",
+      "batch_order": 4,
+      "task_ids": [
+        "TASK-013",
+        "TASK-014",
+        "TASK-017"
+      ],
+      "can_run_in_parallel": true,
+      "batch_goal": "实现询价材料页面、评估报告服务与监控前端页面。",
+      "entry_condition": "batch_3 完成且服务 API 可用。",
+      "exit_condition": "页面可访问、报告生成与预警展示联调通过。"
+    },
+    {
+      "batch_id": "batch_5",
+      "batch_order": 5,
+      "task_ids": [
+        "TASK-015"
+      ],
+      "can_run_in_parallel": true,
+      "batch_goal": "完成评估报告页面，收尾全流程交付。",
+      "entry_condition": "batch_4 完成且评估报告服务可用。",
+      "exit_condition": "PAGE-009 验收项全部通过，报告可导出。"
+    }
+  ],
+  "quality_gates": [
+    {
+      "gate_id": "QG-001",
+      "gate_name": "task_manifest 结构与依赖图检查",
+      "description": "校验 task_manifest JSON 结构、task 字段齐全性、task_index 连续无缺失、dependency_graph 无环且 max_dependency_depth<=5。",
+      "check_method": "运行 schema validator 检查必需字段、枚举值、task_index 连续性，并对依赖图执行环检测与深度统计。",
+      "required": true,
+      "check": "automated",
+      "severity": "minor"
+    },
+    {
+      "gate_id": "QG-002",
+      "gate_name": "Engineering Baseline runtime gate 检查",
+      "description": "校验任务使用的 runtime 框架、依赖与工程基线一致，禁止引入未批准依赖和修改 Integrator-owned 文件。",
+      "check_method": "对照 engineering_baseline.runtime_baseline 与 dependency_baseline，检查任务 dependency_additions 是否在 route approved list 内。",
+      "required": true,
+      "check": "automated",
+      "severity": "minor"
+    },
+    {
+      "gate_id": "QG-003",
+      "gate_name": "Tasker allowed_paths 对齐检查",
+      "description": "校验每个任务的 allowed_paths 必须派生自 application_structure.allowed_paths，且不包含基础设施文件（package.json、vite.config.ts、routes.tsx、main.py 等）。",
+      "check_method": "逐任务比对 allowed_paths 与 application_structure 的允许根目录，拦截越权路径。",
+      "required": true,
+      "check": "automated",
+      "severity": "minor"
+    },
+    {
+      "gate_id": "QG-004",
+      "gate_name": "integration_hooks 与 dependency_additions 装配声明检查",
+      "description": "校验任务对基础设施装配（路由注册、菜单注册、环境变量、迁移）的声明必须通过 integration_hooks 提出，依赖变更通过 dependency_additions 提出，禁止 Tasker 直接修改装配文件。",
+      "check_method": "检查每个任务的 forbidden_paths 是否覆盖 Integrator-owned 文件，integration_hooks target 是否指向真实存在的项目文件路径，dependency_additions 是否有对应 package。",
+      "required": true,
+      "check": "automated",
+      "severity": "minor"
+    },
+    {
+      "gate_id": "QG-005",
+      "gate_name": "验收项覆盖检查",
+      "description": "校验每个任务至少映射到一个 source module/page/feature 或 acceptance_refs，并覆盖 page_function_acceptance 中对应的高优先级验收项。",
+      "check_method": "逐任务检查 module_id/page_ref 非空，acceptance_refs 引用存在的验收项 ID，P0 验收项全部有任务承接。",
+      "required": true,
+      "check": "automated",
+      "severity": "minor"
+    },
+    {
+      "gate_id": "QG-006",
+      "gate_name": "并行安全与共享表面检查",
+      "description": "校验同一 execution_batch 内任务不允许修改相同页面、模块、路由、adapter、共享配置或同一基础设施装配面。",
+      "check_method": "对每个 batch 内任务进行 allowed_paths 交集与 integration_hooks target 冲突检测。",
+      "required": true,
+      "check": "automated",
+      "severity": "minor"
+    },
+    {
+      "gate_id": "QG-BUILD",
+      "gate_name": "build",
+      "check": "运行构建命令验证编译与打包通过（如 npm run build / python manage.py check）",
+      "severity": "blocker",
+      "description": "构建通过（blocker 级质量门禁）"
+    },
+    {
+      "gate_id": "QG-UNIT_TEST",
+      "gate_name": "unit_test",
+      "check": "运行单元测试套件验证全部通过（如 npm run test / pytest）",
+      "severity": "blocker",
+      "description": "单元测试通过（blocker 级质量门禁）"
+    },
+    {
+      "gate_id": "QG-TYPE_CHECK",
+      "gate_name": "type_check",
+      "check": "运行类型检查验证无类型错误（如 tsc --noEmit / mypy）",
+      "severity": "blocker",
+      "description": "类型检查通过（blocker 级质量门禁）"
+    }
+  ],
+  "risk_register": [
+    {
+      "risk_type": "needs_review",
+      "risk_object": "openai、sqlalchemy、jinja2、reportlab 等未锁定精确版本，存在供应链与兼容性风险",
+      "risk_level": "medium",
+      "mitigation": "Integrator 初始化时根据 development_route 与工程基线锁定精确版本，并由 dependency_additions 声明统一合并到依赖清单。",
+      "risk_id": "RISK-001",
+      "description": "风险说明 — 由 normalize 自动补全",
+      "affected_tasks": [
+        "TASK-000",
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008",
+        "TASK-009",
+        "TASK-010",
+        "TASK-011",
+        "TASK-012",
+        "TASK-013",
+        "TASK-014",
+        "TASK-015",
+        "TASK-016",
+        "TASK-017",
+        "TASK-018"
+      ],
+      "required_resolution_before": "pre_development_gate"
+    },
+    {
+      "risk_type": "needs_review",
+      "risk_object": "1688、阿里国际站、百度爱采购等平台反爬机制可能导致 Playwright 检索失败或 IP 被限制",
+      "risk_level": "high",
+      "mitigation": "TASK-003 集成时配置重试、降级与候选不足提示；必要时由管理员在数据源配置中维护备用入口。",
+      "risk_id": "RISK-002",
+      "description": "风险说明 — 由 normalize 自动补全",
+      "affected_tasks": [
+        "TASK-000",
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008",
+        "TASK-009",
+        "TASK-010",
+        "TASK-011",
+        "TASK-012",
+        "TASK-013",
+        "TASK-014",
+        "TASK-015",
+        "TASK-016",
+        "TASK-017",
+        "TASK-018"
+      ],
+      "required_resolution_before": "pre_development_gate"
+    },
+    {
+      "risk_type": "needs_review",
+      "risk_object": "AI 生成规格书、报价口径抽取、产能推断可能编造精确数字或来源",
+      "risk_level": "high",
+      "mitigation": "TASK-000/007/009/012/014 强制遵守 GAR-005，输出附证据链接或置信度，产能推断输出区间而非精确数字。",
+      "risk_id": "RISK-003",
+      "description": "风险说明 — 由 normalize 自动补全",
+      "affected_tasks": [
+        "TASK-000",
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008",
+        "TASK-009",
+        "TASK-010",
+        "TASK-011",
+        "TASK-012",
+        "TASK-013",
+        "TASK-014",
+        "TASK-015",
+        "TASK-016",
+        "TASK-017",
+        "TASK-018"
+      ],
+      "required_resolution_before": "pre_development_gate"
+    },
+    {
+      "risk_type": "needs_review",
+      "risk_object": "OpenAI、企查查、天眼查等 API Key 若在数据源配置页明文回显将造成凭据泄露",
+      "risk_level": "medium",
+      "mitigation": "TASK-018 管理页面按 GAR-010 掩码展示密钥；工程基线 secret_handling_policy 要求管理后台加密存储。",
+      "risk_id": "RISK-004",
+      "description": "风险说明 — 由 normalize 自动补全",
+      "affected_tasks": [
+        "TASK-000",
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008",
+        "TASK-009",
+        "TASK-010",
+        "TASK-011",
+        "TASK-012",
+        "TASK-013",
+        "TASK-014",
+        "TASK-015",
+        "TASK-016",
+        "TASK-017",
+        "TASK-018"
+      ],
+      "required_resolution_before": "pre_development_gate"
+    },
+    {
+      "risk_type": "needs_review",
+      "risk_object": "engineering_baseline.application_structure 中 backend/apps 与 backend/app 目录不一致，可能导致 Tasker 产出路径错位",
+      "risk_level": "low",
+      "mitigation": "本 manifest 统一采用 allowed_paths 内的 backend/app 单数路径，Integrator 初始化时校正 tasker_writable_roots。",
+      "risk_id": "RISK-005",
+      "description": "风险说明 — 由 normalize 自动补全",
+      "affected_tasks": [
+        "TASK-000",
+        "TASK-001",
+        "TASK-002",
+        "TASK-003",
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008",
+        "TASK-009",
+        "TASK-010",
+        "TASK-011",
+        "TASK-012",
+        "TASK-013",
+        "TASK-014",
+        "TASK-015",
+        "TASK-016",
+        "TASK-017",
+        "TASK-018"
+      ],
+      "required_resolution_before": "pre_development_gate"
+    }
+  ]
+}
